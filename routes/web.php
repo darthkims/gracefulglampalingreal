@@ -70,6 +70,9 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.laravel-examples.user-profile');
 	})->name('user-profile');
 	Route::get('shop', function () {
-		return view('pages.shop');
+		return view('customer.shop');
 	})->name('shop');
+	Route::get('indexshop', function () {
+		return view('customer.index');
+	})->name('indexshop');
 });
