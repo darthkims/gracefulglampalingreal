@@ -69,4 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('user-profile', function () {
 		return view('pages.laravel-examples.user-profile');
 	})->name('user-profile');
+	Route::get('shop', function () {
+		return view('pages.shop');
+	})->name('shop');
 });
