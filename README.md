@@ -9,6 +9,7 @@ composer install
 ```
 php artisan key:generate
 ```
+3. Run `php artisan migrate:fresh --seed` to create basic users table
 
 # PHP Location
 
