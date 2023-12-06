@@ -337,7 +337,7 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset('customer')}}/img/product/product-2.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="{{ asset('customer')}}/img/product/product-15.png">
                                     <ul class="product__hover">
                                         <li><a href="#"><img src="{{ asset('customer')}}/img/icon/heart.png" alt=""></a></li>
                                         <li><a href="#"><img src="{{ asset('customer')}}/img/icon/compare.png" alt=""> <span>Compare</span></a>
@@ -372,7 +372,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item sale">
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset('customer')}}/img/product/product-3.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="{{ asset('customer')}}/img/product/product-15.png">
                                     <span class="label">Sale</span>
                                     <ul class="product__hover">
                                         <li><a href="#"><img src="{{ asset('customer')}}/img/icon/heart.png" alt=""></a></li>
@@ -584,7 +584,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item sale">
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset('customer')}}/img/product/product-10.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="{{ asset('customer')}}/img/product/product-15.png">
                                     <span class="label">Sale</span>
                                     <ul class="product__hover">
                                         <li><a href="#"><img src="{{ asset('customer')}}/img/icon/heart.png" alt=""></a></li>
@@ -620,7 +620,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset('customer')}}/img/product/product-11.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="{{ asset('customer')}}/img/product/product-15.png">
                                     <ul class="product__hover">
                                         <li><a href="#"><img src="{{ asset('customer')}}/img/icon/heart.png" alt=""></a></li>
                                         <li><a href="#"><img src="{{ asset('customer')}}/img/icon/compare.png" alt=""> <span>Compare</span></a>
@@ -655,7 +655,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item sale">
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset('customer')}}/img/product/product-12.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="{{ asset('customer')}}/img/product/product-15.png">
                                     <span class="label">Sale</span>
                                     <ul class="product__hover">
                                         <li><a href="#"><img src="{{ asset('customer')}}/img/icon/heart.png" alt=""></a></li>
