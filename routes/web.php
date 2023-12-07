@@ -21,6 +21,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\ProductController;
             
 
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
@@ -70,9 +71,12 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.laravel-examples.user-profile');
 	})->name('user-profile');
 	Route::get('shop', function () {
-		return view('customer.shop');
+		return view('products.shop');
 	})->name('shop');
 	Route::get('indexshop', function () {
-		return view('customer.index');
-	})->name('indexshop');
-});
+		return view('products.index');
+	})->name('index');
+	Route::resource('products', ProductController::class)->parameters([
+		'products' => 'product'
+	]);
+	});
