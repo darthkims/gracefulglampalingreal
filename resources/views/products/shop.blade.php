@@ -82,9 +82,9 @@
                                 <a href="#">FAQs</a>
                             </div>
                             <div class="header__top__hover">
-                                <span>Usd <i class="arrow_carrot-down"></i></span>
+                                <span>MYR <i class="arrow_carrot-down"></i></span>
                                 <ul>
-                                    <li>USD</li>
+                                    <li>MYR</li>
                                     <li>EUR</li>
                                     <li>USD</li>
                                 </ul>
