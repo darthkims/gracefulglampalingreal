@@ -11,17 +11,20 @@
                         <div class="card-header p-3 pt-2">
                             <div
                                 class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10">weekend</i>
+                                <i class="material-icons opacity-10">inventory_2</i>
                             </div>
+                            @php
+                                    $products = App\Models\Product::all();
+                                    $users = App\Models\User::all();
+                                @endphp
                             <div class="text-end pt-1">
-                                <p class="text-sm mb-0 text-capitalize">Today's Money</p>
-                                <h4 class="mb-0">$53k</h4>
+                                <p class="text-sm mb-0 text-capitalize">Total products</p>
+                                <h4 class="mb-0">{{ count($products) }} products</h4>
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than
-                                lask week</p>
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">"KIMS ENCEM" </span></p>
                         </div>
                     </div>
                 </div>
@@ -33,14 +36,13 @@
                                 <i class="material-icons opacity-10">person</i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-sm mb-0 text-capitalize">Today's Users</p>
-                                <h4 class="mb-0">2,300</h4>
+                                <p class="text-sm mb-0 text-capitalize">Total Users</p>
+                                <h4 class="mb-0">{{ count($users) }}</h4>
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>than
-                                lask month</p>
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">"HAZIQ ENCEM</span></p>
                         </div>
                     </div>
                 </div>

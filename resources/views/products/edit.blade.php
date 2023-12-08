@@ -16,28 +16,28 @@
 
                             
                         <!-- Form -->
-                        <form method="POST" action="{{ route('products.store') }}">
+                        <form method="POST" action="{{ route('products.update', $product->id) }}">
                             @csrf
-
+                            @method('PUT')
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
                                     <div class="input-group input-group-outline">
                                         <strong>Name: </strong>
-                                        <input type="text" class="form-control" name="product_name" placeholder="Name" required>
+                                        <input type="text" class="form-control" value="{{ $product->product_name }}" name="product_name" placeholder="Name" required>
                                     </div>
                                 </div>
 
                                 <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
                                     <div class="input-group input-group-outline">
                                         <strong>Description: </strong>
-                                        <input type="text" class="form-control" name="product_desc" placeholder="Description" required>
+                                        <input type="text" class="form-control" value="{{ $product->product_desc }}" name="product_desc" placeholder="Description" required>
                                     </div>
                                 </div>
 
                                 <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
                                     <div class="input-group input-group-outline">
                                         <strong>Price: RM</strong>
-                                        <input type="number" step="0.01" class="form-control" name="price" placeholder="Price" required>
+                                        <input type="number" step="0.01" class="form-control"  value="{{ $product->price }}" name="price" placeholder="Price" required>
                                     </div>
                                 </div>
 

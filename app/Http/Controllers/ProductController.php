@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use DB;
 
 class ProductController extends Controller
 {
@@ -55,7 +56,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('products.edit',compact('product'));
     }
 
     /**
@@ -63,8 +64,21 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'product_name' => 'required',
+            'product_desc' => 'required',
+            'price' => 'required',
+        ]);
+    
+        $product->update([
+            'product_name' => $request->product_name,
+            'product_desc' => $request->product_desc,
+            'price' => $request->price,
+        ]);
+    
+        return redirect()->route('products.index')->with('success', 'Product updated successfully');
     }
+    
 
     /**
      * Remove the specified resource from storage.
