@@ -181,7 +181,7 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__pic__item">
-                                <img src="{{ asset('customer/img/shop-details/product-big-' . $product-> product_ID . '.png') }}" alt="Product Image">
+                                <img src="{{ asset('customer/img/shop-details/product-big-' . $product-> id . '.png') }}" alt="Product Image">
                                 </div>
                             </div>
                             <div class="tab-pane" id="tabs-2" role="tabpanel">

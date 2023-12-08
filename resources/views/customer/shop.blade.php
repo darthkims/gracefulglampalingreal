@@ -348,7 +348,7 @@
                                     $productNumber = $loop->iteration;
                                     $imagePath = asset("customer/img/product/product-$productNumber.jpg");
                                 @endphp
-                                <a href="{{ route('products.show',$product->product_ID) }}">
+                                <a href="{{ route('products.show',$product->id) }}">
                                     <div class="product__item__pic set-bg" data-setbg="{{ $imagePath }}">
                                         <!-- Additional product display elements can be added here -->
                                     </div>
