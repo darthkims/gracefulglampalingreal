@@ -21,7 +21,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -29,7 +29,10 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Product::create($request->all());
+   
+        return redirect()->route('products.index')
+                        ->with('success','Product created successfully.');
     }
 
     /**
@@ -63,6 +66,9 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+  
+        return redirect()->route('products.index')
+                        ->with('success','Product deleted successfully');
     }
 }
