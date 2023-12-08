@@ -71,10 +71,10 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.laravel-examples.user-profile');
 	})->name('user-profile');
 	Route::get('shop', function () {
-		return view('customer.shop');
+		return view('products.shop');
 	})->name('shop');
-	Route::get('index', function () {
-		return view('customer.index');
+	Route::get('indexshop', function () {
+		return view('products.index');
 	})->name('index');
 	Route::resource('products', ProductController::class);
 	});
