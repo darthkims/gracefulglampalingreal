@@ -76,7 +76,5 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('indexshop', function () {
 		return view('products.index');
 	})->name('index');
-	Route::resource('products', ProductController::class)->parameters([
-		'products' => 'product'
-	]);
+	Route::resource('products', ProductController::class);
 	});

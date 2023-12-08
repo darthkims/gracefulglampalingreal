@@ -348,9 +348,11 @@
                                     $productNumber = $loop->iteration;
                                     $imagePath = asset("customer/img/product/product-$productNumber.jpg");
                                 @endphp
+                                <a href="{{ route('products.show',$product->product_ID) }}">
                                     <div class="product__item__pic set-bg" data-setbg="{{ $imagePath }}">
-                                        <!-- Add other product display elements here -->
+                                        <!-- Additional product display elements can be added here -->
                                     </div>
+                                </a>
                                 <div class="product__item__text">
                                     <h6>{{ $product->product_name }}</h6>
                                     <a href="#" class="add-cart">+ Add To Cart</a>
