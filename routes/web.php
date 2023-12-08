@@ -73,8 +73,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('shop', function () {
 		return view('products.shop');
 	})->name('shop');
-	Route::get('indexshop', function () {
-		return view('products.index');
-	})->name('index');
+	Route::get('main', function () {
+		return view('products.main');
+	})->name('main');
 	Route::resource('products', ProductController::class);
+	Route::get('/products/details/{product}', [ProductController::class, 'display'])->name('products.display');
+	Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+
 	});

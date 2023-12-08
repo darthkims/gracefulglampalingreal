@@ -98,13 +98,13 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <div class="header__logo">
-                        <a href="{{ route('index') }}"><img src="{{ asset('customer')}}/img/logo.png" alt=""></a>
+                        <a href="{{ route('main') }}"><img src="{{ asset('customer')}}/img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li><a href="{{ route('index') }}">Home</a></li>
+                            <li><a href="{{ route('main') }}">Home</a></li>
                             <li class="active"><a href="./shop.html">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
@@ -348,7 +348,7 @@
                                     $productNumber = $loop->iteration;
                                     $imagePath = asset("customer/img/product/product-$productNumber.jpg");
                                 @endphp
-                                <a href="{{ route('products.show',$product->id) }}">
+                                <a href="{{ route('products.display',$product->id) }}">
                                     <div class="product__item__pic set-bg" data-setbg="{{ $imagePath }}">
                                         <!-- Additional product display elements can be added here -->
                                     </div>
