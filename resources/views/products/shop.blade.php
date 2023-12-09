@@ -359,7 +359,7 @@
                                     <div class="rating">
                                         <!-- Display product rating here -->
                                     </div>
-                                    <h5>${{ $product->price }}</h5>
+                                    <h5>RM{{ $product->price }}</h5>
                                     <div class="product__color__select">
                                         <!-- Add color selection logic here if needed -->
                                     </div>
