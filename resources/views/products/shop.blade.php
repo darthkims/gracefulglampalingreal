@@ -142,7 +142,7 @@
                     <div class="breadcrumb__text">
                         <h4>Shop</h4>
                         <div class="breadcrumb__links">
-                            <a href="./index.html">Home</a>
+                            <a href="{{ route('main')}}">Home</a>
                             <span>Shop</span>
                         </div>
                     </div>

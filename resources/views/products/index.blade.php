@@ -38,8 +38,10 @@
                                             PRICE</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            CREATION DATE
-                                        </th>
+                                            CREATED DATE</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            UPDATED DATE</th>
                                         <th class="text-secondary opacity-7"></th>
                                     </tr>
                                 </thead>
@@ -56,8 +58,10 @@
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
+                                                    <a href="{{ route('products.show', $product->id) }}">
                                                         <img src="{{ asset('customer/img/product/product-' . $product-> id . '.jpg') }}"
                                                             class="avatar avatar-sm me-3 border-radius-lg" alt="{{ $product->product_name }}">
+                                                    <a/>
                                                     </div>
                                                 </div>
                                             </td>
@@ -73,9 +77,12 @@
                                             <td class="align-middle text-center">
                                                 <span class="text-secondary text-xs font-weight-bold">{{ $product->created_at->format('Y-m-d') }}</span>
                                             </td>
+                                            <td class="align-middle text-center">
+                                                <span class="text-secondary text-xs font-weight-bold">{{ $product->updated_at }}</span>
+                                            </td>
                                             <td class="align-middle">
                                             <form action="{{ route('products.destroy',$product->id) }}" method="POST">
-                                                <a rel="tooltip" class="btn btn-success btn-link"
+                                                <a rel="tooltip" class="btn btn-secondary btn-link"
                                                     href="{{ route('products.edit',$product->id) }}" data-original-title=""
                                                     title="">
                                                     <i class="material-icons">edit</i>

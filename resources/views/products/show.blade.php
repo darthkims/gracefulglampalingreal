@@ -11,7 +11,7 @@
         <div class="card my-4">
             <div class="card-body text-center"> <!-- Center the content -->
                 <h2 class="mb-4">Show Product Details</h2>
-                <img src="{{ asset('customer/img/product/product-' . $product-> id . '.jpg') }}" alt="Product Image">
+                <img src="{{ asset('customer/img/product/product-' . $product->id . '.jpg') }}" alt="Product Image" style="width: 200px; height: auto;">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">

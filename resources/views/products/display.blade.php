@@ -144,7 +144,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="product__details__breadcrumb">
-                            <a href="./index.html">Home</a>
+                            <a href="{{ route('main')}}">Home</a>
                             <a href="{{ route('shop')}}">Shop</a>
                             <span>Product Details</span>
                         </div>
@@ -229,6 +229,7 @@
                                 </div>
                                 <a href="#" class="primary-btn">add to cart</a>
                             </div>
+                            <br>
                             <div class="product__details__last__option">
                                 <h5><span>Guaranteed Safe Checkout</span></h5>
                                 <img src="{{ asset('customer')}}/img/shop-details/details-payment.png" alt="">
@@ -299,7 +300,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__logo">
-                            <a href="#"><img src="{{ asset('customer')}}/img/footer-logo.png" alt=""></a>
+                            <a href="{{route('main')}}"><img src="{{ asset('customer')}}/img/gg_full_white.png" alt=""></a>
                         </div>
                         <p>The customer is at the heart of our unique business model, which includes design.</p>
                         <a href="#"><img src="{{ asset('customer')}}/img/payment.png" alt=""></a>
