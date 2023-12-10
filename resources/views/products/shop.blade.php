@@ -186,11 +186,9 @@
                     </div>
                 </div>
                 <div class="col-lg-9">
-                <?php
-                // Fetch or set $products before this point in your c
-                // Example:
+                @php
                     $products = App\Models\Product::all(); // Assuming you have a Product mo
-                ?>
+                @endphp
                     <div class="shop__product__option">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -214,8 +212,7 @@
                     @foreach ($products as $product)
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
-                                @php
-                                    // Incrementing product number for each loop iteration
+                                @php 
                                     $productNumber = $loop->iteration;
                                     $imagePath = asset("customer/img/product/product-$productNumber.jpg");
                                 @endphp
