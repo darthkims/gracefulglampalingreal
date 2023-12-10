@@ -24,7 +24,7 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\ProductController;
             
 
-Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
+Route::get('/', function () {return redirect('main');})->middleware('guest');
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 Route::get('sign-up', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 Route::post('sign-up', [RegisterController::class, 'store'])->middleware('guest');
@@ -38,6 +38,10 @@ Route::get('verify', function () {
 Route::get('/reset-password/{token}', function ($token) {
 	return view('sessions.password.reset', ['token' => $token]);
 })->middleware('guest')->name('password.reset');
+
+Route::get('main', function () {
+	return view('products.main');
+})->name('main');
 
 Route::post('sign-out', [SessionsController::class, 'destroy'])->middleware('auth')->name('logout');
 Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')->name('profile');
@@ -73,9 +77,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('shop', function () {
 		return view('products.shop');
 	})->name('shop');
-	Route::get('main', function () {
-		return view('products.main');
-	})->name('main');
 	Route::resource('products', ProductController::class);
 	Route::get('/products/details/{product}', [ProductController::class, 'display'])->name('products.display');
 	Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
