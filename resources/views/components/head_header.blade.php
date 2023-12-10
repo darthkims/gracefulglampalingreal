@@ -93,7 +93,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="{{ asset('customer')}}/img/gg_full.png" alt=""></a>
+                        <a href="{{route('main')}}"><img src="{{ asset('customer')}}/img/gg_full.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
@@ -185,9 +185,8 @@
                         <p>Copyright ©
                             <script>
                                 document.write(new Date().getFullYear());
-                            </script>2020
-                            All rights reserved | This template is made with <i class="fa fa-heart-o"
-                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            </script>
+                            All rights reserved | Graceful Glam founded by <a href="https://instagram.com/starwars" target="_blank">darthkims</a>
                         </p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </div>
