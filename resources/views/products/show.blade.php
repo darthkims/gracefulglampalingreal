@@ -39,8 +39,14 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Joined On:</strong>
-                            {{ $product->created_at }}
+                            <strong>Created At:</strong>
+                            {{ $product->created_at->format('F j, Y, g:i A') }}
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Updated At:</strong>
+                            {{ $product->updated_at->format('F j, Y, g:i A') }}
                         </div>
                     </div>
                 </div>

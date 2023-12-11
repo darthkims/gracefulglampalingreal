@@ -75,10 +75,10 @@
                                                 </p>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <span class="text-secondary text-xs font-weight-bold">{{ $product->created_at->format('Y-m-d') }}</span>
+                                                <span class="text-secondary text-xs font-weight-bold">{{ $product->created_at->format('Y-m-d,g:i A') }}</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <span class="text-secondary text-xs font-weight-bold">{{ $product->updated_at }}</span>
+                                                <span class="text-secondary text-xs font-weight-bold">{{ $product->updated_at->format('Y-m-d,g:i A') }}</span>
                                             </td>
                                             <td class="align-middle">
                                             <form action="{{ route('products.destroy',$product->id) }}" method="POST">
