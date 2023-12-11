@@ -134,11 +134,11 @@
                 </div>
             </div>
             <div class="row">
-            <?php
-                $products = App\Models\Product::all();
-                $totalProducts = $products->count();
+            @php
+                $currentProductId = $product->id;
+                $products = App\Models\Product::where('id', '!=', $currentProductId)->get();
                 $randomIds = $products->pluck('id')->unique()->random(4)->toArray();
-                ?>
+            @endphp
                 @foreach($randomIds as $randomId)
                     <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
                         <div class="product__item">
