@@ -48,6 +48,16 @@
                                     </div>
                                 </div>
 
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <select class="form-control" name="product_category[]" multiple>
+                                        <option value="">-- Choose Category --</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}" {{ $product->categories->contains($category->id) ? 'selected' : '' }}>{{ $category->category_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
                                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                     <a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>

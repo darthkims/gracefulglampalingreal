@@ -26,32 +26,45 @@
                                         <input type="text" class="form-control" name="product_name" placeholder="Name" required>
                                     </div>
                                 </div>
-
+                            </div>
+                            <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
                                     <div class="input-group input-group-outline">
                                         <strong>Description: </strong>
                                         <input type="text" class="form-control" name="product_desc" placeholder="Description" required>
                                     </div>
                                 </div>
-
+                            </div>
+                            <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
                                     <div class="input-group input-group-outline">
                                         <strong>Price: RM</strong>
                                         <input type="number" step="0.01" class="form-control" name="price" placeholder="Price" required>
                                     </div>
                                 </div>
-
+                            </div>
+                            <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
                                     <div class="input-group input-group-outline">
                                         <strong>Size: </strong>
                                         <input type="text" class="form-control" name="size" placeholder="Size" required>
                                     </div>
                                 </div>
-
-                                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <select class="form-control" name="product_category[]" multiple>
+                                        <option value="">-- Choose Category --</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>
+                            </div>
                             </div>
                         </form>
                         <!-- End Form -->

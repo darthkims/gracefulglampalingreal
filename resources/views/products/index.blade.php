@@ -40,12 +40,6 @@
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             SIZE</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            CREATED DATE</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            UPDATED DATE</th>
                                         <th class="text-secondary opacity-7"></th>
                                     </tr>
                                 </thead>
@@ -81,12 +75,6 @@
                                             <td class="align-middle text-center text-sm">
                                                 <p class="text-xs text-secondary mb-0">{{ $product->size }}
                                                 </p>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span class="text-secondary text-xs font-weight-bold">{{ $product->created_at->format('Y-m-d,g:i A') }}</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span class="text-secondary text-xs font-weight-bold">{{ $product->updated_at->format('Y-m-d,g:i A') }}</span>
                                             </td>
                                             <td class="align-middle">
                                             <form action="{{ route('products.destroy',$product->id) }}" method="POST">

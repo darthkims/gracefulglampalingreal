@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -21,26 +22,48 @@ class ProductController extends Controller
      */
     public function create()
     {
-            return view('products.create');
+        $categories = Category::all();
+    
+        return view('products.create', compact('categories'));
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
+    * Store a newly created resource in storage.
+    */
     public function store(Request $request)
     {
-        Product::create($request->all());
-   
+        $request->validate([
+            'product_name' => 'required',
+            'product_desc' => 'required',
+            'price' => 'required',
+            'size' => 'required',
+            'product_category' => 'required|array', // Make sure 'categories' is an array
+        ]);
+
+        $product = Product::create([
+            'product_name' => $request->input('product_name'),
+            'product_desc' => $request->input('product_desc'),
+            'price' => $request->input('price'),
+            'size' => $request->input('size'),
+        ]);
+
+        $product->categories()->attach($request->input('product_category'));
+
         return redirect()->route('products.index')
-                        ->with('success','Product created successfully.');
+                        ->with('success', 'Product created successfully.');
     }
+
 
     /**
      * Display the specified resource.
      */
     public function show(Product $product)
     {
-        return view('products.show', compact('product'));    
+
+        $nextProduct = Product::where('id', '>', $product->id)->first();
+        $prevProduct = Product::where('id', '<', $product->id)->latest()->first();
+
+        return view('products.show', compact('product', 'nextProduct', 'prevProduct'));    
     }
     
     public function display(Product $product)
@@ -53,7 +76,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('products.edit',compact('product'));
+
+        $categories = Category::all();
+        
+        return view('products.edit',compact('product','categories'));
     }
 
     /**
@@ -66,6 +92,7 @@ class ProductController extends Controller
             'product_desc' => 'required',
             'price' => 'required',
             'size' => 'required',
+            'product_category' => 'required|array', // Make sure 'product_category' is an array
         ]);
     
         $product->update([
@@ -75,8 +102,12 @@ class ProductController extends Controller
             'size' => $request->size,
         ]);
     
+        // Sync the selected categories
+        $product->categories()->sync($request->input('product_category'));
+    
         return redirect()->route('products.index')->with('success', 'Product updated successfully');
     }
+
     
 
     /**
@@ -84,6 +115,9 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        // Detach categories before deleting the product
+        $product->categories()->detach();
+
         $product->delete();
   
         return redirect()->route('products.index')

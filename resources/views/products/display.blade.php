@@ -79,7 +79,16 @@
                             <h3>RM{{ $product-> price }}</h3>
                             <div class="product__details__option">
                                 <div class="product__details__option__size">
-                                    <h4>Size: {{$product->size}}</h4>
+                                    <span>Size: {{$product->size}}</span>
+                                </div>
+                                <div class="product__details__option__color">
+                                    <span>Category: 
+                                        @forelse ($product->categories as $category)
+                                        {{ $category->category_name }}
+                                        @empty
+                                            No categories
+                                        @endforelse
+                                    </span>
                                 </div>
                             </div>
                             <div class="product__details__cart__option">
