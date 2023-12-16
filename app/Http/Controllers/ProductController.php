@@ -92,7 +92,7 @@ class ProductController extends Controller
             'product_desc' => 'required',
             'price' => 'required',
             'size' => 'required',
-            'product_category' => 'required|array', // Make sure 'product_category' is an array
+            'product_category' => 'required',
         ]);
     
         $product->update([
