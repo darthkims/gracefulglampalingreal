@@ -9,62 +9,59 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card my-4">
-                    <div class="card-body px-0 pb-2 mb-4">
+                        <div class="card-body px-4 pb-2 mb-4">
                             <div class="me-3 my-3">
                                 <h2>Product MANAGEMENT</h2>
                             </div>
+                            <!-- Form -->
+                            <form method="POST" action="{{ route('products.update', $product->id) }}">
+                                @csrf
+                                @method('PUT')
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
+                                        <div class="input-group input-group-outline">
+                                            <strong>Name: </strong>
+                                            <input type="text" class="form-control" value="{{ $product->product_name }}" name="product_name" placeholder="Name" required>
+                                        </div>
+                                    </div>
 
-                            
-                        <!-- Form -->
-                        <form method="POST" action="{{ route('products.update', $product->id) }}">
-                            @csrf
-                            @method('PUT')
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
-                                    <div class="input-group input-group-outline">
-                                        <strong>Name: </strong>
-                                        <input type="text" class="form-control" value="{{ $product->product_name }}" name="product_name" placeholder="Name" required>
+                                    <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
+                                        <div class="input-group input-group-outline">
+                                            <strong>Description: </strong>
+                                            <input type="text" class="form-control" value="{{ $product->product_desc }}" name="product_desc" placeholder="Description" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
+                                        <div class="input-group input-group-outline">
+                                            <strong>Price: RM</strong>
+                                            <input type="number" step="0.01" class="form-control"  value="{{ $product->price }}" name="price" placeholder="Price" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
+                                        <div class="input-group input-group-outline">
+                                            <strong>Size: </strong>
+                                            <input type="text" class="form-control" value="{{ $product->size }}" name="size" placeholder="Size" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
+                                        <select class="form-control" name="product_category" multiple>
+                                            <option value="">-- Choose Category --</option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}" {{ $product->categories->contains($category->id) ? 'selected' : '' }}>{{ $category->category_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-12 text-center">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>
                                     </div>
                                 </div>
-
-                                <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
-                                    <div class="input-group input-group-outline">
-                                        <strong>Description: </strong>
-                                        <input type="text" class="form-control" value="{{ $product->product_desc }}" name="product_desc" placeholder="Description" required>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
-                                    <div class="input-group input-group-outline">
-                                        <strong>Price: RM</strong>
-                                        <input type="number" step="0.01" class="form-control"  value="{{ $product->price }}" name="price" placeholder="Price" required>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
-                                    <div class="input-group input-group-outline">
-                                        <strong>Size: </strong>
-                                        <input type="text" class="form-control" value="{{ $product->size }}" name="size" placeholder="Size" required>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <select class="form-control" name="product_category" multiple>
-                                        <option value="">-- Choose Category --</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}" {{ $product->categories->contains($category->id) ? 'selected' : '' }}>{{ $category->category_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
-                                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>
-                                </div>
-                            </div>
-                        </form>
-                        <!-- End Form -->
+                            </form>
+                            <!-- End Form -->
                         </div>
                     </div>
                 </div>
