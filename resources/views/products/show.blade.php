@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card my-4">
-                        <div class="card-body text-center"> <!-- Center the content -->
+                        <div class="card-body"> <!-- Center the content -->
                             <h2 class="mb-4">Show Product Details</h2>
                             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                 @if($prevProduct)
@@ -22,7 +22,9 @@
                                     </a>
                                 @endif
                             </div>
-                            <img src="{{ asset('customer/img/product/product-' . $product->id . '.jpg') }}" alt="Product Image" style="width: 200px; height: auto;">
+                            <div class="d-flex justify-content-center mb-4"> <!-- Center the content -->
+                                <img src="{{ asset('customer/img/product/product-' . $product->id . '.jpg') }}" alt="Product Image" style="width: 200px; height: auto;">
+                            </div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
@@ -58,7 +60,7 @@
                                     <div class="form-group">
                                         <strong>Categories: </strong>
                                         @forelse ($product->categories as $category)
-                                            {{ $category->category_name }}
+                                        <a href="{{ route('categories.show', $category) }}">{{ $category->category_name }}</a>
                                         @empty
                                             No categories associated with this product.<
                                         @endforelse

@@ -37,7 +37,7 @@ class ProductController extends Controller
             'product_desc' => 'required',
             'price' => 'required',
             'size' => 'required',
-            'product_category' => 'required|array', // Make sure 'categories' is an array
+            'product_category' => 'required|array',
         ]);
 
         $product = Product::create([
@@ -61,7 +61,7 @@ class ProductController extends Controller
     {
 
         $nextProduct = Product::where('id', '>', $product->id)->first();
-        $prevProduct = Product::where('id', '<', $product->id)->latest()->first();
+        $prevProduct = Product::where('id', '<', $product->id)->orderBy('id', 'desc')->first();
 
         return view('products.show', compact('product', 'nextProduct', 'prevProduct'));    
     }

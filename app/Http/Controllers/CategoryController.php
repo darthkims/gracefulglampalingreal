@@ -38,7 +38,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('categories.show', compact('category'));    
+        $products = $category->products;
+
+        return view('categories.show', compact('category', 'products'));    
     }
     
     public function display(Category $category)

@@ -9,7 +9,7 @@
     <div class="row">
     <div class="col-12">
         <div class="card my-4">
-            <div class="card-body text-center"> <!-- Center the content -->
+            <div class="card-body"> <!-- Center the content -->
                 <h2 class="mb-4">Show Product Details</h2>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -36,6 +36,18 @@
                             {{ $category->updated_at->format('F j, Y, g:i A') }}
                         </div>
                     </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Products in {{ $category->category_name }}:</strong>
+                            @foreach ($products as $key => $product)
+                                <div>
+                                <a href="{{ route('products.show', $product) }}">{{ $key + 1 }}. {{ $product->product_name }}</a>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

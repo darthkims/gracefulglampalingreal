@@ -17,7 +17,7 @@ class CategorySeeder extends Seeder
             ['category_name' => 'Pants'],
             ['category_name' => 'Cosmetics'],
             ['category_name' => 'Shoes'],
-            ['category_name' => 'Accesories'],
+            ['category_name' => 'Accessories'],
             ['category_name' => 'Shirts'],
             // Add more categories as needed
         ];
