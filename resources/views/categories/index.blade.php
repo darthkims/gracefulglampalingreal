@@ -15,7 +15,7 @@
                             </div>
 
                             @if ($message = Session::get('success'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <div class="alert alert-success alert-dismissible fade show" style="color: white; background-color: red;">
                                     <strong>Success!</strong> {{ $message }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
@@ -55,10 +55,10 @@
                                                     </div>
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    <span class="text-secondary text-xs font-weight-bold">{{ $category->created_at->format('Y-m-d,g:i A') }}</span>
+                                                    <span class="text-secondary text-xs font-weight-bold">{{ $category->created_at->format('F j, Y, g:i A') }}</span>
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    <span class="text-secondary text-xs font-weight-bold">{{ $category->updated_at->format('Y-m-d,g:i A') }}</span>
+                                                    <span class="text-secondary text-xs font-weight-bold">{{ $category->updated_at->format('F j, Y, g:i A') }}</span>
                                                 </td>                                               
                                                 <td>
                                                     <form action="{{ route('categories.destroy', $category->id) }}" method="POST">

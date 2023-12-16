@@ -8,8 +8,16 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card my-4">
-                        <div class="card-body"> <!-- Center the content -->
-                            <h2 class="mb-4">Show Product Details</h2>
+                        <div class="card-body">
+                            <h2 class="mb-4">Show Product Details 
+                                <a rel="tooltip" class="btn btn-secondary btn-link"
+                                href="{{ route('products.edit',$product->id) }}" data-original-title=""
+                                title="">
+                                <i class="material-icons">edit</i>
+                                <div class="ripple-container"></div>
+                                </a>
+                            </h2>
+                            
                             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                 @if($prevProduct)
                                     <a class="btn btn-success" href="{{ route('products.show', $prevProduct->id) }}">

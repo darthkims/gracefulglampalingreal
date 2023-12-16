@@ -47,12 +47,19 @@
                                     </div>
 
                                     <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
-                                        <select class="form-control" name="product_category" multiple>
-                                            <option value="">-- Choose Category --</option>
-                                            @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}" {{ $product->categories->contains($category->id) ? 'selected' : '' }}>{{ $category->category_name }}</option>
-                                            @endforeach
-                                        </select>
+                                        <div class="input-group input-group-outline">
+                                            <strong>Categories: </strong>
+                                            <div>
+                                                @foreach ($categories as $category)
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="product_category[]" value="{{ $category->id }}" {{ $product->categories->contains($category->id) ? 'checked' : '' }} >
+                                                        <label class="form-check-label" for="category_{{ $category->id }}">
+                                                            {{ $category->category_name }}
+                                                        </label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="col-md-12 text-center">
