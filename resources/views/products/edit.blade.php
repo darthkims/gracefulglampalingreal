@@ -49,7 +49,7 @@
                                 </div>
 
                                 <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <select class="form-control" name="product_category[]" multiple>
+                                    <select class="form-control" name="product_category" multiple>
                                         <option value="">-- Choose Category --</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}" {{ $product->categories->contains($category->id) ? 'selected' : '' }}>{{ $category->category_name }}</option>

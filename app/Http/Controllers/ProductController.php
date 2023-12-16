@@ -37,7 +37,7 @@ class ProductController extends Controller
             'product_desc' => 'required',
             'price' => 'required',
             'size' => 'required',
-            'product_category' => 'required|array',
+            'product_category' => 'required',
         ]);
 
         $product = Product::create([
