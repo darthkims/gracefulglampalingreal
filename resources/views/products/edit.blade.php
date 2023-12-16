@@ -41,6 +41,13 @@
                                     </div>
                                 </div>
 
+                                <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
+                                    <div class="input-group input-group-outline">
+                                        <strong>Size: </strong>
+                                        <input type="text" class="form-control" value="{{ $product->size }}" name="size" placeholder="Size" required>
+                                    </div>
+                                </div>
+
                                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                     <a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>

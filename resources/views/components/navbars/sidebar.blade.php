@@ -48,12 +48,12 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'billing' ? ' active bg-gradient-primary' : '' }}  "
-                    href="{{ route('billing') }}">
+                <a class="nav-link text-white {{ $activePage == 'categories' ? ' active bg-gradient-primary' : '' }}  "
+                    href="{{ route('categories.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">receipt_long</i>
+                        <i class="material-icons opacity-10">list_alt</i>
                     </div>
-                    <span class="nav-link-text ms-1">Billing</span>
+                    <span class="nav-link-text ms-1">Categories</span>
                 </a>
             </li>
             <li class="nav-item">

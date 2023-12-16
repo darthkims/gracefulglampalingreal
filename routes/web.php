@@ -22,7 +22,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\ProductController;
-            
+use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {return redirect('main');})->middleware('guest');
 Route::get('/admin', function () {return redirect('sign-in');})->middleware('guest');
@@ -46,7 +46,6 @@ Route::get('main', function () {
 Route::get('shop', function () {
 	return view('products.shop');
 })->name('shop');
-Route::resource('products', ProductController::class);
 Route::get('/products/details/{product}', [ProductController::class, 'display'])->name('products.display');
 
 Route::post('sign-out', [SessionsController::class, 'destroy'])->middleware('auth')->name('logout');
@@ -80,6 +79,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('user-profile', function () {
 		return view('pages.laravel-examples.user-profile');
 	})->name('user-profile');
-	Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
-
+	Route::resource('products', ProductController::class);
+	Route::resource('categories', CategoryController::class);
 	});

@@ -1,0 +1,30 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use App\Models\Category;
+
+class CategorySeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        $category_seed = [
+            ['category_name' => 'Collectibles'],
+            ['category_name' => 'Pants'],
+            ['category_name' => 'Cosmetics'],
+            ['category_name' => 'Shoes'],
+            ['category_name' => 'Accesories'],
+            ['category_name' => 'Shirts'],
+            // Add more categories as needed
+        ];
+
+        // Insert data into the 'categories' table using Eloquent
+        foreach ($category_seed as $category_data) {
+            Category::create($category_data);
+        }
+    }
+}

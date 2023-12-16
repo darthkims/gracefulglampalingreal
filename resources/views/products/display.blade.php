@@ -79,10 +79,7 @@
                             <h3>RM{{ $product-> price }}</h3>
                             <div class="product__details__option">
                                 <div class="product__details__option__size">
-                                    <span>Size: NANTI LETAK</span>
-                                </div>
-                                <div class="product__details__option__color">
-                                    <span>Color: NANTI LETAK</span>
+                                    <h4>Size: {{$product->size}}</h4>
                                 </div>
                             </div>
                             <div class="product__details__cart__option">

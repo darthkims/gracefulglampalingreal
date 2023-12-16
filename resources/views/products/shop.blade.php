@@ -222,15 +222,12 @@
                                     </div>
                                 </a>
                                 <div class="product__item__text">
-                                    <h6>{{ $product->product_name }}</h6>
+                                    <h6>{{ $product->product_name }} ({{$product->size}})</h6>
                                     <a href="#" class="add-cart">+ Add To Cart</a>
                                     <div class="rating">
                                         <!-- Display product rating here -->
                                     </div>
                                     <h5>RM{{ $product->price }}</h5>
-                                    <div class="product__color__select">
-                                        <!-- Add color selection logic here if needed -->
-                                    </div>
                                 </div>
                             </div>
                         </div>

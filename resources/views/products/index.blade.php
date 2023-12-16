@@ -5,7 +5,8 @@
         <x-navbars.navs.auth titlePage="Products"></x-navbars.navs.auth>
         <!-- End Navbar -->
         <div class="container-fluid py-4">
-            <div class="row"> <div class="col-12">
+            <div class="row"> 
+                <div class="col-12">
                     <div class="card my-4">
                         <div class=" me-3 my-3 text-end">
                             <a class="btn bg-gradient-dark mb-0" href="{{route('products.create')}}"><i
@@ -36,6 +37,9 @@
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             PRICE</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            SIZE</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             CREATED DATE</th>
@@ -72,6 +76,10 @@
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <p class="text-xs text-secondary mb-0">RM{{ $product->price }}
+                                                </p>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <p class="text-xs text-secondary mb-0">{{ $product->size }}
                                                 </p>
                                             </td>
                                             <td class="align-middle text-center">
