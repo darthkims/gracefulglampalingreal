@@ -13,9 +13,17 @@
                                 <h2>Product MANAGEMENT</h2>
                             </div>
                             <!-- Form -->
-                            <form method="POST" action="{{ route('products.store') }}">
+                            <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
+
+                                    <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
+                                        <div class="input-group input-group-outline">
+                                            <strong>Image: </strong>
+                                            <input type="file" class="form-control" name="product_image" accept="image/*">
+                                        </div>
+                                    </div>
+
                                     <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
                                         <div class="input-group input-group-outline">
                                             <strong>Name: </strong>

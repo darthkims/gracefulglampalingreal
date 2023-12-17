@@ -38,6 +38,7 @@ class ProductController extends Controller
             'price' => 'required',
             'size' => 'required',
             'product_category' => 'required',
+            'product_image' => 'image|mimes:jpg',
         ]);
 
         $product = Product::create([
@@ -46,6 +47,17 @@ class ProductController extends Controller
             'price' => $request->input('price'),
             'size' => $request->input('size'),
         ]);
+
+        // Handle file upload
+
+        $productId = $product->id;
+
+        if ($request->hasFile('product_image')) {
+            $image = $request->file('product_image');
+            $imageName = 'product-' . $productId . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('customer/img/product'), $imageName);
+            // You may want to save $imageName in the database for later use.
+        }
 
         $product->categories()->attach($request->input('product_category'));
 
