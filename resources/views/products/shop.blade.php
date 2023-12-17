@@ -123,8 +123,7 @@
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 @php 
-                                    $productNumber = $loop->iteration;
-                                    $imagePath = asset("customer/img/product/product-$productNumber.jpg");
+                                    $imagePath = asset("customer/img/product/product-{$product->id}.jpg");
                                 @endphp
                                 <a href="{{ route('products.display',$product->id) }}">
                                     <div class="product__item__pic set-bg" data-setbg="{{ $imagePath }}">

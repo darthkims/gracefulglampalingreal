@@ -20,7 +20,7 @@
                                     <div class="col-xs-6 col-sm-6 col-md-12 mb-3">
                                         <div class="input-group input-group-outline">
                                             <strong>Image: </strong>
-                                            <input type="file" class="form-control" name="product_image" accept="image/*">
+                                            <input type="file" class="form-control" name="product_image" accept=".jpg">
                                         </div>
                                     </div>
 

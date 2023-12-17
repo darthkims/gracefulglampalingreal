@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use File;
 
 class ProductController extends Controller
 {
@@ -38,7 +39,7 @@ class ProductController extends Controller
             'price' => 'required',
             'size' => 'required',
             'product_category' => 'required',
-            'product_image' => 'image|mimes:jpg',
+            'product_image' => 'image|mimes:jpg|max:5120',
         ]);
 
         $product = Product::create([
@@ -127,6 +128,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+
+        $this->deleteProductImages($product);
         // Detach categories before deleting the product
         $product->categories()->detach();
 
@@ -135,4 +138,17 @@ class ProductController extends Controller
         return redirect()->route('products.index')
                         ->with('success','Product deleted successfully');
     }
+
+    private function deleteProductImages(Product $product)
+{
+    // Construct the image file path based on the product ID
+    $imageFilePath = public_path('customer/img/product/product-' . $product->id . '.jpg');
+
+    // Check if the image exists before attempting to delete it
+    if (File::exists($imageFilePath)) {
+        File::delete($imageFilePath);
+    }
+
+
+}
 }
