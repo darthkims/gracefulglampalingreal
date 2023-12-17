@@ -97,7 +97,7 @@
                 </div>
                 <div class="col-lg-9">
                 @php
-                    $products = App\Models\Product::all(); // Assuming you have a Product mo
+                    $products = App\Models\Product::all();
                 @endphp
                     <div class="shop__product__option">
                         <div class="row">

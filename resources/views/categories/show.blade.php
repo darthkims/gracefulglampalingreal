@@ -2,7 +2,7 @@
     <x-navbars.sidebar activePage="categories"></x-navbars.sidebar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
-        <x-navbars.navs.auth titlePage="Products"></x-navbars.navs.auth>
+        <x-navbars.navs.auth titlePage="Categories"></x-navbars.navs.auth>
         <!-- End Navbar -->
         <div class="container-fluid py-4">
    
@@ -10,7 +10,7 @@
     <div class="col-12">
         <div class="card my-4">
             <div class="card-body"> <!-- Center the content -->
-                <h2 class="mb-4">Show Product Details</h2>
+                <h2 class="mb-4">Show Category Details</h2>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Product Name:</strong>
+                            <strong>Category Name:</strong>
                             {{ $category->category_name }}
                         </div>
                     </div>

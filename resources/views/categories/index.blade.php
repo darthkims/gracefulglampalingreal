@@ -9,11 +9,13 @@
                 <div class="col-12">
                     <div class="card my-4">
                         <div class=" me-3 my-3 text-end">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h2 class="mb-0">Categories</h2>
                                 <a class="btn bg-gradient-dark mb-0" href="{{ route('categories.create') }}">
                                     <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Category
                                 </a>
                             </div>
-
+                        </div>
                             @if ($message = Session::get('success'))
                                 <div class="alert alert-success alert-dismissible fade show" style="color: white; background-color: red;">
                                     <strong>Success!</strong> {{ $message }}
@@ -32,7 +34,7 @@
                                                 NAME</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                CREATED DATE</th>
+                                                PRODUCT COUNT</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 UPDATED DATE</th>
@@ -55,8 +57,9 @@
                                                     </div>
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    <span class="text-secondary text-xs font-weight-bold">{{ $category->created_at->format('F j, Y, g:i A') }}</span>
-                                                </td>
+                                                     <!-- Count the number of products for the current category -->
+                                                     <span class="text-secondary text-xs font-weight-bold">{{ $category->products->count() }}</span>
+                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span class="text-secondary text-xs font-weight-bold">{{ $category->updated_at->format('F j, Y, g:i A') }}</span>
                                                 </td>                                               

@@ -9,9 +9,12 @@
                 <div class="col-12">
                     <div class="card my-4">
                         <div class=" me-3 my-3 text-end">
-                            <a class="btn bg-gradient-dark mb-0" href="{{route('products.create')}}"><i
-                                    class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New
-                                Product</a>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h2 class="mb-0">Product</h2>
+                                <a class="btn bg-gradient-dark mb-0" href="{{route('products.create')}}">
+                                    <iclass="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Product
+                                </a>
+                            </div>
                         </div>
                         @if ($message = Session::get('success'))
                             <div class="alert alert-success alert-dismissible fade show" style="color: white; background-color: red;">
