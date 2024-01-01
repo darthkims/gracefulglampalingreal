@@ -11,6 +11,10 @@ php artisan key:generate
 ```
 3. Run `php artisan migrate:fresh --seed` to create basic users table
 
+# LOGIN AS ADMIN
+
+type `gracefulglam.test/admin`
+
 # PHP Location
 
 1. sidebar = rsrc>views>cmp>nvb>sidebar.php

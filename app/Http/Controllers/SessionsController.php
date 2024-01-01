@@ -17,23 +17,36 @@ class SessionsController extends Controller
         return view('sessions.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $attributes = request()->validate([
-            'email' => 'required|email',
+        $attributes = $request->validate([
+            'identifier' => 'required', // 'identifier' can be either email or username
             'password' => 'required'
         ]);
-
-        if (! auth()->attempt($attributes)) {
+    
+        // to determine if the input is an email or username
+        $field = filter_var($attributes['identifier'], FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+    
+        // build credentials array based on the identified field
+        $credentials = [
+            $field => $attributes['identifier'],
+            'password' => $attributes['password']
+        ];
+    
+        if (!auth()->attempt($credentials)) {
             throw ValidationException::withMessages([
-                'email' => 'Your provided credentials could not be verified.'
+                'identifier' => 'Your provided credentials could not be verified.'
             ]);
+        }
+
+        // if the authenticated user has the 'admin' role
+        if (auth()->user()->hasRole('admin')) {
+            return redirect()->route('admin.home'); // redirect admin to admin panel
         }
 
         session()->regenerate();
 
         return redirect('/dashboard');
-
     }
 
     public function show(){
