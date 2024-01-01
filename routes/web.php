@@ -85,6 +85,6 @@ Route::group(['middleware' => 'auth'], function () {
 	});
 
 	Route::prefix('/admin')->middleware(['auth', 'role:admin'])->group(function () {
-		Route::get('/home', [HomeController::class, 'index'])->name('admin.home');
+		Route::get('/', [HomeController::class, 'index'])->name('admin.home');
 	});
 

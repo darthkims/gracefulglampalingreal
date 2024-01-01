@@ -30,8 +30,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        {{-- <form method="POST" action="{{ route('logout') }}" class="d-none" id="logout-form">
+                            @csrf
+                        </form>
+                        <li class="nav-item d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
+                                <i class="fa fa-user me-sm-1"></i>
+                                <span class="d-sm-inline d-none" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</span>
+                            </a>
+                        </li> --}}
                     </ul>
+                        
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
