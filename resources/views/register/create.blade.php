@@ -39,6 +39,16 @@
                                             @error('name')
                                             <p class='text-danger inputerror'>{{ $message }} </p>
                                             @enderror
+
+                                            <div class="input-group input-group-outline mt-3">
+                                                <label class="form-label">Username</label>
+                                                <input type="text" class="form-control" name="username"
+                                                    value="{{ old('username') }}">
+                                            </div>
+                                            @error('username')
+                                            <p class='text-danger inputerror'>{{ $message }} </p>
+                                            @enderror
+
                                             <div class="input-group input-group-outline mt-3">
                                                 <label class="form-label">Email</label>
                                                 <input type="email" class="form-control" name="email"
@@ -47,6 +57,7 @@
                                             @error('email')
                                             <p class='text-danger inputerror'>{{ $message }} </p>
                                             @enderror
+
                                             <div class="input-group input-group-outline mt-3">
                                                 <label class="form-label">Password</label>
                                                 <input type="password" class="form-control" name="password">
@@ -54,6 +65,7 @@
                                             @error('password')
                                             <p class='text-danger inputerror'>{{ $message }} </p>
                                             @enderror
+
                                             <div class="form-check form-check-info text-start ps-0 mt-3">
                                                 <input class="form-check-input" type="checkbox" value=""
                                                     id="flexCheckDefault" checked>

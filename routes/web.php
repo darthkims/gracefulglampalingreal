@@ -17,12 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {return redirect('main');})->middleware('guest');
 Route::get('/admin', function () {return redirect('sign-in');})->middleware('guest');
@@ -82,6 +83,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('products', ProductController::class);
 	Route::resource('categories', CategoryController::class);
 	});
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+	Route::prefix('/admin')->middleware(['auth', 'role:admin'])->group(function () {
+		Route::get('/home', [HomeController::class, 'index'])->name('admin.home');
+	});
+
