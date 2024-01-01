@@ -16,13 +16,14 @@ class DatabaseSeeder extends Seeder
     {
         User::factory()->create([
            'name' => 'Admin',
+            'username' => 'admin',
            'email' => 'admin@material.com',
            'password' => ('secret')
         ]);
 
-        $this->call(ProductSeeder::class);
-        $this->call(CategorySeeder::class);
-        $this->call(ProductCategorySeeder::class);
+        // $this->call(ProductSeeder::class);
+        // $this->call(CategorySeeder::class);
+        // $this->call(ProductCategorySeeder::class);
         
     }
 }
