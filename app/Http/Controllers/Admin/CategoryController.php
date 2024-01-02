@@ -5,83 +5,62 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index ()
     {
-        
-        $categories = Category::all();
-        return view('categories.index',compact('categories'));
+        $categories = Category::orderBy('created_at', 'desc')->get();
+
+        return view('admin.category.index', compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-            return view('categories.create');
+        return view('admin.category.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        Category::create($request->all());
-   
-        return redirect()->route('categories.index')
-                        ->with('success','Category created successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Category $category)
-    {
-        $products = $category->products;
-
-        return view('categories.show', compact('category', 'products'));    
-    }
-    
-    public function display(Category $category)
-    {
-        return view('categories.display', compact('category'));    
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Category $category)
-    {
-        return view('categories.edit',compact('category'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Category $category)
-    {
+        //check for name uniqe
         $request->validate([
-            'category_name' => 'required',
+            'name' => 'required|unique:categories',
         ]);
-    
-        $category->update([
-            'category_name' => $request->category_name,
-        ]);
-    
-        return redirect()->route('categories.index')->with('success', 'Category updated successfully');
-    }
-    
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Category $category)
+        Category::create([
+            'name' => $request->name,
+        ]);
+
+        return Redirect::route('categories.index')->with('message', 'Category has been created');
+    }
+
+    public function edit($id)
     {
-        $category->delete();
-  
-        return redirect()->route('categories.index')
-                        ->with('success','Category deleted successfully');
+        $category = Category::findOrFail($id);
+
+        return view('admin.category.edit', compact('category'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        //check for name uniqe
+        $request->validate([
+            'name' => 'required|unique:categories',
+        ]);
+
+        Category::where('id', $id)->update([
+            'name' => $request->name,
+        ]);
+
+        return Redirect::route('categories.index')->with('message', 'Category has been updated');
+    }
+
+    public function destroy($id)
+    {
+        // Student::where('student_id', $id)->delete();
+        Category::destroy($id);
+
+        return Redirect::route('categories.index')->with('message', 'Category has been deleted');
     }
 }
