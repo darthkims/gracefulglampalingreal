@@ -15,6 +15,7 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\PromoCodeController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +46,7 @@ Route::get('verify', function () {
 })->middleware('guest')->name('verify'); 
 Route::get('/reset-password/{token}', function ($token) {
 	return view('sessions.password.reset', ['token' => $token]);
-})->middleware('guest')->name('password.reset');
+})->middleware('guest')->name('password.reset'); 
 
 Route::get('main', function () {
 	return view('products.main');
@@ -107,12 +108,12 @@ Route::group(['middleware' => 'auth'], function () {
 		});
 
 		Route::prefix('/users')->group(function () {
-			Route::get('/', [AdminProductController::class, 'index'])->name('users.index');
-			Route::get('/create', [AdminProductController::class, 'create'])->name('users.create');
-			Route::post('/', [AdminProductController::class, 'store'])->name('users.store');
-			Route::get('/edit/{id}', [AdminProductController::class, 'edit'])->name('users.edit');
-			Route::patch('/{id}', [AdminProductController::class, 'update'])->name('users.update');
-			Route::delete('/{id}', [AdminProductController::class, 'destroy'])->name('users.destroy');
+			Route::get('/', [UserController::class, 'index'])->name('users.index');
+			Route::get('/create', [UserController::class, 'create'])->name('users.create');
+			Route::post('/', [UserController::class, 'store'])->name('users.store');
+			Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+			Route::patch('/{id}', [UserController::class, 'update'])->name('users.update');
+			Route::delete('/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 		});
 
 		Route::prefix('/customers')->group(function () {
