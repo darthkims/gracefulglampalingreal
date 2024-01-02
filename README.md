@@ -1,19 +1,40 @@
-# First time Install
+# First-time Installation
 
 1. Run the following commands to install the dependencies:
+
 ```
 composer install
 ```
 
-2. Make sure you have a .env file in your project root. If not, copy the .env.example file and rename it to .env. Then, run:
+```
+npm install
+```
+
+2.  Make sure you have a `.env` file in your project root. If not, run this command to copy `.env.example` to `.env`.
+
+```
+cp .env.example .env
+```
+
+3.  Then, run to generate the app key.
+
 ```
 php artisan key:generate
 ```
-3. Run `php artisan migrate:fresh --seed` to create basic users table
 
-# LOGIN AS ADMIN
+4. Run the following command to migrate all tables and seed the database with basic data
 
-type `gracefulglam.test/admin`
+```
+php artisan migrate:fresh --seed
+```
+
+# Login as Admin
+
+1. Go to the login page by navigating to `/sign-in`.
+2. Use the following credentials. User can insert either email or username:
+    - **Email / Username:** admin@material.com (email) / admin (username)
+    - **Password:** secret
+3. For user role admin, the system will redirect to the admin panel.
 
 # PHP Location
 

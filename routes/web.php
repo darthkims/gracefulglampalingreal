@@ -35,7 +35,7 @@ Route::get('/', function () {return redirect('main');})->middleware('guest');
 Route::get('/admin', function () {return redirect('sign-in');})->middleware('guest');
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 Route::get('sign-up', [RegisterController::class, 'create'])->middleware('guest')->name('register');
-Route::post('sign-up', [RegisterController::class, 'store'])->middleware('guest');
+Route::post('sign-up', [RegisterController::class, 'store'])->middleware('guest')->name('register');
 Route::get('sign-in', [SessionsController::class, 'create'])->middleware('guest')->name('login');
 Route::post('sign-in', [SessionsController::class, 'store'])->middleware('guest');
 Route::post('verify', [SessionsController::class, 'show'])->middleware('guest');
