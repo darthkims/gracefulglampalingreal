@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header">{{ __('Brands') }}</div>
+                <div class="card-header">{{ __('Roles') }}</div>
 
                 <div class="card-body">
                   @if (session('message'))
@@ -17,14 +17,10 @@
 
                     <div class="container mb-4">
                       <div class="row">
-                        <div class="col">
-                          
-                        </div>
-                        <div class="col">
-                          
-                        </div>
+                        <div class="col"></div>
+                        <div class="col"></div>
                         <div class="col text-end">
-                          <a class="btn btn-primary" href="{{ route('brands.create') }}" role="button">Add Brand</a>
+                          <a class="btn btn-primary" href="{{ route('roles.create') }}" role="button">Add Role</a>
                         </div>
                       </div>
                     </div>
@@ -40,27 +36,27 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @forelse($brands as $index => $brand)
+                        @forelse($roles as $index => $role)
                             <tr class="text-center">
                                 <th scope="row">{{ $index + 1 }}</th>
-                                <td>{{ $brand->name }}</td>
-                                <td>{{ date_format($brand->created_at ,"d F Y H:i A"); }}</td>
-                                <td>{{ date_format($brand->updated_at ,"d F Y H:i A"); }}</td>
+                                <td>{{ Str::ucfirst($role->name) }}</td>
+                                <td>{{ date_format($role->created_at ,"d F Y H:i A"); }}</td>
+                                <td>{{ date_format($role->updated_at ,"d F Y H:i A"); }}</td>
                                 <td class="d-flex justify-content-center gap-2">
                                     <!-- Edit Btn -->                                    
-                                    <a class="btn btn-warning" href="{{ route('brands.edit', $brand->id) }}" role="button">Edit</a>
+                                    <a class="btn btn-warning" href="{{ route('roles.edit', $role->id) }}" role="button">Edit</a>
                                     <!-- Delete Btn -->
-                                    <form id="deleteForm{{ $brand->id }}" action="{{ route('brands.destroy', $brand->id) }}" 
+                                    <form id="deleteForm{{ $role->id }}" action="{{ route('roles.destroy', $role->id) }}" 
                                       method="POST" style="display: none;">
                                       @csrf
                                       @method('DELETE')
                                     </form>
-                                    <a class="btn btn-danger" href="#" onclick="confirmDelete('{{ $brand->id }}')" role="button">Delete</a>
+                                    <a class="btn btn-danger" href="#" onclick="confirmDelete('{{ $role->id }}')" role="button">Delete</a>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="text-center">No brands found.</td>
+                                <td colspan="4" class="text-center">No roles found.</td>
                             </tr>
                         @endforelse
                       </tbody>
@@ -72,11 +68,11 @@
 </div>
 
 <script>
-  function confirmDelete(brandId) {
-      var confirmation = confirm("Are you sure you want to delete this brand?");
+  function confirmDelete(roleId) {
+      var confirmation = confirm("Are you sure you want to delete this role?");
       
       if (confirmation) {
-          document.getElementById('deleteForm' + brandId).submit();
+          document.getElementById('deleteForm' + roleId).submit();
       }
   }
 </script>

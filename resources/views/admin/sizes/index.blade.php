@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header">{{ __('Brands') }}</div>
+                <div class="card-header">{{ __('Sizes') }}</div>
 
                 <div class="card-body">
                   @if (session('message'))
@@ -24,7 +24,7 @@
                           
                         </div>
                         <div class="col text-end">
-                          <a class="btn btn-primary" href="{{ route('brands.create') }}" role="button">Add Brand</a>
+                          <a class="btn btn-primary" href="{{ route('sizes.create') }}" role="button">Add Size</a>
                         </div>
                       </div>
                     </div>
@@ -40,27 +40,27 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @forelse($brands as $index => $brand)
+                        @forelse($sizes as $index => $size)
                             <tr class="text-center">
                                 <th scope="row">{{ $index + 1 }}</th>
-                                <td>{{ $brand->name }}</td>
-                                <td>{{ date_format($brand->created_at ,"d F Y H:i A"); }}</td>
-                                <td>{{ date_format($brand->updated_at ,"d F Y H:i A"); }}</td>
+                                <td>{{ $size->name }}</td>
+                                <td>{{ date_format($size->created_at ,"d F Y H:i A"); }}</td>
+                                <td>{{ date_format($size->updated_at ,"d F Y H:i A"); }}</td>
                                 <td class="d-flex justify-content-center gap-2">
                                     <!-- Edit Btn -->                                    
-                                    <a class="btn btn-warning" href="{{ route('brands.edit', $brand->id) }}" role="button">Edit</a>
+                                    <a class="btn btn-warning" href="{{ route('sizes.edit', $size->id) }}" role="button">Edit</a>
                                     <!-- Delete Btn -->
-                                    <form id="deleteForm{{ $brand->id }}" action="{{ route('brands.destroy', $brand->id) }}" 
+                                    <form id="deleteForm{{ $size->id }}" action="{{ route('sizes.destroy', $size->id) }}" 
                                       method="POST" style="display: none;">
                                       @csrf
                                       @method('DELETE')
                                     </form>
-                                    <a class="btn btn-danger" href="#" onclick="confirmDelete('{{ $brand->id }}')" role="button">Delete</a>
+                                    <a class="btn btn-danger" href="#" onclick="confirmDelete('{{ $size->id }}')" role="button">Delete</a>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="text-center">No brands found.</td>
+                                <td colspan="4" class="text-center">No sizes found.</td>
                             </tr>
                         @endforelse
                       </tbody>
@@ -72,11 +72,11 @@
 </div>
 
 <script>
-  function confirmDelete(brandId) {
-      var confirmation = confirm("Are you sure you want to delete this brand?");
+  function confirmDelete(sizeId) {
+      var confirmation = confirm("Are you sure you want to delete this size?");
       
       if (confirmation) {
-          document.getElementById('deleteForm' + brandId).submit();
+          document.getElementById('deleteForm' + sizeId).submit();
       }
   }
 </script>

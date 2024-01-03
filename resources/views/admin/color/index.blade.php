@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header">{{ __('Brands') }}</div>
+                <div class="card-header">{{ __('Colors') }}</div>
 
                 <div class="card-body">
                   @if (session('message'))
@@ -24,7 +24,7 @@
                           
                         </div>
                         <div class="col text-end">
-                          <a class="btn btn-primary" href="{{ route('brands.create') }}" role="button">Add Brand</a>
+                          <a class="btn btn-primary" href="{{ route('colors.create') }}" role="button">Add Color</a>
                         </div>
                       </div>
                     </div>
@@ -40,27 +40,27 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @forelse($brands as $index => $brand)
+                        @forelse($colors as $index => $color)
                             <tr class="text-center">
                                 <th scope="row">{{ $index + 1 }}</th>
-                                <td>{{ $brand->name }}</td>
-                                <td>{{ date_format($brand->created_at ,"d F Y H:i A"); }}</td>
-                                <td>{{ date_format($brand->updated_at ,"d F Y H:i A"); }}</td>
+                                <td>{{ $color->name }}</td>
+                                <td>{{ date_format($color->created_at ,"d F Y H:i A"); }}</td>
+                                <td>{{ date_format($color->updated_at ,"d F Y H:i A"); }}</td>
                                 <td class="d-flex justify-content-center gap-2">
                                     <!-- Edit Btn -->                                    
-                                    <a class="btn btn-warning" href="{{ route('brands.edit', $brand->id) }}" role="button">Edit</a>
+                                    <a class="btn btn-warning" href="{{ route('colors.edit', $color->id) }}" role="button">Edit</a>
                                     <!-- Delete Btn -->
-                                    <form id="deleteForm{{ $brand->id }}" action="{{ route('brands.destroy', $brand->id) }}" 
+                                    <form id="deleteForm{{ $color->id }}" action="{{ route('colors.destroy', $color->id) }}" 
                                       method="POST" style="display: none;">
                                       @csrf
                                       @method('DELETE')
                                     </form>
-                                    <a class="btn btn-danger" href="#" onclick="confirmDelete('{{ $brand->id }}')" role="button">Delete</a>
+                                    <a class="btn btn-danger" href="#" onclick="confirmDelete('{{ $color->id }}')" role="button">Delete</a>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="text-center">No brands found.</td>
+                                <td colspan="4" class="text-center">No colors found.</td>
                             </tr>
                         @endforelse
                       </tbody>
@@ -72,11 +72,11 @@
 </div>
 
 <script>
-  function confirmDelete(brandId) {
-      var confirmation = confirm("Are you sure you want to delete this brand?");
+  function confirmDelete(colorId) {
+      var confirmation = confirm("Are you sure you want to delete this color?");
       
       if (confirmation) {
-          document.getElementById('deleteForm' + brandId).submit();
+          document.getElementById('deleteForm' + colorId).submit();
       }
   }
 </script>

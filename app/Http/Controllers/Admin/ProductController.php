@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use File;
+use App\Models\Size;
+use App\Models\Brand;
+use App\Models\Color;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -10,61 +13,54 @@ use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $products = Product::all();
-        return view('products.index',compact('products'));
+
+        return view('admin.product.index',compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $categories = Category::all();
+        $sizes = Size::all();
+        $colors = Color::all();
+        $brands = Brand::all();
     
-        return view('products.create', compact('categories'));
+        return view('admin.product.create', compact('categories', 'sizes', 'colors', 'brands'));
     }
 
-    /**
-    * Store a newly created resource in storage.
-    */
     public function store(Request $request)
     {
-        $request->validate([
-            'product_name' => 'required',
-            'product_desc' => 'required',
-            'price' => 'required',
-            'size' => 'required',
-            'product_category' => 'required',
-            'product_image' => 'image|mimes:jpg|max:5120',
+        // validate the data
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'description' => 'required|string',
+            'brand' => 'required|exists:brands,id',
+            'categories' => 'required|array',
+            'categories.*' => 'exists:categories,id',
+            'sizes' => 'required|array',
+            'sizes.*' => 'exists:sizes,id',
+            'colors' => 'required|array',
+            'colors.*' => 'exists:colors,id',
         ]);
 
         $product = Product::create([
-            'product_name' => $request->input('product_name'),
-            'product_desc' => $request->input('product_desc'),
-            'price' => $request->input('price'),
-            'size' => $request->input('size'),
+            'name' => $validatedData['name'],
+            'price' => $validatedData['price'],
+            'description' => $validatedData['description'],
         ]);
 
-        // Handle file upload
+        // associate the brand with the product
+        $product->brands()->attach($validatedData['brand'], ['brand_id' => $validatedData['brand']]);
 
-        $productId = $product->id;
+        // attach categories, sizes, and colors
+        $product->categories()->sync($validatedData['categories']);
+        $product->sizes()->sync($validatedData['sizes']);
+        $product->colors()->sync($validatedData['colors']);
 
-        if ($request->hasFile('product_image')) {
-            $image = $request->file('product_image');
-            $imageName = 'product-' . $productId . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('customer/img/product'), $imageName);
-            // You may want to save $imageName in the database for later use.
-        }
-
-        $product->categories()->attach($request->input('product_category'));
-
-        return redirect()->route('products.index')
-                        ->with('success', 'Product created successfully.');
+        return redirect()->route('admin.products.index')->with('success', 'Product created successfully!');
     }
 
 
@@ -73,17 +69,11 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        $product = Product::find($product->id);
 
-        $nextProduct = Product::where('id', '>', $product->id)->first();
-        $prevProduct = Product::where('id', '<', $product->id)->orderBy('id', 'desc')->first();
-
-        return view('products.show', compact('product', 'nextProduct', 'prevProduct'));    
+        return view('admin.product.show',compact('product'));
     }
     
-    public function display(Product $product)
-    {
-        return view('products.display', compact('product'));    
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -93,7 +83,7 @@ class ProductController extends Controller
 
         $categories = Category::all();
         
-        return view('products.edit',compact('product','categories'));
+        return view('admin.product.edit',compact('product','categories'));
     }
 
     /**
@@ -119,7 +109,7 @@ class ProductController extends Controller
         // Sync the selected categories
         $product->categories()->sync($request->input('product_category'));
     
-        return redirect()->route('products.index')->with('success', 'Product updated successfully');
+        return redirect()->route('admin.product.index')->with('success', 'Product updated successfully');
     }
 
     
@@ -129,11 +119,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-
         $this->deleteProductImages($product);
-        // Detach categories before deleting the product
         $product->categories()->detach();
-
         $product->delete();
   
         return redirect()->route('products.index')
@@ -141,15 +128,13 @@ class ProductController extends Controller
     }
 
     private function deleteProductImages(Product $product)
-{
-    // Construct the image file path based on the product ID
-    $imageFilePath = public_path('customer/img/product/product-' . $product->id . '.jpg');
+    {
+        // Construct the image file path based on the product ID
+        $imageFilePath = public_path('customer/img/product/product-' . $product->id . '.jpg');
 
-    // Check if the image exists before attempting to delete it
-    if (File::exists($imageFilePath)) {
-        File::delete($imageFilePath);
+        // Check if the image exists before attempting to delete it
+        if (File::exists($imageFilePath)) {
+            File::delete($imageFilePath);
+        }
     }
-
-
-}
 }
