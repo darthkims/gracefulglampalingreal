@@ -9,6 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
         'name',
         'price',
@@ -44,3 +45,4 @@ class Product extends Model
         return $this->belongsToMany(Category::class, 'product_category')->withTimestamps();
     }
 }
+

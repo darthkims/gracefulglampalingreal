@@ -131,7 +131,7 @@
                                     </div>
                                 </a>
                                 <div class="product__item__text">
-                                    <h6>{{ $product->product_name }} ({{$product->size}})</h6>
+                                    <h6>{{ $product->name }}</h6>
                                     <a href="#" class="add-cart">+ Add To Cart</a>
                                     <div class="rating">
                                         <!-- Display product rating here -->

@@ -13,15 +13,15 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $category_seed = [
-            ['category_name' => 'Collectibles'],
-            ['category_name' => 'Pants'],
-            ['category_name' => 'Cosmetics'],
-            ['category_name' => 'Shoes'],
-            ['category_name' => 'Accessories'],
-            ['category_name' => 'Shirts'],
-            ['category_name' => 'Men'],
-            ['category_name' => 'Women'],
-            ['category_name' => 'Unisex'],
+            ['name' => 'Collectibles'],
+            ['name' => 'Pants'],
+            ['name' => 'Cosmetics'],
+            ['name' => 'Shoes'],
+            ['name' => 'Accessories'],
+            ['name' => 'Shirts'],
+            ['name' => 'Men'],
+            ['name' => 'Women'],
+            ['name' => 'Unisex'],
             // Add more categories as needed
         ];
 

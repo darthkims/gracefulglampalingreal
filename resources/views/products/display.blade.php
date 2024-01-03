@@ -78,6 +78,19 @@
                             <h4>{{ $product-> name }}</h4>
                             <h3>RM{{ $product-> price }}</h3>
                             <div class="product__details__option">
+                                <div class="product__details__option__color">
+                                    <span>Category: 
+                                        @if ($product->categories)
+                                            @forelse ($product->categories as $category)
+                                                {{ $category->name }}
+                                            @empty
+                                                No categories
+                                            @endforelse
+                                        @else
+                                            No categories
+                                        @endif
+                                    </span>
+                                </div>
                             </div>
                             <div class="product__details__cart__option">
                                 <div class="quantity">
