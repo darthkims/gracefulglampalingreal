@@ -24,7 +24,7 @@
                           
                         </div>
                         <div class="col text-end">
-                          <a class="btn btn-primary" href="{{ route('products.create') }}" role="button">Add Product</a>
+                          <a class="btn btn-primary" href="{{ route('admin.products.create') }}" role="button">Add Product</a>
                         </div>
                       </div>
                     </div>
@@ -75,9 +75,9 @@
                                 </td>
                                 <td class="d-flex justify-content-center gap-2">
                                     <!-- Edit Btn -->                                    
-                                    <a class="btn btn-warning" href="{{ route('products.edit', $product->id) }}" role="button">Edit</a>
+                                    <a class="btn btn-warning" href="{{ route('admin.products.edit', $product->id) }}" role="button">Edit</a>
                                     <!-- Delete Btn -->
-                                    <form id="deleteForm{{ $product->id }}" action="{{ route('products.destroy', $product->id) }}" 
+                                    <form id="deleteForm{{ $product->id }}" action="{{ route('admin.products.destroy', $product->id) }}" 
                                       method="POST" style="display: none;">
                                       @csrf
                                       @method('DELETE')
