@@ -75,21 +75,9 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8">
                         <div class="product__details__text">
-                            <h4>{{ $product-> product_name }}</h4>
+                            <h4>{{ $product-> name }}</h4>
                             <h3>RM{{ $product-> price }}</h3>
                             <div class="product__details__option">
-                                <div class="product__details__option__size">
-                                    <span>Size: {{$product->size}}</span>
-                                </div>
-                                <div class="product__details__option__color">
-                                    <span>Category: 
-                                        @forelse ($product->categories as $category)
-                                        {{ $category->category_name }}
-                                        @empty
-                                            No categories
-                                        @endforelse
-                                    </span>
-                                </div>
                             </div>
                             <div class="product__details__cart__option">
                                 <div class="quantity">
@@ -119,7 +107,7 @@
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tabs-5" role="tabpanel">
                                     <div class="product__details__tab__content">
-                                        <p class="note">{{ $product-> product_desc}}</p>
+                                        <p class="note">{{ $product-> description}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +144,7 @@
                                 </div>
                                 <div class="product__item__text">
                                     <a href="#" class="add-cart">+ Add To Cart</a>
-                                    <h6>{{ $random ->product_name }}</h6>
+                                    <h6>{{ $random ->name }}</h6>
                                     <h5>RM{{ $random ->price }}</h5>
                                 </div>
                             </a>
