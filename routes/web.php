@@ -54,8 +54,8 @@ Route::get('main', function () {
 })->name('main');
 
 // Product Listing
-Route::get('shop', [ProductController::class, 'index'])->name('products.index');
-Route::get('/products/details/{product}', [ProductController::class, 'display'])->name('products.display');
+Route::get('shop', [ProductController::class, 'index'])->name('cust.products.index');
+Route::get('/products/details/{product}', [ProductController::class, 'display'])->name('cust.products.display');
 // Route::get('shop', function () {
 // 	return view('products.shop');
 // })->name('shop');

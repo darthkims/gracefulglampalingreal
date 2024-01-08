@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="col-md-12 text-center">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>
+                                        <a class="btn btn-primary" href="{{ route('cust.products.index') }}"> Back</a>
                                     </div>
                                 </div>
                             </form>

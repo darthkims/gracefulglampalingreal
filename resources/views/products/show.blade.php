@@ -89,7 +89,7 @@
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>
+                            <a class="btn btn-primary" href="{{ route('cust.products.index') }}"> Back</a>
                         </div>
                     </div>
                 </div>

@@ -9,7 +9,7 @@
                     <div class="col-lg-12">
                         <div class="product__details__breadcrumb">
                             <a href="{{ route('main')}}">Home</a>
-                            <a href="{{ route('products.index')}}">Shop</a>
+                            <a href="{{ route('cust.products.index')}}">Shop</a>
                             <span>Product Details</span>
                         </div>
                     </div>
