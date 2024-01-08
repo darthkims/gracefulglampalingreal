@@ -48,12 +48,17 @@ Route::get('/reset-password/{token}', function ($token) {
 	return view('sessions.password.reset', ['token' => $token]);
 })->middleware('guest')->name('password.reset'); 
 
+
 Route::get('main', function () {
 	return view('products.main');
 })->name('main');
-Route::get('shop', function () {
-	return view('products.shop');
-})->name('shop');
+
+// Product Listing
+Route::get('shop', [ProductController::class, 'index'])->name('cust.products.index');
+Route::get('/products/details/{product}', [ProductController::class, 'display'])->name('cust.products.display');
+// Route::get('shop', function () {
+// 	return view('products.shop');
+// })->name('shop');
 Route::get('/products/details/{product}', [ProductController::class, 'display'])->name('products.display');
 
 Route::post('sign-out', [SessionsController::class, 'destroy'])->middleware('auth')->name('logout');

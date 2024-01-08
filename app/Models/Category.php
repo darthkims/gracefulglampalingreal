@@ -13,9 +13,18 @@ class Category extends Model
         'name',
     ];
 
+    protected $appends = [
+        'product_count'
+    ];
+
     public function products()
     {
         return $this->belongsToMany(Product::class, 'product_category');
+    }
+
+    public function getProductCountAttribute()
+    {
+        return $this->products->count();
     }
 
 }
