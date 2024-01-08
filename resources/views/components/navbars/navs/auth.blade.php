@@ -17,7 +17,6 @@
                     <input type="text" class="form-control">
                 </div>
             </div>
-            <a href="{{ route('shop') }}" class="btn btn-primary">Delete me</a>
             <form method="POST" action="{{ route('logout') }}" class="d-none" id="logout-form">
                 @csrf
             </form>
