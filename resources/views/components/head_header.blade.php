@@ -100,7 +100,7 @@
                     <nav class="header__menu mobile-menu">
                         <ul>
                         <li class="{{ $activePage == 'main' ? ' active' : '' }}"> <a href="{{ route('main') }}" > Home</a></li>
-                            <li class="{{ $activePage == 'shop' ? ' active' : '' }}"><a href="{{ route('shop') }}">Shop</a></li>
+                            <li class="{{ $activePage == 'shop' ? ' active' : '' }}"><a href="{{ route('products.index') }}">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="./about.html">About Us</a></li>

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use File;
+use App\Models\Size;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use File;
 
 class ProductController extends Controller
 {
@@ -14,8 +15,33 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        return view('products.index',compact('products'));
+        $products = Product::with(['colors', 'sizes', 'brands', 'categories'])->get();
+        $categories = Category::all();
+        $sizes = Size::all();
+
+        return view('products.shop',compact('products', 'categories', 'sizes'));
+    }
+
+    public function display(Product $product, Request $request)
+    {
+
+        /**
+         * $product = Product::with(['colors', 'sizes', 'brands', 'categories'])->where('id', $product->id)->first();
+         * method load() is used to eager load the relationships, the output is the same as the above
+         */
+        $product->load(['colors', 'sizes', 'brands', 'categories']);
+
+        
+        // to display related products
+        $relatedProducts = Product::with(['colors', 'sizes', 'brands', 'categories'])
+            ->whereHas('categories', function ($query) use ($product) {
+                $query->whereIn('categories.id', $product->categories->pluck('id'));
+            })
+            ->where('id', '!=', $product->id)
+            ->limit(4)
+            ->get();
+
+        return view('products.display', compact('product', 'relatedProducts'));    
     }
 
     /**
@@ -79,10 +105,6 @@ class ProductController extends Controller
         return view('products.show', compact('product', 'nextProduct', 'prevProduct'));    
     }
     
-    public function display(Product $product)
-    {
-        return view('products.display', compact('product'));    
-    }
 
     /**
      * Show the form for editing the specified resource.

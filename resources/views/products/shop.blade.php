@@ -40,15 +40,11 @@
                                         <div class="card-body">
                                             <div class="shop__sidebar__categories">
                                                 <ul class="nice-scroll">
-                                                    <li><a href="#">Men (20)</a></li>
-                                                    <li><a href="#">Women (20)</a></li>
-                                                    <li><a href="#">Bags (20)</a></li>
-                                                    <li><a href="#">Clothing (20)</a></li>
-                                                    <li><a href="#">Shoes (20)</a></li>
-                                                    <li><a href="#">Accessories (20)</a></li>
-                                                    <li><a href="#">Kids (20)</a></li>
-                                                    <li><a href="#">Kids (20)</a></li>
-                                                    <li><a href="#">Kids (20)</a></li>
+                                                    @forelse($categories as $index => $category)
+                                                        <li><a href="#">{{ $category->name }} ({{ $category->product_count }})</a></li>
+                                                    @empty
+                                                        <li><a href="#">No categories found</a></li>
+                                                    @endforelse
                                                 </ul>
                                             </div>
                                         </div>
@@ -62,30 +58,13 @@
                                     <div id="collapseFour" class="collapse show" data-parent="#accordionExample">
                                         <div class="card-body">
                                             <div class="shop__sidebar__size">
-                                                <label for="xs">xs
-                                                    <input type="radio" id="xs">
-                                                </label>
-                                                <label for="sm">s
-                                                    <input type="radio" id="sm">
-                                                </label>
-                                                <label for="md">m
-                                                    <input type="radio" id="md">
-                                                </label>
-                                                <label for="xl">xl
-                                                    <input type="radio" id="xl">
-                                                </label>
-                                                <label for="2xl">2xl
-                                                    <input type="radio" id="2xl">
-                                                </label>
-                                                <label for="xxl">xxl
-                                                    <input type="radio" id="xxl">
-                                                </label>
-                                                <label for="3xl">3xl
-                                                    <input type="radio" id="3xl">
-                                                </label>
-                                                <label for="4xl">4xl
-                                                    <input type="radio" id="4xl">
-                                                </label>
+                                                @forelse($sizes as $index => $size)
+                                                    <label for="{{ $size->name }}">{{ $size->name }}
+                                                        <input type="radio" id="{{ $size->name }}">
+                                                    </label>
+                                                @empty
+                                                    <p>No sizes found</p>
+                                                @endforelse
                                             </div>
                                         </div>
                                     </div>
@@ -96,9 +75,6 @@
                     </div>
                 </div>
                 <div class="col-lg-9">
-                @php
-                    $products = App\Models\Product::all();
-                @endphp
                     <div class="shop__product__option">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6">

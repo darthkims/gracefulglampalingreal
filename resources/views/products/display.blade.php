@@ -9,7 +9,7 @@
                     <div class="col-lg-12">
                         <div class="product__details__breadcrumb">
                             <a href="{{ route('main')}}">Home</a>
-                            <a href="{{ route('shop')}}">Shop</a>
+                            <a href="{{ route('products.index')}}">Shop</a>
                             <span>Product Details</span>
                         </div>
                     </div>
@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-3">
                         <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">
                                     <div class="product__thumb__pic set-bg" data-setbg="{{ asset('customer/img/shop-details/thumb-1-' . $product-> id . '.jpg') }}">
                                     </div>
@@ -40,12 +40,12 @@
                                     <div class="product__thumb__pic set-bg" data-setbg="{{ asset('customer/img/shop-details/thumb-4-' . $product-> id . '.jpg') }}">
                                     </div>
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                     <div class="col-lg-6 col-md-9">
                         <div class="tab-content">
-                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            {{-- <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__pic__item">
                                 <img src="{{ asset('customer/img/shop-details/thumb-1-' . $product-> id . '.jpg') }}" alt="Product Image">
                                 </div>
@@ -64,7 +64,7 @@
                                 <div class="product__details__pic__item">
                                 <img src="{{ asset('customer/img/shop-details/thumb-4-' . $product-> id . '.jpg') }}" alt="Product Image">
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8">
                         <div class="product__details__text">
-                            <h4>{{ $product-> name }}</h4>
+                            <h4>{{ $product->name }}</h4>
                             <h3>RM{{ $product-> price }}</h3>
                             <div class="product__details__option">
                                 <div class="product__details__option__color">
@@ -141,24 +141,16 @@
                 </div>
             </div>
             <div class="row">
-            @php
-                $currentProductId = $product->id;
-                $products = App\Models\Product::where('id', '!=', $currentProductId)->get();
-                $randomIds = $products->pluck('id')->unique()->random(4)->toArray();
-            @endphp
-                @foreach($randomIds as $randomId)
+                @foreach($relatedProducts as $rp)
                     <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
                         <div class="product__item">
-                            <?php
-                                $random = App\Models\Product::find($randomId);
-                            ?>
-                            <a href="{{ route('products.display', $random ->id) }}"> <!-- Set your product details route -->
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset('customer/img/shop-details/thumb-1-' . $random ->id . '.jpg') }}">
+                            <a href="{{ route('products.display', $rp->id) }}"> <!-- Set your product details route -->
+                                {{-- <div class="product__item__pic set-bg" data-setbg="{{ asset('customer/img/shop-details/thumb-1-' . $p ->id . '.jpg') }}"> --}}
                                 </div>
                                 <div class="product__item__text">
                                     <a href="#" class="add-cart">+ Add To Cart</a>
-                                    <h6>{{ $random ->name }}</h6>
-                                    <h5>RM{{ $random ->price }}</h5>
+                                    <h6>{{ $rp->name }}</h6>
+                                    <h5>RM{{ $rp->price }}</h5>
                                 </div>
                             </a>
                         </div>
