@@ -46,7 +46,7 @@
                                     @foreach ($users as $user)
                                         <tr>
                                             <td>
-                                                <div class="d-flex justify-content-center">
+                                                <div class="d-flex px-2 py-1">
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <p class="mb-0 text-sm">{{ $user->id }}</p>
                                                     </div>
@@ -80,18 +80,12 @@
                                                 <p class="text-xs text-secondary mb-0">{{ date_format($user->updated_at ,"d F Y H:i A") }}</p>
                                             </td>
                                             <td class="align-middle">
-                                                <a rel="tooltip" class="btn btn-success btn-link"
-                                                    href="{{ route('users.edit', $user->id) }}" data-original-title=""
-                                                    title="">
-                                                    <i class="material-icons">edit</i>
-                                                    <div class="ripple-container"></div>
-                                                </a>
-                                                
-                                                <button type="button" class="btn btn-danger btn-link"
-                                                href="{{ route('users.destroy', $user->id) }}" data-original-title="" title="">
-                                                <i class="material-icons">close</i>
-                                                <div class="ripple-container"></div>
-                                            </button>
+                                                <form action="{{ route('users.destroy',$user->id) }}" method="POST">
+                                                   <a class="btn btn-secondary" href="{{ route('users.edit',$user->id) }}"><i class="material-icons">edit</i></a>
+                                                   @csrf
+                                                   @method('DELETE')
+                                                   <button type="submit" class="btn btn-danger"><i class="material-icons">close</i></button>
+                                                </form>
                                             </td>
                                         </tr>
                                         @endforeach
