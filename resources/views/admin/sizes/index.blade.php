@@ -1,83 +1,88 @@
-@extends('layouts.app')
+<x-layout bodyClass="g-sidenav-show  bg-gray-200">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-header">{{ __('Sizes') }}</div>
-
-                <div class="card-body">
-                  @if (session('message'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ session('message') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <x-navbars.sidebar activePage="sizes"></x-navbars.sidebar>
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <!-- Navbar -->
+        <x-navbars.navs.auth titlePage="Sizes"></x-navbars.navs.auth>
+        <!-- End Navbar -->
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card my-4">
+                        <div class=" me-3 my-3 text-end">
+                            <a class="btn bg-gradient-dark mb-0" href="{{ route('sizes.create') }}"><i
+                                    class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New
+                                Size</a>
+                        </div>
+                        <div class="card-body px-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                ID
+                                            </th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                NAME</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                DATE CREATED</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                DATE UPDATED</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                ACTION
+                                            </th>
+                                            <th class="text-secondary opacity-7"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach ($sizes as $size)
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <p class="mb-0 text-sm">{{ $size->id }}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <p class="mb-0 text-sm">{{ $size->name }}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <p class="text-xs text-secondary mb-0">{{ date_format($size->created_at ,"d F Y H:i A") }}
+                                                </p>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <p class="text-xs text-secondary mb-0">{{ date_format($size->updated_at ,"d F Y H:i A") }}</p>
+                                            </td>
+                                            <td class="align-middle">
+                                                <form action="{{ route('sizes.destroy',$size->id) }}" method="POST">
+                                                   <a class="btn btn-secondary" href="{{ route('sizes.edit',$size->id) }}"><i class="material-icons">edit</i></a>
+                                                   @csrf
+                                                   @method('DELETE')
+                                                   <button type="submit" class="btn btn-danger"><i class="material-icons">close</i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                  @endif
-
-                    <div class="container mb-4">
-                      <div class="row">
-                        <div class="col">
-                          
-                        </div>
-                        <div class="col">
-                          
-                        </div>
-                        <div class="col text-end">
-                          <a class="btn btn-primary" href="{{ route('sizes.create') }}" role="button">Add Size</a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <table class="table align-middle">
-                      <thead class="table-secondary">
-                        <tr class="text-center">
-                          <th scope="col" class="table-secondary">#</th>
-                          <th scope="col" class="table-secondary">Name</th>
-                          <th scope="col" class="table-secondary">Date Created</th>
-                          <th scope="col" class="table-secondary">Date Updated</th>
-                          <th scope="col" width="50px" class="table-secondary">Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @forelse($sizes as $index => $size)
-                            <tr class="text-center">
-                                <th scope="row">{{ $index + 1 }}</th>
-                                <td>{{ $size->name }}</td>
-                                <td>{{ date_format($size->created_at ,"d F Y H:i A"); }}</td>
-                                <td>{{ date_format($size->updated_at ,"d F Y H:i A"); }}</td>
-                                <td class="d-flex justify-content-center gap-2">
-                                    <!-- Edit Btn -->                                    
-                                    <a class="btn btn-warning" href="{{ route('sizes.edit', $size->id) }}" role="button">Edit</a>
-                                    <!-- Delete Btn -->
-                                    <form id="deleteForm{{ $size->id }}" action="{{ route('sizes.destroy', $size->id) }}" 
-                                      method="POST" style="display: none;">
-                                      @csrf
-                                      @method('DELETE')
-                                    </form>
-                                    <a class="btn btn-danger" href="#" onclick="confirmDelete('{{ $size->id }}')" role="button">Delete</a>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="4" class="text-center">No sizes found.</td>
-                            </tr>
-                        @endforelse
-                      </tbody>
-                    </table>
                 </div>
             </div>
+            <x-footers.auth></x-footers.auth>
         </div>
-    </div>
-</div>
+    </main>
+    <x-plugins></x-plugins>
 
-<script>
-  function confirmDelete(sizeId) {
-      var confirmation = confirm("Are you sure you want to delete this size?");
-      
-      if (confirmation) {
-          document.getElementById('deleteForm' + sizeId).submit();
-      }
-  }
-</script>
-@endsection
+</x-layout>

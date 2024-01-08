@@ -1,110 +1,116 @@
-@extends('layouts.app')
+<x-layout bodyClass="g-sidenav-show  bg-gray-200">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-header">{{ __('Products') }}</div>
-
-                <div class="card-body">
-                  @if (session('message'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ session('message') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <x-navbars.sidebar activePage="products"></x-navbars.sidebar>
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <!-- Navbar -->
+        <x-navbars.navs.auth titlePage="Products"></x-navbars.navs.auth>
+        <!-- End Navbar -->
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card my-4">
+                        <div class=" me-3 my-3 text-end">
+                            <a class="btn bg-gradient-dark mb-0" href="{{ route('admin.products.create') }}"><i
+                                    class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New
+                                Product</a>
+                        </div>
+                        <div class="card-body px-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                ID
+                                            </th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                NAME</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                PRICE</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                COLOURS</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                DATE CREATED</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                DATE UPDATED</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                ACTION
+                                            </th>
+                                            <th class="text-secondary opacity-7"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach ($products as $product)
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <p class="mb-0 text-sm">{{ $product->id }}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <p class="mb-0 text-sm">{{ $product->name }}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <p class="mb-0 text-sm">RM{{ $product->price }}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <p class="mb-0 text-sm">
+                                                        @forelse ($product->categories as $category)
+                                                        {{ $category->name }}</a>
+                                                        @empty
+                                                            No categories associated with this product.<
+                                                        @endforelse
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <p class="text-xs text-secondary mb-0">{{ date_format($product->created_at ,"d F Y H:i A") }}
+                                                </p>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <p class="text-xs text-secondary mb-0">{{ date_format($product->updated_at ,"d F Y H:i A") }}</p>
+                                            </td>
+                                            <td class="align-middle">
+                                                <form action="{{ route('admin.products.destroy',$product->id) }}" method="POST">
+                                                   <a class="btn btn-secondary" href="{{ route('admin.products.edit',$product->id) }}"><i class="material-icons">edit</i></a>
+                                                   @csrf
+                                                   @method('DELETE')
+                                                   <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this product?')">
+                                                        <i class="material-icons">close</i>
+                                                  </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                  @endif
-
-                    <div class="container mb-4">
-                      <div class="row">
-                        <div class="col">
-                          
-                        </div>
-                        <div class="col">
-                          
-                        </div>
-                        <div class="col text-end">
-                          <a class="btn btn-primary" href="{{ route('admin.products.create') }}" role="button">Add Product</a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <table class="table align-middle">
-                      <thead class="table-secondary">
-                        <tr class="text-center">
-                          <th scope="col" class="table-secondary">#</th>
-                          <th scope="col" class="table-secondary">Name</th>
-                          <th scope="col" class="table-secondary">Price</th>
-                          <th scope="col" class="table-secondary">Brand</th>
-                          <th scope="col" class="table-secondary">Categories</th>
-                          <th scope="col" class="table-secondary">Sizes</th>
-                          <th scope="col" class="table-secondary">Colors</th>
-                          <th scope="col" width="50px" class="table-secondary">Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @forelse($products as $index => $product)
-                            <tr class="text-center">
-                                <th scope="row">{{ $index + 1 }}</th>
-                                <td>{{ $product->name }}</td>
-                                <td>{{ $product->price }}</td>
-                                <td>{{ $product->brands->first()->name }}</td>
-                                <td>
-                                  @foreach ($product->categories as $category)
-                                      {{ $category->name }}
-                                      @if (!$loop->last)
-                                          , <!-- Add a comma if it's not the last category -->
-                                      @endif
-                                  @endforeach  
-                                </td>
-                                <td>
-                                  @foreach ($product->sizes as $size)
-                                      {{ $size->name }}
-                                      @if (!$loop->last)
-                                          , <!-- Add a comma if it's not the last category -->
-                                      @endif
-                                  @endforeach  
-                                </td>
-                                <td>
-                                  @foreach ($product->colors as $color)
-                                      {{ $color->name }}
-                                      @if (!$loop->last)
-                                          , <!-- Add a comma if it's not the last category -->
-                                      @endif
-                                  @endforeach  
-                                </td>
-                                <td class="d-flex justify-content-center gap-2">
-                                    <!-- Edit Btn -->                                    
-                                    <a class="btn btn-warning" href="{{ route('admin.products.edit', $product->id) }}" role="button">Edit</a>
-                                    <!-- Delete Btn -->
-                                    <form id="deleteForm{{ $product->id }}" action="{{ route('admin.products.destroy', $product->id) }}" 
-                                      method="POST" style="display: none;">
-                                      @csrf
-                                      @method('DELETE')
-                                    </form>
-                                    <a class="btn btn-danger" href="#" onclick="confirmDelete('{{ $product->id }}')" role="button">Delete</a>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="8" class="text-center">No products found.</td>
-                            </tr>
-                        @endforelse
-                      </tbody>
-                    </table>
                 </div>
             </div>
+            <x-footers.auth></x-footers.auth>
         </div>
-    </div>
-</div>
+    </main>
+    <x-plugins></x-plugins>
 
-<script>
-  function confirmDelete(productId) {
-      var confirmation = confirm("Are you sure you want to delete this product?");
-      
-      if (confirmation) {
-          document.getElementById('deleteForm' + productId).submit();
-      }
-  }
-</script>
-@endsection
+</x-layout>

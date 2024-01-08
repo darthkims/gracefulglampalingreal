@@ -1,25 +1,16 @@
-@extends('layouts.app')
+<x-layout bodyClass="g-sidenav-show bg-gray-200">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Create Product') }}</div>
-
-                <div class="card-body">
-                    <div class="container mb-4">
-                      <div class="row">
-                        <div class="col">
-                          <a href="{{ route('admin.products.index') }}" class="link-dark text-decoration-none">
-                            <i class="fa-solid fa-arrow-left"></i>
-                          </a>
-                        </div>
-                        <div class="col"></div>
-                        <div class="col"></div>
-                    </div>
-
-                    <form class="my-4"
+    <x-navbars.sidebar activePage="products"></x-navbars.sidebar>
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+        <!-- Navbar -->
+        <x-navbars.navs.auth titlePage="Products"></x-navbars.navs.auth>
+        <!-- End Navbar -->
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card my-4">
+                        <div class="card-body px-4 pb-2">
+                        <form class="my-4"
                       action="{{ route('admin.products.store') }}"
                       method="POST">
                       @csrf
@@ -28,8 +19,9 @@
                         <label for="name" class="form-label">
                           Product Name <span class="text-danger">*</span>
                         </label>
-                        <input type="text" class="form-control  @error('name') is-invalid @enderror" name="name">
-
+                        <div class="input-group input-group-outline">
+                                     <input type="text" class="form-control @error('name') is-invalid @enderror" name="name">
+                                    </div>
                           @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -41,8 +33,9 @@
                         <label for="price" class="form-label">
                           Price <span class="text-danger">*</span>
                         </label>
-                        <input type="number" class="form-control  @error('price') is-invalid @enderror" name="price" step="0.01">
-
+                        <div class="input-group input-group-outline">
+                                     <input type="text" class="form-control  @error('price') is-invalid @enderror" name="price" step="0.01">
+                                    </div>
                           @error('price')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -54,7 +47,9 @@
                         <label for="description" class="form-label">
                           Description <span class="text-danger">*</span>
                         </label>
-                        <textarea name="description" id="" rows="4" class="form-control  @error('description') is-invalid @enderror" name="description"></textarea>
+                        <div class="input-group input-group-outline">
+                        <textarea class="form-control @error('description') is-invalid @enderror" id="floatingTextarea2" name="description" rows="4" cols="50"></textarea>
+                                    </div>
                           @error('description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -146,9 +141,13 @@
                         <button type="submit" class="btn btn-success">Submit</button>
                       </div>
                     </form>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <x-footers.auth></x-footers.auth>
         </div>
-    </div>
-</div>
-@endsection
+    </main>
+    <x-plugins></x-plugins>
+
+</x-layout>

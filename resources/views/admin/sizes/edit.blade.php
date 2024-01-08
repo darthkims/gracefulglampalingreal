@@ -1,25 +1,16 @@
-@extends('layouts.app')
+<x-layout bodyClass="g-sidenav-show bg-gray-200">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Edit Size') }}</div>
-
-                <div class="card-body">
-                    <div class="container mb-4">
-                      <div class="row">
-                        <div class="col">
-                          <a href="{{ route('sizes.index') }}" class="link-dark text-decoration-none">
-                            <i class="fa-solid fa-arrow-left"></i>
-                          </a>
-                        </div>
-                        <div class="col"></div>
-                        <div class="col"></div>
-                    </div>
-
-                    <form class="my-4"
+    <x-navbars.sidebar activePage="sizes"></x-navbars.sidebar>
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+        <!-- Navbar -->
+        <x-navbars.navs.auth titlePage="Sizes"></x-navbars.navs.auth>
+        <!-- End Navbar -->
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card my-4">
+                        <div class="card-body px-4 pb-2">
+                        <form class="my-4"
                       action="{{ route('sizes.update', $size->id) }}"
                       method="POST">
                       @csrf
@@ -27,12 +18,13 @@
 
                       <div class="mb-3">
                         <label for="name" class="form-label fw-bold">
-                          Color Name <span class="text-danger">*</span>
+                          Brand Name <span class="text-danger">*</span>
                         </label>
+                        <div class="input-group input-group-outline">
                         <input type="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $size->name }}">
-
+</div>
                           @error('name')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" size="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                           @enderror
@@ -42,9 +34,13 @@
                         <button type="submit" class="btn btn-success">Update</button>
                       </div>
                     </form>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <x-footers.auth></x-footers.auth>
         </div>
-    </div>
-</div>
-@endsection
+    </main>
+    <x-plugins></x-plugins>
+
+</x-layout>

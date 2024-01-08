@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Log;
 
 class ProductController extends Controller
 {
@@ -119,22 +120,30 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $this->deleteProductImages($product);
+        //$this->deleteProductImages($product);
+
+        // Detach all related records from pivot tables
+        $product->brands()->detach();
         $product->categories()->detach();
+        $product->colors()->detach();
+        $product->sizes()->detach();
+        
+        // Delete the product
         $product->delete();
+    
   
-        return redirect()->route('products.index')
+        return redirect()->route('admin.products.index')
                         ->with('success','Product deleted successfully');
     }
 
-    private function deleteProductImages(Product $product)
-    {
-        // Construct the image file path based on the product ID
-        $imageFilePath = public_path('customer/img/product/product-' . $product->id . '.jpg');
+    // private function deleteProductImages(Product $product)
+    // {
+    //     // Construct the image file path based on the product ID
+    //     $imageFilePath = public_path('customer/img/product/product-' . $product->id . '.jpg');
 
-        // Check if the image exists before attempting to delete it
-        if (File::exists($imageFilePath)) {
-            File::delete($imageFilePath);
-        }
-    }
+    //     // Check if the image exists before attempting to delete it
+    //     if (File::exists($imageFilePath)) {
+    //         File::delete($imageFilePath);
+    //     }
+    // }
 }
