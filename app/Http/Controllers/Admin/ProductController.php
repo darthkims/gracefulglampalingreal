@@ -10,7 +10,6 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Log;
 
 class ProductController extends Controller
 {
