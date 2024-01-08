@@ -108,7 +108,7 @@
                                 </a>
                                 <div class="product__item__text">
                                     <h6>{{ $product->name }}</h6>
-                                    <a href="#" class="add-cart">+ Add To Cart</a>
+                                    <a href="{{ route('login') . '?prev=shop' }}" class="add-cart">+ Add To Cart</a>
                                     <div class="rating">
                                         <!-- Display product rating here -->
                                     </div>

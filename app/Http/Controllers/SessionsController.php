@@ -12,13 +12,16 @@ use Illuminate\Support\Facades\Password;
 
 class SessionsController extends Controller
 {
-    public function create()
+    public function create(Request $request)
     {
-        return view('sessions.create');
+        $prevParam = $request->query('prev');
+
+        return view('sessions.create', compact('prevParam'));
     }
 
     public function store(Request $request)
     {
+        $prevParam = $request->prev;
         $attributes = $request->validate([
             'identifier' => 'required', // 'identifier' can be either email or username
             'password' => 'required'
@@ -46,7 +49,11 @@ class SessionsController extends Controller
 
         session()->regenerate();
 
-        return redirect('/dashboard');
+        if ($prevParam) {
+            return redirect($prevParam);
+        } else {
+            return redirect('/dashboard');
+        }
     }
 
     public function show(){
