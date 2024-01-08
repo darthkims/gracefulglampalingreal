@@ -26,87 +26,95 @@
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'users' ? ' active bg-gradient-primary' : '' }} "
-                    href="{{ route('users.index') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">group</i>
-                    </div>
-                    <span class="nav-link-text ms-1">User Management</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'customers' ? ' active bg-gradient-primary' : '' }} "
-                    href="{{ route('customers.index') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">group</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Customers</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'categories' ? ' active bg-gradient-primary' : '' }}  "
-                    href="{{ route('categories.index') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">list_alt</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Categories</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'products' ? ' active bg-gradient-primary' : '' }}  "
-                    href="{{ route('admin.products.index') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">inventory_2</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Products</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'brands' ? ' active bg-gradient-primary' : '' }}  "
-                    href="{{ route('brands.index') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">checkroom</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Brands</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'sizes' ? ' active bg-gradient-primary' : '' }}  "
-                    href="{{ route('sizes.index') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">checkroom</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Sizes</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'roles' ? ' active bg-gradient-primary' : '' }}  "
-                    href="{{ route('roles.index') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">person_search</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Roles</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'colors' ? ' active bg-gradient-primary' : '' }}  "
-                    href="{{ route('colors.index') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">colorize</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Colors</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'promo-codes' ? ' active bg-gradient-primary' : '' }}  "
-                    href="{{ route('promo-codes.index') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">sell</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Promo Code</span>
-                </a>
-            </li>
+
+            <!-- Customer Navs -->
+            @role('customer')
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ $activePage == 'products' ? ' active bg-gradient-primary' : '' }}  "
+                        href="{{ route('products.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">inventory_2</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Products</span>
+                    </a>
+                </li>
+            @endrole
+
+            <!-- Admin Navs -->
+            @role('admin')
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ $activePage == 'users' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('dashboard') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">group</i>
+                        </div>
+                        <span class="nav-link-text ms-1">User Management</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ $activePage == 'categories' ? ' active bg-gradient-primary' : '' }}  "
+                        href="{{ route('categories.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">list_alt</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Categories</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ $activePage == 'products' ? ' active bg-gradient-primary' : '' }}  "
+                        href="{{ route('admin.products.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">inventory_2</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Products</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ $activePage == 'brands' ? ' active bg-gradient-primary' : '' }}  "
+                        href="{{ route('brands.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">checkroom</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Brands</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ $activePage == 'sizes' ? ' active bg-gradient-primary' : '' }}  "
+                        href="{{ route('sizes.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">checkroom</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Sizes</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ $activePage == 'roles' ? ' active bg-gradient-primary' : '' }}  "
+                        href="{{ route('roles.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">person_search</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Roles</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ $activePage == 'colors' ? ' active bg-gradient-primary' : '' }}  "
+                        href="{{ route('colors.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">colorize</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Colors</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ $activePage == 'promo-codes' ? ' active bg-gradient-primary' : '' }}  "
+                        href="{{ route('promo-codes.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">sell</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Promo Code</span>
+                    </a>
+                </li>
+            @endrole
         </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
