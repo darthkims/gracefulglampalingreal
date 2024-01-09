@@ -108,8 +108,8 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::get('/', [AdminProductController::class, 'index'])->name('admin.products.index');
 			Route::get('/create', [AdminProductController::class, 'create'])->name('admin.products.create');
 			Route::post('/', [AdminProductController::class, 'store'])->name('admin.products.store');
-			Route::get('/edit/{id}', [AdminProductController::class, 'edit'])->name('admin.products.edit');
-			Route::patch('/{id}', [AdminProductController::class, 'update'])->name('admin.products.update');
+			Route::get('/edit/{product}', [AdminProductController::class, 'edit'])->name('admin.products.edit');
+			Route::patch('/{product}', [AdminProductController::class, 'update'])->name('admin.products.update');
 			Route::delete('/{product}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
 		});
 

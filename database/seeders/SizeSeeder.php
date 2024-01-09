@@ -19,7 +19,7 @@ class SizeSeeder extends Seeder
             ['name' => 'M'],
             ['name' => 'L'],
             ['name' => 'XL'],
-            ['name' => 'XS'],
+            ['name' => 'XXL'],
             ['name' => '32'],
             ['name' => '31'],
             ['name' => '33'],

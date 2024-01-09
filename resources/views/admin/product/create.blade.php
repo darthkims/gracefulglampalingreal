@@ -146,7 +146,7 @@
                       </div>
                       
                       <div class="d-flex justify-content-end">
-                        <a href="javascript:history.back()" class="btn btn-danger mr-2">Back</a>
+                      <a href="{{ route('admin.products.index') }}" class="btn btn-danger mr-2">Back</a>
                         <button type="submit" class="btn btn-success ms-2">Submit</button>
                       </div>
                     </form>

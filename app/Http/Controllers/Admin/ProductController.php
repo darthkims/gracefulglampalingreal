@@ -94,8 +94,11 @@ class ProductController extends Controller
     {
 
         $categories = Category::all();
+        $brands = Brand::all();
+        $sizes = Size::all();
+        $colors = Color::all();
         
-        return view('admin.product.edit',compact('product','categories'));
+        return view('admin.product.edit',compact('product','categories','brands','sizes','colors'));
     }
 
     /**
@@ -104,24 +107,27 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
-            'product_name' => 'required',
-            'product_desc' => 'required',
+            'name' => 'required',
+            'description' => 'required',
             'price' => 'required',
-            'size' => 'required',
-            'product_category' => 'required|array',
         ]);
     
+        // Update the product details
         $product->update([
-            'product_name' => $request->product_name,
-            'product_desc' => $request->product_desc,
-            'price' => $request->price,
-            'size' => $request->size,
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
         ]);
     
-        // Sync the selected categories
-        $product->categories()->sync($request->input('product_category'));
+        // Update the brand association
+        $product->brands()->sync([$request->input('brand')]);
     
-        return redirect()->route('admin.product.index')->with('success', 'Product updated successfully');
+        // Update the categories, sizes, and colors associations
+        $product->categories()->sync($request->input('categories'));
+        $product->sizes()->sync($request->input('sizes'));
+        $product->colors()->sync($request->input('colors'));
+    
+        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully');
     }
 
     
