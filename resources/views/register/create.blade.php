@@ -18,7 +18,7 @@
                             <div
                                 class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
                                 <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center"
-                                    style="background-image: url('../assets/img/illustrations/illustration-signup.jpg'); background-size: cover;">
+                                    style="background-image: url('{{ asset('customer/img/shop-details/thumb-2-1.jpg') }}'); background-size: cover;">
                                 </div>
                             </div>
                             <div
@@ -65,15 +65,6 @@
                                             @error('password')
                                             <p class='text-danger inputerror'>{{ $message }} </p>
                                             @enderror
-
-                                            <div class="form-check form-check-info text-start ps-0 mt-3">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefault" checked>
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                    I agree the <a href="javascript:;"
-                                                        class="text-dark font-weight-bolder">Terms and Conditions</a>
-                                                </label>
-                                            </div>
                                             <div class="text-center">
                                                 <button type="submit"
                                                     class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign
