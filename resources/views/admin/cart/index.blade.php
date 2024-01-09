@@ -1,6 +1,6 @@
 <x-layout bodyClass="g-sidenav-show  bg-gray-200">
 
-    <x-navbars.sidebar activePage="customers"></x-navbars.sidebar>
+    <x-navbars.sidebar activePage="carts"></x-navbars.sidebar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
         <x-navbars.navs.auth titlePage="Category"></x-navbars.navs.auth>
@@ -10,7 +10,7 @@
                 <div class="col-12">
                     <div class="card my-4">
                         <div class=" me-3 my-3 d-flex justify-content-between align-items-center">
-                            <h2 class="text-gradient text-dark mb-0 ms-3">Customers</h2>
+                            <h2 class="text-gradient text-dark mb-0 ms-3">Cart</h2>
                             <!-- <a class="btn bg-gradient-dark mb-0" href="{{ route('customers.create') }}">
                                 <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Customer
                             </a> -->
@@ -26,7 +26,10 @@
                                             </th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                NAME</th>
+                                                USERNAME</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                PRODUCTS ORDERED</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 DATE CREATED</th>

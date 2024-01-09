@@ -16,6 +16,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\PromoCodeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -128,6 +129,15 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('customers.edit');
 			Route::patch('/{id}', [CustomerController::class, 'update'])->name('customers.update');
 			Route::delete('/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
+		});
+
+		Route::prefix('/carts')->group(function () {
+			Route::get('/', [CartController::class, 'index'])->name('carts.index');
+			Route::get('/create', [CartController::class, 'create'])->name('carts.create');
+			Route::post('/', [CartController::class, 'store'])->name('carts.store');
+			Route::get('/edit/{id}', [CartController::class, 'edit'])->name('carts.edit');
+			Route::patch('/{id}', [CartController::class, 'update'])->name('carts.update');
+			Route::delete('/{id}', [CartController::class, 'destroy'])->name('carts.destroy');
 		});
 
 		Route::prefix('/roles')->group(function () {

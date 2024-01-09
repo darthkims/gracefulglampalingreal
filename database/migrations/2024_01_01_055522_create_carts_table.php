@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('promo_code_id')->nullable();
-            $table->foreign('promo_code_id')->references('id')->on('promo_codes');
+            $table->foreign('promo_code_id')->references('id')->on('promo_codes')->nullable();
             $table->decimal('total',10,2);
             $table->timestamps();
             
