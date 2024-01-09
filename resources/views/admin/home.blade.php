@@ -140,10 +140,6 @@
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             PRICE</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            CREATION DATE
-                                        </th>
                                         <th class="text-secondary opacity-7"></th>
                                     </tr>
                                 </thead>
@@ -173,9 +169,6 @@
                                             <td class="align-middle text-center text-sm">
                                                 <p class="text-xs text-secondary mb-0">RM{{ $product->price }}
                                                 </p>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span class="text-secondary text-xs font-weight-bold">{{ $product->created_at->format('Y-m-d') }}</span>
                                             </td>
                                         </tr>
                                     @endforeach

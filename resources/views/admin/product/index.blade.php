@@ -74,10 +74,10 @@
                                                 <div class="d-flex px-2 py-1">
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <p class="mb-0 text-sm">
-                                                        @forelse ($product->categories as $category)
-                                                        {{ $category->name }}</a>
+                                                        @forelse ($product->colors as $color)
+                                                        {{ $color->name }}</a>
                                                         @empty
-                                                            No categories associated with this product.<
+                                                            No colors.
                                                         @endforelse
                                                         </p>
                                                     </div>
