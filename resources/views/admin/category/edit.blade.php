@@ -31,7 +31,8 @@
                       </div>
                       
                       <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-success">Update</button>
+                        <a href="{{ route('categories.index') }}" class="btn btn-danger mr-2">Back</a>
+                        <button type="submit" class="btn btn-success ms-2">Update</button>
                       </div>
                     </form>
                         </div>
