@@ -33,7 +33,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // validate the data
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
             'description' => 'required|string',
@@ -44,24 +44,36 @@ class ProductController extends Controller
             'sizes.*' => 'exists:sizes,id',
             'colors' => 'required|array',
             'colors.*' => 'exists:colors,id',
+            'product_image' => 'image|mimes:jpg|max:5120',
         ]);
-
+    
         $product = Product::create([
-            'name' => $validatedData['name'],
-            'price' => $validatedData['price'],
-            'description' => $validatedData['description'],
+            'name' => $request->input('name'),
+            'price' => $request->input('price'),
+            'description' => $request->input('description'),
         ]);
-
+    
+        // Handle file upload
+        $productId = $product->id;
+    
+        if ($request->hasFile('product_image')) {
+            $image = $request->file('product_image');
+            $imageName = 'product-' . $productId . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('customer/img/product'), $imageName);
+            // You may want to save $imageName in the database for later use.
+        }
+    
         // associate the brand with the product
-        $product->brands()->attach($validatedData['brand'], ['brand_id' => $validatedData['brand']]);
-
+        $product->brands()->attach($request->input('brand'), ['brand_id' => $request->input('brand')]);
+    
         // attach categories, sizes, and colors
-        $product->categories()->sync($validatedData['categories']);
-        $product->sizes()->sync($validatedData['sizes']);
-        $product->colors()->sync($validatedData['colors']);
-
+        $product->categories()->sync($request->input('categories'));
+        $product->sizes()->sync($request->input('sizes'));
+        $product->colors()->sync($request->input('colors'));
+    
         return redirect()->route('admin.products.index')->with('success', 'Product created successfully!');
     }
+    
 
 
     /**

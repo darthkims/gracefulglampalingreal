@@ -10,11 +10,19 @@
                 <div class="col-12">
                     <div class="card my-4">
                         <div class="card-body px-4 pb-2">
-                        <form class="my-4"
-                      action="{{ route('admin.products.store') }}"
-                      method="POST">
+                        <form class="my-4" action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
                       @csrf
 
+                      <!-- Add this code inside the <form> element -->
+                      <div class="mb-3">
+                        <label for="product_image" class="form-label">
+                          Product Image</span>
+                        </label>
+                        <div class="input-group input-group-outline">
+                            <input type="file" class="form-control" name="product_image" accept=".jpg">
+                        </div>
+                      </div>
+                      
                       <div class="mb-3">
                         <label for="name" class="form-label">
                           Product Name <span class="text-danger">*</span>
