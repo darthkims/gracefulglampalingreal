@@ -81,8 +81,6 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $product = Product::find($product->id);
-
         return view('admin.product.show',compact('product'));
     }
     

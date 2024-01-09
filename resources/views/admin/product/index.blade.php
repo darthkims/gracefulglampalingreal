@@ -35,12 +35,6 @@
                                                 COLOURS</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                DATE CREATED</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                DATE UPDATED</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 ACTION
                                             </th>
                                             <th class="text-secondary opacity-7"></th>
@@ -83,16 +77,10 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="align-middle text-center">
-                                                <p class="text-xs text-secondary mb-0">{{ date_format($product->created_at ,"d F Y H:i A") }}
-                                                </p>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <p class="text-xs text-secondary mb-0">{{ date_format($product->updated_at ,"d F Y H:i A") }}</p>
-                                            </td>
                                             <td class="align-middle">
                                                 <form action="{{ route('admin.products.destroy',$product->id) }}" method="POST">
                                                    <a class="btn btn-secondary" href="{{ route('admin.products.edit',$product->id) }}"><i class="material-icons">edit</i></a>
+                                                   <a class="btn btn-primary" href="{{ route('admin.products.show',$product->id) }}"><i class="material-icons">edit</i></a>
                                                    @csrf
                                                    @method('DELETE')
                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this product?')">
