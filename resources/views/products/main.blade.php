@@ -1,4 +1,4 @@
-<x-head_header activePage="main" bodyClass="g-sidenav-show  bg-gray-200">
+<x-customer_header activePage="main" bodyClass="g-sidenav-show  bg-gray-200">
     <!-- Hero Section Begin -->
     <section class="hero">
         <div class="hero__slider owl-carousel">
@@ -504,4 +504,4 @@
         </div>
     </section>
     <!-- Latest Blog Section End -->
-</x-head_header>
+</x-customer_header>
