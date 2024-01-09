@@ -93,18 +93,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-<<<<<<< HEAD
-                                            <td class="align-middle text-center">
-                                                <p class="text-xs text-secondary mb-0">{{ date_format($product->created_at ,"d F Y H:i A") }}
-                                                </p>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <p class="text-xs text-secondary mb-0">{{ date_format($product->updated_at ,"d F Y H:i A") }}</p>
-                                            </td>
-                                            <td class="align-middle text-center">
-=======
                                             <td class="align-middle">
->>>>>>> ae1740651d4be420a1781fbed15b74342b84a01f
                                                 <form action="{{ route('admin.products.destroy',$product->id) }}" method="POST">
                                                    <a class="btn btn-secondary" href="{{ route('admin.products.edit',$product->id) }}"><i class="material-icons">edit</i></a>
                                                    <a class="btn btn-success" href="{{ route('admin.products.show',$product->id) }}"><i class="material-icons">visibility</i></a>
