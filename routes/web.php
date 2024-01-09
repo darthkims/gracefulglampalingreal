@@ -109,7 +109,7 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::post('/', [AdminProductController::class, 'store'])->name('admin.products.store');
 			Route::get('/edit/{id}', [AdminProductController::class, 'edit'])->name('admin.products.edit');
 			Route::patch('/{id}', [AdminProductController::class, 'update'])->name('admin.products.update');
-			Route::delete('/{id}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
+			Route::delete('/{product}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
 		});
 
 		Route::prefix('/users')->group(function () {
