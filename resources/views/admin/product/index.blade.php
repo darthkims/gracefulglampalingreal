@@ -107,7 +107,7 @@
 >>>>>>> ae1740651d4be420a1781fbed15b74342b84a01f
                                                 <form action="{{ route('admin.products.destroy',$product->id) }}" method="POST">
                                                    <a class="btn btn-secondary" href="{{ route('admin.products.edit',$product->id) }}"><i class="material-icons">edit</i></a>
-                                                   <a class="btn btn-primary" href="{{ route('admin.products.show',$product->id) }}"><i class="material-icons">edit</i></a>
+                                                   <a class="btn btn-success" href="{{ route('admin.products.show',$product->id) }}"><i class="material-icons">visibility</i></a>
                                                    @csrf
                                                    @method('DELETE')
                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this product?')">
