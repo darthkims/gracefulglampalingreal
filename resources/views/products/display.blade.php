@@ -1,4 +1,4 @@
-<x-head_header activePage="shop" bodyClass="g-sidenav-show  bg-gray-200">
+<x-customer_header activePage="shop" bodyClass="g-sidenav-show  bg-gray-200">
 
     <!-- Shop Details Section Begin -->
 
@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-3">
                         <ul class="nav nav-tabs" role="tablist">
-                            {{-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">
                                     <div class="product__thumb__pic set-bg" data-setbg="{{ asset('customer/img/shop-details/thumb-1-' . $product-> id . '.jpg') }}">
                                     </div>
@@ -40,12 +40,12 @@
                                     <div class="product__thumb__pic set-bg" data-setbg="{{ asset('customer/img/shop-details/thumb-4-' . $product-> id . '.jpg') }}">
                                     </div>
                                 </a>
-                            </li> --}}
+                            </li> 
                         </ul>
                     </div>
                     <div class="col-lg-6 col-md-9">
                         <div class="tab-content">
-                            {{-- <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__pic__item">
                                 <img src="{{ asset('customer/img/shop-details/thumb-1-' . $product-> id . '.jpg') }}" alt="Product Image">
                                 </div>
@@ -64,7 +64,7 @@
                                 <div class="product__details__pic__item">
                                 <img src="{{ asset('customer/img/shop-details/thumb-4-' . $product-> id . '.jpg') }}" alt="Product Image">
                                 </div>
-                            </div> --}}
+                            </div> 
                         </div>
                     </div>
                 </div>
@@ -160,4 +160,4 @@
         </div>
     </section>
     <!-- Related Section End -->
-</x-head_header>
+</x-customer_header>

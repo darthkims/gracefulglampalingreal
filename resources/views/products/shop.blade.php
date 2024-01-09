@@ -1,4 +1,4 @@
-<x-head_header activePage="shop" bodyClass="g-sidenav-show  bg-gray-200">
+<x-customer_header activePage="shop" bodyClass="g-sidenav-show  bg-gray-200">
 
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-option">
@@ -124,4 +124,4 @@
     </section>
     <!-- Shop Section End -->
 
-</x-head_header>
+</x-customer_header>
