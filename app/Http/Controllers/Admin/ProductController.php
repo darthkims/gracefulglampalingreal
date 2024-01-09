@@ -44,7 +44,7 @@ class ProductController extends Controller
             'sizes.*' => 'exists:sizes,id',
             'colors' => 'required|array',
             'colors.*' => 'exists:colors,id',
-            'product_image' => 'image|mimes:jpg|max:5120',
+            'product_image' => 'image|mimes:jpg|max:5120|dimensions:min_width=1,min_height=1',
         ]);
     
         $product = Product::create([
