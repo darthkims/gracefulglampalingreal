@@ -12,7 +12,7 @@
         </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
-    <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
+    <div class="w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
@@ -127,13 +127,13 @@
         <div class="mx-3">
             <a class="btn bg-gradient-primary w-100" href="{{ route('main') }}" target="_blank">Main page</a>
         </div>
-        <div class="mx-3">
+        <!-- <div class="mx-3">
             <a class="btn bg-gradient-primary w-100" href="#" target="_blank">NAK ISI APA NI</a>
         </div>
         <div class="mx-3">
             <a class="btn bg-gradient-primary w-100"
                 href="#" target="_blank" type="button">NAK ISI APA NI</a>
         </div>
-    </div>
+    </div> -->
 
 </aside>
