@@ -17,6 +17,8 @@ use App\Http\Controllers\Admin\PromoCodeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CartController;
+use app\Http\Controllers\Customer\CartController as CustCartController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +55,11 @@ Route::get('/reset-password/{token}', function ($token) {
 Route::get('main', function () {
 	return view('products.main');
 })->name('main');
+
+Route::get('carts', function () {
+	return view('carts.index');
+})->name('shoppingcarts.index');
+
 
 // Product Listing
 Route::get('shop', [ProductController::class, 'index'])->name('cust.products.index');
@@ -96,6 +103,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('products', ProductController::class);
 	Route::resource('categories', CategoryController::class);
 	});
+
 
 
 	/**
