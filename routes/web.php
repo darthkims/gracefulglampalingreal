@@ -206,3 +206,30 @@ Route::group(['middleware' => 'auth'], function () {
 		});
 	});
 
+	
+
+// ... (existing routes)
+
+// Customer Routes
+		Route::prefix('/customer')->middleware(['auth', 'role:customer'])->group(function () {
+			// Cart Routes
+			Route::prefix('/carts')->group(function () {
+				Route::get('/', [CartController::class, 'index'])->name('customer.carts.index');
+				Route::get('/create', [CartController::class, 'create'])->name('customer.carts.create');
+				Route::post('/', [CartController::class, 'store'])->name('customer.carts.store');
+				Route::get('/edit/{id}', [CartController::class, 'edit'])->name('customer.carts.edit');
+				Route::patch('/{id}', [CartController::class, 'update'])->name('customer.carts.update');
+				Route::delete('/{id}', [CartController::class, 'destroy'])->name('customer.carts.destroy');
+			});
+
+			// Product Routes
+			Route::prefix('/products')->group(function () {
+				Route::get('/', [ProductController::class, 'index'])->name('customer.products.index');
+				Route::get('/details/{product}', [ProductController::class, 'display'])->name('customer.products.display');
+				// Add other product routes if needed
+			});
+
+			// Add routes for other customer-related controllers
+		});
+
+

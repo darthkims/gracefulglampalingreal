@@ -32,7 +32,10 @@
                                                 PRICE</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                COLOURS</th>
+                                                BRAND</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                COLOR</th>    
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 ACTION
@@ -66,6 +69,19 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center text-center">
+                                                        <p class="mb-0 text-sm">
+                                                            @forelse ($product->brands as $brand)
+                                                                {{ $brand->name }}
+                                                            @empty
+                                                                No brand.
+                                                            @endforelse
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <p class="mb-0 text-sm">
                                                         @forelse ($product->colors as $color)
@@ -77,7 +93,18 @@
                                                     </div>
                                                 </div>
                                             </td>
+<<<<<<< HEAD
+                                            <td class="align-middle text-center">
+                                                <p class="text-xs text-secondary mb-0">{{ date_format($product->created_at ,"d F Y H:i A") }}
+                                                </p>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <p class="text-xs text-secondary mb-0">{{ date_format($product->updated_at ,"d F Y H:i A") }}</p>
+                                            </td>
+                                            <td class="align-middle text-center">
+=======
                                             <td class="align-middle">
+>>>>>>> ae1740651d4be420a1781fbed15b74342b84a01f
                                                 <form action="{{ route('admin.products.destroy',$product->id) }}" method="POST">
                                                    <a class="btn btn-secondary" href="{{ route('admin.products.edit',$product->id) }}"><i class="material-icons">edit</i></a>
                                                    <a class="btn btn-success" href="{{ route('admin.products.show',$product->id) }}"><i class="material-icons">visibility</i></a>
