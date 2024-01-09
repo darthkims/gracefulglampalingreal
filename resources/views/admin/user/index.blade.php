@@ -64,7 +64,7 @@
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
                                                       @if($user->roles->first()->name === 'customer')
-                                                        <span class="badge bg-success">{{ Str::ucfirst($user->roles->first()->name) }}</span>
+                                                        <span class="badge bg-info">{{ Str::ucfirst($user->roles->first()->name) }}</span>
                                                       @elseif($user->roles->first()->name === 'admin')
                                                         <span class="badge bg-primary">{{ Str::ucfirst($user->roles->first()->name) }}</span>
                                                       @else

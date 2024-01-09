@@ -14,17 +14,23 @@
                                 <i class="material-icons opacity-10">inventory_2</i>
                             </div>
                             @php
-                                    $products = App\Models\Product::all();
-                                    $users = App\Models\User::all();
-                                @endphp
+                                $products = App\Models\Product::all();
+                                $users = App\Models\User::all();
+                                $customerCount = $users->filter(function($user) {
+                                    return $user->roles->first() && $user->roles->first()->name === 'customer';
+                                })->count();  
+                                $adminCount = $users->filter(function($user) {
+                                    return $user->roles->first() && $user->roles->first()->name === 'admin';
+                                })->count();                              
+                            @endphp
                             <div class="text-end pt-1">
                                 <p class="text-sm mb-0 text-capitalize">Total products</p>
-                                <h4 class="mb-0">{{ count($products) }} products</h4>
+                                <h4 class="mb-0">{{ count($products) }}</h4>
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">"KIMS ENCEM" </span></p>
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">"Total Products" </span></p>
                         </div>
                     </div>
                 </div>
@@ -37,12 +43,12 @@
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-sm mb-0 text-capitalize">Total Users</p>
-                                <h4 class="mb-0">{{ count($users) }}</h4>
+                                <h4 class="mb-0">{{ $customerCount }}</h4>
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">"HAZIQ ENCEM</span></p>
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">"Total Customers"</span></p>
                         </div>
                     </div>
                 </div>
@@ -54,14 +60,13 @@
                                 <i class="material-icons opacity-10">person</i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-sm mb-0 text-capitalize">New Clients</p>
-                                <h4 class="mb-0">3,462</h4>
+                                <p class="text-sm mb-0 text-capitalize">Total Admin</p>
+                                <h4 class="mb-0">{{ $adminCount }}</h4>
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> than
-                                yesterday</p>
+                            <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">"Hello"</p>
                         </div>
                     </div>
                 </div>
