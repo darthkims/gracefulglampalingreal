@@ -131,7 +131,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //$this->deleteProductImages($product);
+        $this->deleteProductImages($product);
 
         // Detach all related records from pivot tables
         $product->brands()->detach();
@@ -147,14 +147,14 @@ class ProductController extends Controller
                         ->with('success','Product deleted successfully');
     }
 
-    // private function deleteProductImages(Product $product)
-    // {
-    //     // Construct the image file path based on the product ID
-    //     $imageFilePath = public_path('customer/img/product/product-' . $product->id . '.jpg');
+    private function deleteProductImages(Product $product)
+    {
+        // Construct the image file path based on the product ID
+        $imageFilePath = public_path('customer/img/product/product-' . $product->id . '.jpg');
 
-    //     // Check if the image exists before attempting to delete it
-    //     if (File::exists($imageFilePath)) {
-    //         File::delete($imageFilePath);
-    //     }
-    // }
+        // Check if the image exists before attempting to delete it
+        if (File::exists($imageFilePath)) {
+            File::delete($imageFilePath);
+        }
+    }
 }
