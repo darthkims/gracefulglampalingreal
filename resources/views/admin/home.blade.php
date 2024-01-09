@@ -161,13 +161,13 @@
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
                                                         <img src="{{ asset('customer/img/product/product-' . $product-> id . '.jpg') }}"
-                                                            class="avatar avatar-sm me-3 border-radius-lg" alt="{{ $product->product_name }}">
+                                                            class="avatar avatar-sm me-3 border-radius-lg" alt="{{ $product->name }}">
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $product->product_name }}</h6>
+                                                    <h6 class="mb-0 text-sm">{{ $product->name }}</h6>
                                                 </div>
                                             </td>
                                             <td class="align-middle text-center text-sm">
