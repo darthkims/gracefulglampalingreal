@@ -133,7 +133,11 @@
                         <a href="#"><img src="{{ asset('customer')}}/img/icon/heart.png" alt=""></a>
                         <a href="{{ route('cart.show') }}"><img src="{{ asset('customer')}}/img/icon/cart.png" alt="">
                             <span class="badge badge-pill badge-danger text-white">
-                                {{ count(array_unique(session('cart.products')->pluck('id')->toArray())) }}
+                                @isset(session('cart.products'))
+                                    {{ count(array_unique(session('cart.products')->pluck('id')->toArray())) }}
+                                @else
+                                    0
+                                @endisset
                             </span>
                         </a>
                         @php
