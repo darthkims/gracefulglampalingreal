@@ -108,11 +108,14 @@
                                 </a>
                                 <div class="product__item__text">
                                     <h6>{{ $product->name }}</h6>
-                                    <a href="{{ route('login') . '?prev=shop' }}" class="add-cart">+ Add To Cart</a>
+                                    <button class="add-to-cart-btn add-cart" data-product-id="{{ $product->id }}">+ Add To Cart</button>
+                                    {{-- <a href="{{ route('login') . '?prev=shop' }}" class="add-cart">+ Add To Cart</a> --}}
                                     <div class="rating">
                                         <!-- Display product rating here -->
                                     </div>
                                     <h5>RM{{ $product->price }}</h5>
+                                    <!-- Set default quantity to 1 -->
+                                    <input type="number" id="quantityInput_{{ $product->id }}" value="1" style="display: none;">
                                 </div>
                             </div>
                         </div>
@@ -124,4 +127,30 @@
     </section>
     <!-- Shop Section End -->
 
+<script>
+    $(document).ready(function () {
+        $('.add-to-cart-btn').on('click', function () {
+            let productId = $(this).data('product-id');
+            let quantity = $('#quantityInput_' + productId).val();
+
+            console.log(quantity);
+
+            $.ajax({
+                type: 'POST',
+                url: '/add-to-cart',
+                data: {
+                    product_id: productId,
+                    quantity: quantity,
+                    _token: '{{ csrf_token() }}',
+                },
+                success: function (response) {
+                    alert(response.success);
+                },
+                error: function (error) {
+                    alert(error.responseJSON.error);
+                },
+            });
+        });
+    });
+</script>
 </x-customer_header>

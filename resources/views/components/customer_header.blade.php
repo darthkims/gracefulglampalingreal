@@ -22,13 +22,17 @@
     <link rel="stylesheet" href="{{ asset('customer')}}/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="{{ asset('customer')}}/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="{{ asset('customer')}}/css/style.css" type="text/css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
     <!-- Page Preloder -->
-    <div id="preloder">
+    {{-- <div id="preloder">
         <div class="loader"></div>
-    </div>
+    </div> --}}
 
     <!-- Offcanvas Menu Begin -->
     <div class="offcanvas-menu-overlay"></div>
@@ -50,8 +54,8 @@
         <div class="offcanvas__nav__option">
             <a href="#" class="search-switch"><img src="{{ asset('customer')}}/img/icon/search.png" alt=""></a>
             <a href="#"><img src="{{ asset('customer')}}/img/icon/heart.png" alt=""></a>
-            <a href="#"><img src="{{ asset('customer')}}/img/icon/cart.png" alt=""> <span>0</span></a>
-            <div class="price">$0.00</div>
+            <a href="#"><img src="{{ asset('customer')}}/img/icon/cart.png" alt=""></a>
+            <div class="price">RM 0.00</div>
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__text">
@@ -113,7 +117,7 @@
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="./about.html">About Us</a></li>
-                                    <li><a href="{{ route('shoppingcarts.index') }}">Shopping Cart</a></li>
+                                    <li><a href="{{ route('cart.show') }}">Shopping Cart</a></li>
                                     <li><a href="./checkout.html">Check Out</a></li>
                                     <li><a href="./blog-details.html">Blog Details</a></li>
                                 </ul>
@@ -127,8 +131,23 @@
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img src="{{ asset('customer')}}/img/icon/search.png" alt=""></a>
                         <a href="#"><img src="{{ asset('customer')}}/img/icon/heart.png" alt=""></a>
-                        <a href="#"><img src="{{ asset('customer')}}/img/icon/cart.png" alt=""> <span>0</span></a>
-                        <div class="price">$0.00</div>
+                        <a href="{{ route('cart.show') }}"><img src="{{ asset('customer')}}/img/icon/cart.png" alt="">
+                            <span class="badge badge-pill badge-danger text-white">
+                                {{ count(array_unique(session('cart.products')->pluck('id')->toArray())) }}
+                            </span>
+                        </a>
+                        @php
+                            $total = 0;
+                            $cartProducts = session('cart.products');
+
+                            if ($cartProducts) {
+                                foreach ($cartProducts as $product) {
+                                    $total += $product->price * $product->pivot->quantity;
+                                }
+                            }
+                        @endphp
+
+                        <div class="price">RM {{ number_format($total, 2) }}</div>
                     </div>
                 </div>
             </div>

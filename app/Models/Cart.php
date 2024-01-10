@@ -10,8 +10,25 @@ class Cart extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'product_id', 
+        'user_id', 
+        'promo_code_id',
+        'total'
     ];
 
-    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function promoCode()
+    {
+        return $this->belongsTo(PromoCode::class, 'promo_code_id');
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'cart_product')
+                    ->withPivot('quantity')
+                    ->withTimestamps();
+    }
 }

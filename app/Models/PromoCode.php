@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class PromoCode extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name', 
+        'discount',
+    ];
 }

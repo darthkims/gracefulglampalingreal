@@ -16,8 +16,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\PromoCodeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\CartController;
-use app\Http\Controllers\Customer\CartController as CustCartController;
+// use App\Http\Controllers\Admin\CartController;
+use App\Http\Controllers\Customer\CartController;
 
 
 /*
@@ -64,9 +64,6 @@ Route::get('carts', function () {
 // Product Listing
 Route::get('shop', [ProductController::class, 'index'])->name('cust.products.index');
 Route::get('/products/details/{product}', [ProductController::class, 'display'])->name('cust.products.display');
-// Route::get('shop', function () {
-// 	return view('products.shop');
-// })->name('shop');
 Route::get('/products/details/{product}', [ProductController::class, 'display'])->name('products.display');
 
 Route::post('sign-out', [SessionsController::class, 'destroy'])->middleware('auth')->name('logout');
@@ -210,26 +207,37 @@ Route::group(['middleware' => 'auth'], function () {
 
 // ... (existing routes)
 
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
+Route::patch('/update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+Route::post('/apply-promo', [CartController::class, 'applyPromo'])->name('cart.promo');
+Route::delete('/remove-cart', [CartController::class, 'removeCart'])->name('cart.remove');
+
+
 // Customer Routes
-		Route::prefix('/customer')->middleware(['auth', 'role:customer'])->group(function () {
-			// Cart Routes
-			Route::prefix('/carts')->group(function () {
-				Route::get('/', [CartController::class, 'index'])->name('customer.carts.index');
-				Route::get('/create', [CartController::class, 'create'])->name('customer.carts.create');
-				Route::post('/', [CartController::class, 'store'])->name('customer.carts.store');
-				Route::get('/edit/{id}', [CartController::class, 'edit'])->name('customer.carts.edit');
-				Route::patch('/{id}', [CartController::class, 'update'])->name('customer.carts.update');
-				Route::delete('/{id}', [CartController::class, 'destroy'])->name('customer.carts.destroy');
-			});
+Route::prefix('/customer')->middleware(['auth', 'role:customer'])->group(function () {
+	// Cart Routes
+	Route::prefix('/carts')->group(function () {
+		// Route::get('/', [CartController::class, 'index'])->name('customer.carts.index');
+		Route::get('/create', [CartController::class, 'create'])->name('customer.carts.create');
+		Route::post('/', [CartController::class, 'store'])->name('customer.carts.store');
+		Route::get('/edit/{id}', [CartController::class, 'edit'])->name('customer.carts.edit');
+		Route::patch('/{id}', [CartController::class, 'update'])->name('customer.carts.update');
+		Route::delete('/{id}', [CartController::class, 'destroy'])->name('customer.carts.destroy');
 
-			// Product Routes
-			Route::prefix('/products')->group(function () {
-				Route::get('/', [ProductController::class, 'index'])->name('customer.products.index');
-				Route::get('/details/{product}', [ProductController::class, 'display'])->name('customer.products.display');
-				// Add other product routes if needed
-			});
+		// Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
+		// Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
+		// Route::patch('/update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+	});
 
-			// Add routes for other customer-related controllers
-		});
+	// Product Routes
+	Route::prefix('/products')->group(function () {
+		Route::get('/', [ProductController::class, 'index'])->name('customer.products.index');
+		Route::get('/details/{product}', [ProductController::class, 'display'])->name('customer.products.display');
+		// Add other product routes if needed
+	});
+
+	// Add routes for other customer-related controllers
+});
 
 
