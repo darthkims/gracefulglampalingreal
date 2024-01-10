@@ -69,6 +69,10 @@
                                             $subtotal += $product->price * $product->pivot->quantity;
                                         @endphp
                                     @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="4">No products in cart.</td>
+                                    </tr>
                                 @endif
                             </tbody>
                         </table>
@@ -92,7 +96,7 @@
                         <form id="apply-promo-form" method="post">
                             @csrf
                             <input type="text" name="promo_code" placeholder="Coupon code" id="promo-code-input">
-                            <button type="submit">Apply</button>
+                            <button type="submit" @if(empty(session('cart.products'))) disabled @endif>Apply</button>
                         </form>
                     </div>
                     <div class="cart__total">
@@ -100,20 +104,24 @@
                         <ul>
                             @php
                                 $total = 0;
-                                $cart = session('cart');
-                                $promoCode = $cart->promoCode;
 
-                                if ($promoCode) {
-                                    $discount = $promoCode->discount / 100;
-                                    $total = $subtotal - ($subtotal * $discount);
-                                } else {
-                                    $total = $subtotal;
+                                if (session('cart')) {
+                                    $cart = session('cart');
+                                    $promoCode = $cart->promoCode;
+
+                                    if ($promoCode) {
+                                        $discount = $promoCode->discount / 100;
+                                        $total = $subtotal - ($subtotal * $discount);
+                                    } else {
+                                        $total = $subtotal;
+                                    }
                                 }
+
                             @endphp
                             <li>Subtotal <span>RM {{ number_format($subtotal, 2) }}</span></li>
                             <li>Total <span>RM {{ number_format($total, 2) }}</span></li>
                         </ul>
-                        <a href="#" class="primary-btn">Proceed to checkout</a>
+                        <a href="#" class="primary-btn" @if(empty(session('cart.products'))) onclick="return false;" @endif>Proceed to checkout</a>
                     </div>
                 </div>
             </div>
@@ -124,6 +132,12 @@
     <script>
         $(document).ready(function () {
             $('#update-cart-btn').on('click', function () {
+                // Check if the cart is empty
+                if ({{ empty(session('cart.products')) ? 'true' : 'false' }}) {
+                    alert('Cart is empty. Update is disabled.');
+                    return false;
+                }
+
                 let products = {};
 
                 // Get updated quantities for each product in the cart modal
@@ -138,7 +152,7 @@
                     type: 'PATCH',
                     url: '/update-cart',
                     data: {
-                        cart_id: '{{ $cart->id }}',
+                        cart_id: '{{ $cart->id ?? 0 }}',
                         products: products,
                         _token: '{{ csrf_token() }}',
                     },
@@ -162,7 +176,7 @@
                     type: 'POST',
                     url: '/apply-promo', // Update this to match your Laravel route
                     data: {
-                        cart_id: '{{ $cart->id }}',
+                        cart_id: '{{ $cart->id ?? 0 }}',
                         promo_code: promoCode,
                         _token: '{{ csrf_token() }}',
                     },
@@ -183,7 +197,7 @@
                     type: 'DELETE',
                     url: '/remove-cart',
                     data: {
-                        cart_id: '{{ $cart->id }}',
+                        cart_id: '{{ $cart->id ?? 0 }}',
                         product_id: productId,
                         _token: '{{ csrf_token() }}'
                     },
