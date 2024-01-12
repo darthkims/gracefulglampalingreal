@@ -56,6 +56,10 @@ Route::get('main', function () {
 	return view('products.main');
 })->name('main');
 
+Route::get('about', function () {
+	return view('customer.about');
+})->name('about');
+
 Route::get('carts', function () {
 	return view('carts.index');
 })->name('shoppingcarts.index');

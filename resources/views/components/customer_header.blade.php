@@ -26,6 +26,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
@@ -112,9 +113,17 @@
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                        <li class="{{ $activePage == 'main' ? ' active' : '' }}"> <a href="{{ route('main') }}" > Home</a></li>
-                            <li class="{{ $activePage == 'shop' ? ' active' : '' }}"><a href="{{ route('cust.products.index') }}">Shop</a></li>
-                            <li><a href="./contact.html">Contacts</a></li>
+                            <li class="{{ $activePage == 'main' ? ' active' : '' }}"> <a href="{{ route('main') }}" > Home</a></li>
+                            <li class="{{ $activePage == 'shop' ? ' active' : '' }}"><a href="{{ route('cust.products.index') }}">Shop</a>
+                            <ul class="dropdown">
+                                    <li><a href="{{ route('cust.products.index') }}">Shop All</a></li>
+                                    <li><a href="./about.html">Men</a></li>
+                                    <li><a href="./shop-details.html">Women</a></li>
+                                    <li><a href="./shopping-cart.html">Unisex</a></li>
+                                    <li><a href="./checkout.html">Categories</a></li>
+                                </ul>
+                            </li>
+                            <li class="{{ $activePage == 'about' ? ' active' : '' }}"><a href="{{ route('about') }}">About</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -160,7 +169,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__logo">
-                            <a href="#"><img src="{{ asset('customer')}}/img/footer-logo.png" alt=""></a>
+                            <a href="#"><img src="{{ asset('customer')}}/img/gg_full.png" alt=""></a>
                         </div>
                         <p>The customer is at the heart of our unique business model, which includes design.</p>
                         <a href="#"><img src="{{ asset('customer')}}/img/payment.png" alt=""></a>
@@ -179,27 +188,14 @@
                 </div>
                 <div class="col-lg-2 col-md-3 col-sm-6">
                     <div class="footer__widget">
-                        <h6>Shopping</h6>
+                        <h6>Enquiry</h6>
                         <ul>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Payment Methods</a></li>
-                            <li><a href="#">Delivary</a></li>
-                            <li><a href="#">Return & Exchanges</a></li>
+                            <li><a href="{{route('about')}}">About Us</a></li>
+                            <li><a href="#">Delivery</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
-                    <div class="footer__widget">
-                        <h6>NewLetter</h6>
-                        <div class="footer__newslatter">
-                            <p>Be the first to know about new arrivals, look books, sales & promos!</p>
-                            <form action="#">
-                                <input type="text" placeholder="Your email">
-                                <button type="submit"><span class="icon_mail_alt"></span></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <div class="row">
                 <div class="col-lg-12 text-center">
