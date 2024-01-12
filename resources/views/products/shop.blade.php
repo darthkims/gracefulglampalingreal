@@ -24,12 +24,6 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="shop__sidebar">
-                        <div class="shop__sidebar__search">
-                            <form action="#">
-                                <input type="text" placeholder="Search...">
-                                <button type="submit"><span class="icon_search"></span></button>
-                            </form>
-                        </div>
                         <div class="shop__sidebar__accordion">
                             <div class="accordion" id="accordionExample">
                                 <div class="card">
@@ -39,13 +33,23 @@
                                     <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
                                         <div class="card-body">
                                             <div class="shop__sidebar__categories">
-                                                <ul class="nice-scroll">
-                                                    @forelse($categories as $index => $category)
-                                                        <li><a href="#">{{ $category->name }} ({{ $category->product_count }})</a></li>
-                                                    @empty
-                                                        <li><a href="#">No categories found</a></li>
-                                                    @endforelse
-                                                </ul>
+                                            <ul class="nice-scroll">
+                                            <li>
+                                                <a href="{{ route('cust.products.index', ['sort' => request('sort')]) }}">
+                                                    All Categories
+                                                </a>
+                                            </li>
+                                                @forelse($categories as $index => $category)
+                                                <li>
+                                                    <a href="{{ route('cust.products.index', ['category' => $category->id, 'size' => $selectedSize, 'sort' => request('sort')]) }}">
+                                                        {{ $category->name }} ({{ $category->product_count }})
+                                                    </a>
+                                                </li>
+
+                                                @empty
+                                                    <li><a href="#">No categories found</a></li>
+                                                @endforelse
+                                            </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -58,9 +62,24 @@
                                     <div id="collapseFour" class="collapse show" data-parent="#accordionExample">
                                         <div class="card-body">
                                             <div class="shop__sidebar__size">
-                                                @forelse($sizes as $index => $size)
-                                                    <label for="{{ $size->name }}">{{ $size->name }}
-                                                        <input type="radio" id="{{ $size->name }}">
+                                                <label for="">
+                                                    <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'sort' => request('sort')]) }}"
+                                                       style="color: black;"
+                                                       class="">
+                                                        All Size
+                                                    </a>
+                                                    <input type="radio" id="" name="" value=""
+                                                           >
+                                                </label>
+                                                @forelse($sizes as $size)
+                                                    <label for="size_{{ $size->id }}">
+                                                        <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'size' => $size->id, 'sort' => request('sort')]) }}"
+                                                           style="color: black;"
+                                                           class="{{ $size->id == $selectedSize ? 'active' : '' }}">
+                                                            {{ $size->name }} ({{ optional($size->products)->count() ?? 0 }})
+                                                        </a>
+                                                        <input type="radio" id="size_{{ $size->id }}" name="size" value="{{ $size->id }}"
+                                                               {{ $size->id == $selectedSize ? 'checked' : '' }}>
                                                     </label>
                                                 @empty
                                                     <p>No sizes found</p>
@@ -69,7 +88,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -85,17 +103,21 @@
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="shop__product__option__right">
                                     <p>Sort by Price:</p>
-                                    <select>
-                                        <option value="">Low To High</option>
-                                        <option value="">$0 - $55</option>
-                                        <option value="">$55 - $100</option>
-                                    </select>
+                                    <form action="{{ route('cust.products.index') }}" method="GET">
+                                        <input type="hidden" name="category" value="{{ $selectedCategory }}">
+                                        <input type="hidden" name="size" value="{{ $selectedSize }}">
+                                        <select name="sort" onchange="this.form.submit()">
+                                            <option value="low_to_high" {{ request('sort') == 'low_to_high' ? 'selected' : '' }}>Low To High</option>
+                                            <option value="high_to_low" {{ request('sort') == 'high_to_low' ? 'selected' : '' }}>High To Low</option>
+                                        </select>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>                   
                     <div class="row">
                     @foreach ($products as $product)
+                        @if (!$selectedCategory || $product->categories->contains('id', $selectedCategory))
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 @php 
@@ -119,6 +141,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     @endforeach
                     </div>
                 </div>
