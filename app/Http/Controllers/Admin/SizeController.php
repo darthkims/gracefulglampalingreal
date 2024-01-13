@@ -61,6 +61,6 @@ class SizeController extends Controller
         // Student::where('student_id', $id)->delete();
         Size::destroy($id);
 
-        return Redirect::route('sizes.index')->with('message', 'Color has been deleted');
+        return Redirect::route('sizes.index')->with('message', 'Size has been deleted');
     }
 }

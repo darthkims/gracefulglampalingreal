@@ -8,6 +8,14 @@
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-12">
+
+                @if (session('message'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="color: white;">
+                            {{ session('message') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
                     <div class="card my-4">
                     <div class=" me-3 my-3 d-flex justify-content-between align-items-center">
                             <h2 class="text-gradient text-dark mb-0 ms-3">Colors</h2>

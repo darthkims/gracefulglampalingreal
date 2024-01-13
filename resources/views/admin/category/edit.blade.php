@@ -22,7 +22,7 @@
                         </label>
                         <div class="input-group input-group-outline">
                         <input type="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $category->name }}">
-</div>
+                        </div>
                           @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
