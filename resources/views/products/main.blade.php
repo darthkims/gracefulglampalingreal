@@ -1,4 +1,12 @@
-<x-customer_header activePage="main" bodyClass="g-sidenav-show  bg-gray-200">
+@auth
+    <x-customer_header activePage="main" bodyClass="g-sidenav-show bg-gray-200">
+        <!-- Authenticated User Header Content Goes Here -->
+    </x-customer_header>
+@else
+    <x-head_header activePage="main" bodyClass="g-sidenav-show bg-gray-200">
+        <!-- Guest Header Content Goes Here -->
+    </x-head_header>
+@endauth
     <!-- Hero Section Begin -->
     <section class="hero">
         <div class="hero__slider owl-carousel">
@@ -504,4 +512,5 @@
         </div>
     </section>
     <!-- Latest Blog Section End -->
-</x-customer_header>
+<x-customer_footer activePage="main" bodyClass="g-sidenav-show bg-gray-200">
+</x-customer_footer>

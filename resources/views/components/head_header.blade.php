@@ -74,15 +74,6 @@
                         <div class="header__top__right">
                             <div class="header__top__links">
                                 <a href="{{ route('login') }}">Sign in</a>
-                                <a href="#">FAQs</a>
-                            </div>
-                            <div class="header__top__hover">
-                                <span>Usd <i class="arrow_carrot-down"></i></span>
-                                <ul>
-                                    <li>MYR</li>
-                                    <li>EUR</li>
-                                    <li>USD</li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -117,6 +108,22 @@
                                     @endforelse                                
                                 </ul>
                             </li>
+                            <li><a>Brands</a>
+                            @php
+                            $brands = App\Models\Brand::all();
+                            @endphp
+                                <ul class="dropdown">
+                                    @forelse($brands as $index => $brand)
+                                    <li>
+                                        <a href="{{ route('cust.products.index', ['brand' => $brand->id]) }}">
+                                            {{ $brand->name }}
+                                        </a>
+                                    </li>
+                                    @empty
+                                        <li><a href="#">No brands found</a></li>
+                                    @endforelse                                
+                                </ul>
+                            </li>
                             <li class="{{ $activePage == 'about' ? ' active' : '' }}"><a href="{{ route('about') }}">About</a></li>
                         </ul>
                     </nav>
@@ -125,8 +132,27 @@
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img src="{{ asset('customer')}}/img/icon/search.png" alt=""></a>
                         <a href="#"><img src="{{ asset('customer')}}/img/icon/heart.png" alt=""></a>
-                        <a href="#"><img src="{{ asset('customer')}}/img/icon/cart.png" alt=""> <span>0</span></a>
-                        <div class="price">$0.00</div>
+                        <a href="{{ route('cart.show') }}"><img src="{{ asset('customer')}}/img/icon/cart.png" alt="">
+                            <span class="badge badge-pill badge-danger text-white">
+                                @if(session('cart.products'))
+                                    {{ count(array_unique(session('cart.products')->pluck('id')->toArray())) }}
+                                @else
+                                    0
+                                @endif
+                            </span>
+                        </a>
+                        @php
+                            $total = 0;
+                            $cartProducts = session('cart.products');
+
+                            if ($cartProducts) {
+                                foreach ($cartProducts as $product) {
+                                    $total += $product->price * $product->pivot->quantity;
+                                }
+                            }
+                        @endphp
+
+                        <div class="price">RM {{ number_format($total, 2) }}</div>
                     </div>
                 </div>
             </div>
@@ -137,58 +163,6 @@
     <div class="content">
         {{$slot}}
     </div>
-       <!-- Footer Section Begin -->
-       <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer__about">
-                        <div class="footer__logo">
-                            <a href="#"><img src="{{ asset('customer')}}/img/gg_full_white.png" alt=""></a>
-                        </div>
-                        <p>The customer is at the heart of our unique business model, which includes design.</p>
-                        <a href="#"><img src="{{ asset('customer')}}/img/payment.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
-                    <div class="footer__widget">
-                        <h6>Shopping</h6>
-                        <ul>
-                            <li><a href="#">Clothing Store</a></li>
-                            <li><a href="#">Trending Shoes</a></li>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Sale</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6">
-                    <div class="footer__widget">
-                        <h6>Enquiry</h6>
-                        <ul>
-                            <li><a href="{{route('about')}}">About Us</a></li>
-                            <li><a href="#">Delivery</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="footer__copyright__text">
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        <p>Copyright ©
-                            <script>
-                                document.write(new Date().getFullYear());
-                            </script>
-                            All rights reserved | Graceful Glam founded by <a href="https://instagram.com/starwars" target="_blank">darthkims</a>
-                        </p>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Footer Section End -->
 
     <!-- Search Begin -->
     <div class="search-model">

@@ -1,5 +1,14 @@
-<x-customer_header activePage="about" bodyClass="g-sidenav-show  bg-gray-200">
-        <!-- Breadcrumb Section Begin -->
+@auth
+    <x-customer_header activePage="about" bodyClass="g-sidenav-show bg-gray-200">
+        <!-- Authenticated User Header Content Goes Here -->
+    </x-customer_header>
+@else
+    <x-head_header activePage="about" bodyClass="g-sidenav-show bg-gray-200">
+        <!-- Guest Header Content Goes Here -->
+    </x-head_header>
+@endauth
+
+<!-- Breadcrumb Section Begin -->
         <section class="breadcrumb-option">
         <div class="container">
             <div class="row">
@@ -187,4 +196,5 @@
         </div>
     </section>
     <!-- Client Section End -->
-</x-customer_header>
+<x-customer_footer activePage="about" bodyClass="g-sidenav-show bg-gray-200">
+</x-customer_footer>

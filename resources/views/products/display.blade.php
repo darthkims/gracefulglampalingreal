@@ -1,5 +1,12 @@
-<x-customer_header activePage="shop" bodyClass="g-sidenav-show  bg-gray-200">
-
+@auth
+    <x-customer_header activePage="shop" bodyClass="g-sidenav-show bg-gray-200">
+        <!-- Authenticated User Header Content Goes Here -->
+    </x-customer_header>
+@else
+    <x-head_header activePage="shop" bodyClass="g-sidenav-show bg-gray-200">
+        <!-- Guest Header Content Goes Here -->
+    </x-head_header>
+@endauth
     <!-- Shop Details Section Begin -->
 
     <section class="shop-details">
@@ -205,4 +212,5 @@
         </div>
     </section>
     <!-- Related Section End -->
-</x-customer_header>
+<x-customer_footer activePage="shop" bodyClass="g-sidenav-show bg-gray-200">
+</x-customer_footer>
