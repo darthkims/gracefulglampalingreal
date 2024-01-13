@@ -12,4 +12,14 @@ class Brand extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_brand');
+    }
+
+    public function getProductCountAttribute()
+    {
+        return $this->products->count();
+    }
 }
