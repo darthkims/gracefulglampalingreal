@@ -35,7 +35,7 @@
                                             <div class="shop__sidebar__categories">
                                             <ul class="nice-scroll">
                                             <li>
-                                                <a href="{{ route('cust.products.index', ['sort' => request('sort')]) }}">
+                                                <a href="{{ route('cust.products.index', ['size' => $selectedSize, 'sort' => request('sort')]) }}">
                                                     All Categories
                                                 </a>
                                             </li>
@@ -123,7 +123,7 @@
                                 @php 
                                     $imagePath = asset("customer/img/product/product-{$product->id}.jpg");
                                 @endphp
-                                <a href="{{ route('products.display',$product->id) }}">
+                                <a href="{{ route('cust.products.display',$product->id) }}">
                                     <div class="product__item__pic set-bg" data-setbg="{{ $imagePath }}">
                                         <!-- Additional product display elements can be added here -->
                                     </div>

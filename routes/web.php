@@ -68,7 +68,6 @@ Route::get('carts', function () {
 // Product Listing
 Route::get('shop', [ProductController::class, 'index'])->name('cust.products.index');
 Route::get('/products/details/{product}', [ProductController::class, 'display'])->name('cust.products.display');
-Route::get('/products/details/{product}', [ProductController::class, 'display'])->name('products.display');
 
 Route::post('sign-out', [SessionsController::class, 'destroy'])->middleware('auth')->name('logout');
 Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')->name('profile');
