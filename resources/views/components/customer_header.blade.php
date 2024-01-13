@@ -114,13 +114,21 @@
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <li class="{{ $activePage == 'main' ? ' active' : '' }}"> <a href="{{ route('main') }}" > Home</a></li>
-                            <li class="{{ $activePage == 'shop' ? ' active' : '' }}"><a href="{{ route('cust.products.index') }}">Shop</a>
-                            <ul class="dropdown">
-                                    <li><a href="{{ route('cust.products.index') }}">Shop All</a></li>
-                                    <li><a href="./about.html">Men</a></li>
-                                    <li><a href="./shop-details.html">Women</a></li>
-                                    <li><a href="./shopping-cart.html">Unisex</a></li>
-                                    <li><a href="./checkout.html">Categories</a></li>
+                            <li class="{{ $activePage == 'shop' ? ' active' : '' }}"><a href="{{ route('cust.products.index') }}">Shop</a></li>
+                            <li><a>Categories</a>
+                            @php
+                            $categories = App\Models\Category::all();
+                            @endphp
+                                <ul class="dropdown">
+                                    @forelse($categories as $index => $category)
+                                    <li>
+                                        <a href="{{ route('cust.products.index', ['category' => $category->id]) }}">
+                                            {{ $category->name }}
+                                        </a>
+                                    </li>
+                                    @empty
+                                        <li><a href="#">No categories found</a></li>
+                                    @endforelse                                
                                 </ul>
                             </li>
                             <li class="{{ $activePage == 'about' ? ' active' : '' }}"><a href="{{ route('about') }}">About</a></li>
@@ -169,7 +177,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__logo">
-                            <a href="#"><img src="{{ asset('customer')}}/img/gg_full.png" alt=""></a>
+                            <a href="#"><img src="{{ asset('customer')}}/img/gg_full_white.png" alt=""></a>
                         </div>
                         <p>The customer is at the heart of our unique business model, which includes design.</p>
                         <a href="#"><img src="{{ asset('customer')}}/img/payment.png" alt=""></a>
