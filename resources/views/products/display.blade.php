@@ -141,21 +141,26 @@
                 </div>
             </div>
             <div class="row">
-                @foreach($relatedProducts as $rp)
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
-                        <div class="product__item">
-                            <a href="{{ route('products.display', $rp->id) }}"> <!-- Set your product details route -->
-                                {{-- <div class="product__item__pic set-bg" data-setbg="{{ asset('customer/img/shop-details/thumb-1-' . $p ->id . '.jpg') }}"> --}}
-                                </div>
-                                <div class="product__item__text">
-                                    <a href="#" class="add-cart">+ Add To Cart</a>
-                                    <h6>{{ $rp->name }}</h6>
-                                    <h5>RM{{ $rp->price }}</h5>
-                                </div>
-                            </a>
+                <div class="row">
+                    @foreach($randomIds as $randomId)
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
+                            <div class="product__item">
+                                <?php
+                                    $random = App\Models\Product::find($randomId);
+                                ?>
+                                <a href="{{ route('cust.products.display', $random ->id) }}"> <!-- Set your product details route -->
+                                    <div class="product__item__pic set-bg" data-setbg="{{ asset('customer/img/shop-details/thumb-1-' . $random ->id . '.jpg') }}">
+                                    </div>
+                                    <div class="product__item__text">
+                                        <a href="#" class="add-cart">+ Add To Cart</a>
+                                        <h6>{{ $random ->name }}</h6>
+                                        <h5>RM{{ $random ->price }}</h5>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
         </div>
     </section>

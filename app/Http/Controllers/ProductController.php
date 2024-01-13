@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use File;
 use App\Models\Size;
 use App\Models\Product;
@@ -57,42 +58,11 @@ class ProductController extends Controller
 
         
         // to display related products
-        $relatedProducts = Product::with(['colors', 'sizes', 'brands', 'categories'])
-            ->whereHas('categories', function ($query) use ($product) {
-                $query->whereIn('categories.id', $product->categories->pluck('id'));
-            })
-            ->where('id', '!=', $product->id)
-            ->limit(4)
-            ->get();
+        $currentProductId = $product->id;
+        $products = Product::where('id', '!=', $currentProductId)->get();
+        $randomIds = $products->pluck('id')->unique()->random(4)->toArray();
 
-        return view('products.display', compact('product', 'relatedProducts'));    
+        return view('products.display', compact('product', 'randomIds'));    
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-
-
-    /**
-    * Store a newly created resource in storage.
-    */
-    /**
-     * Display the specified resource.
-     */
-    // public function show(Product $product)
-    // {
-
-    //     $nextProduct = Product::where('id', '>', $product->id)->first();
-    //     $prevProduct = Product::where('id', '<', $product->id)->orderBy('id', 'desc')->first();
-
-    //     return view('products.show', compact('product', 'nextProduct', 'prevProduct'));    
-    // }
-    
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    /**
-     * Update the specified resource in storage.
-     */
 }
