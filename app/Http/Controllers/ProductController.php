@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
-use File;
 use App\Models\Size;
 use App\Models\Product;
 use App\Models\Category;
@@ -18,30 +17,53 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $sizes = Size::all();
-        $sort = $request->input('sort', 'low_to_high');
+        $brands = Brand::all();
+        $sort = $request->input('sort', 'newest');
         $selectedCategory = $request->input('category');
-        $selectedSize = $request->input('size'); // Add this line to get the selected size
-        
+        $selectedSize = $request->input('size');
+        $selectedBrand = $request->input('brand');
+
         // Fetch products and apply sorting based on $sort value
-        $products = Product::orderBy('price', $sort === 'low_to_high' ? 'asc' : 'desc');
-        
+        $products = Product::query();
+
+        // Add sorting based on the selected option
+        switch ($sort) {
+            case 'low_to_high':
+                $products->orderBy('price', 'asc');
+                break;
+            case 'high_to_low':
+                $products->orderBy('price', 'desc');
+                break;
+            case 'newest':
+                $products->orderBy('created_at', 'desc');
+                break;
+            // Add more cases as needed...
+        }
+
         // Filter by selected category if it's provided
         if ($selectedCategory) {
             $products->whereHas('categories', function ($query) use ($selectedCategory) {
-                $query->where('categories.id', $selectedCategory); // Specify the table alias or full table name
+                $query->where('categories.id', $selectedCategory);
             });
         }
-    
+
+        if ($selectedBrand) {
+            $products->whereHas('brands', function ($query) use ($selectedBrand) {
+                $query->where('brands.id', $selectedBrand);
+            });
+        }
+
         // Filter by selected size if it's provided
         if ($selectedSize) {
             $products->whereHas('sizes', function ($query) use ($selectedSize) {
-                $query->where('sizes.id', $selectedSize); // Specify the table alias or full table name
+                $query->where('sizes.id', $selectedSize);
             });
         }
-        
+
+        // Get the results after applying sorting and filtering
         $products = $products->get();
-        
-        return view('products.shop', compact('products', 'categories', 'sizes', 'selectedCategory', 'selectedSize'));
+
+        return view('products.shop', compact('products', 'categories', 'sizes', 'brands', 'selectedCategory', 'selectedSize', 'selectedBrand'));
     }
     
     

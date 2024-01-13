@@ -91,6 +91,46 @@
                                         @endif
                                     </span>
                                 </div>
+                                <div class="product__details__option__color">
+                                    <span>Size: 
+                                        @if ($product->sizes)
+                                            @forelse ($product->sizes as $size)
+                                                {{ $size->name }}
+                                            @empty
+                                                No sizes
+                                            @endforelse
+                                        @else
+                                            No sizes
+                                        @endif
+                                    </span>
+                                </div>
+                                <br>
+                                <div class="product__details__option__color">
+                                    <span>Brand: 
+                                        @if ($product->brands)
+                                            @forelse ($product->brands as $brand)
+                                                {{ $brand->name }}
+                                            @empty
+                                                No brands
+                                            @endforelse
+                                        @else
+                                            No brands
+                                        @endif
+                                    </span>
+                                </div>
+                                <div class="product__details__option__color">
+                                    <span>Color: 
+                                        @if ($product->colors)
+                                            @forelse ($product->colors as $color)
+                                                {{ $color->name }}
+                                            @empty
+                                                No colors
+                                            @endforelse
+                                        @else
+                                            No colors
+                                        @endif
+                                    </span>
+                                </div>
                             </div>
                             <div class="product__details__cart__option">
                                 <div class="quantity">
