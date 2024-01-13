@@ -18,7 +18,7 @@
 
                       <div class="mb-3">
                         <label for="name" class="form-label fw-bold">
-                          Brand Name <span class="text-danger">*</span>
+                          Role Name <span class="text-danger">*</span>
                         </label>
                         <div class="input-group input-group-outline">
                         <input type="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $role->name }}">
