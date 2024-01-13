@@ -33,23 +33,50 @@
                                     <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
                                         <div class="card-body">
                                             <div class="shop__sidebar__categories">
-                                            <ul class="nice-scroll">
-                                            <li>
-                                                <a href="{{ route('cust.products.index', ['size' => $selectedSize, 'sort' => request('sort')]) }}">
-                                                    All Categories
-                                                </a>
-                                            </li>
-                                                @forelse($categories as $index => $category)
-                                                <li>
-                                                    <a href="{{ route('cust.products.index', ['category' => $category->id, 'size' => $selectedSize, 'sort' => request('sort')]) }}">
-                                                        {{ $category->name }} ({{ $category->product_count }})
-                                                    </a>
-                                                </li>
+                                                <ul class="nice-scroll">
+                                                    <li>
+                                                        <a href="{{ route('cust.products.index', ['brand' => $selectedBrand, 'size' => $selectedSize, 'sort' => request('sort')]) }}">
+                                                            All Categories
+                                                        </a>
+                                                    </li>
+                                                    @forelse($categories as $index => $category)
+                                                    <li>
+                                                        <a href="{{ route('cust.products.index', ['category' => $category->id, 'brand' => $selectedBrand, 'size' => $selectedSize, 'sort' => request('sort')]) }}">
+                                                            {{ $category->name }} ({{ $category->product_count }})
+                                                        </a>
+                                                    </li>
+                                                    @empty
+                                                        <li><a href="#">No categories found</a></li>
+                                                    @endforelse
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                                @empty
-                                                    <li><a href="#">No categories found</a></li>
-                                                @endforelse
-                                            </ul>
+                                <div class="card">
+                                    <div class="card-heading">
+                                        <a data-toggle="collapse" data-target="#collapseTwo">Branding</a>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse show" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="shop__sidebar__brand">
+                                                <ul class="nice-scroll">
+                                                    <li>
+                                                        <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'size' => $selectedSize, 'sort' => request('sort')]) }}">
+                                                            All Brands
+                                                        </a>
+                                                    </li>
+                                                    @forelse($brands as $index => $brand)
+                                                        <li>
+                                                            <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'brand' => $brand->id, 'size' => $selectedSize, 'sort' => request('sort')]) }}">
+                                                                {{ $brand->name }} ({{ $brand->product_count }})
+                                                            </a>
+                                                        </li>
+                                                    @empty
+                                                        <li><a href="#">No brands found</a></li>
+                                                    @endforelse
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -63,7 +90,7 @@
                                         <div class="card-body">
                                             <div class="shop__sidebar__size">
                                                 <label for="">
-                                                    <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'sort' => request('sort')]) }}"
+                                                    <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'brand' => $selectedBrand, 'sort' => request('sort')]) }}"
                                                        style="color: black;"
                                                        class="">
                                                         All Size
@@ -73,7 +100,7 @@
                                                 </label>
                                                 @forelse($sizes as $size)
                                                     <label for="size_{{ $size->id }}">
-                                                        <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'size' => $size->id, 'sort' => request('sort')]) }}"
+                                                        <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'brand' => $selectedBrand, 'size' => $size->id, 'sort' => request('sort')]) }}"
                                                            style="color: black;"
                                                            class="{{ $size->id == $selectedSize ? 'active' : '' }}">
                                                             {{ $size->name }} ({{ optional($size->products)->count() ?? 0 }})
@@ -105,8 +132,10 @@
                                     <p>Sort by Price:</p>
                                     <form action="{{ route('cust.products.index') }}" method="GET">
                                         <input type="hidden" name="category" value="{{ $selectedCategory }}">
+                                        <input type="hidden" name="brand" value="{{ $selectedBrand }}">
                                         <input type="hidden" name="size" value="{{ $selectedSize }}">
                                         <select name="sort" onchange="this.form.submit()">
+                                            <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest</option>
                                             <option value="low_to_high" {{ request('sort') == 'low_to_high' ? 'selected' : '' }}>Low To High</option>
                                             <option value="high_to_low" {{ request('sort') == 'high_to_low' ? 'selected' : '' }}>High To Low</option>
                                         </select>

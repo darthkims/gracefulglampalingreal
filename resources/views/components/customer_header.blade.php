@@ -131,6 +131,22 @@
                                     @endforelse                                
                                 </ul>
                             </li>
+                            <li><a>Brands</a>
+                            @php
+                            $brands = App\Models\Brand::all();
+                            @endphp
+                                <ul class="dropdown">
+                                    @forelse($brands as $index => $brand)
+                                    <li>
+                                        <a href="{{ route('cust.products.index', ['brand' => $brand->id]) }}">
+                                            {{ $brand->name }}
+                                        </a>
+                                    </li>
+                                    @empty
+                                        <li><a href="#">No brands found</a></li>
+                                    @endforelse                                
+                                </ul>
+                            </li>
                             <li class="{{ $activePage == 'about' ? ' active' : '' }}"><a href="{{ route('about') }}">About</a></li>
                         </ul>
                     </nav>
