@@ -86,6 +86,21 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <label for="location" class="form-label">
+                                        Address
+                                    </label>
+                                    <div class="input-group input-group-outline">
+                                        <input type="text" class="form-control @error('location') is-invalid @enderror" name="location">
+                                    </div>
+
+                                    @error('location')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
                                     <label for="role" class="form-label">
                                         Role <span class="text-danger">*</span>
                                     </label>

@@ -41,6 +41,7 @@ class UserController extends Controller
             'email' => strtolower($request->email),
             'password' => $request->password,
             'phone' => $request->phone,
+            'location' => $request->location,
         ])->assignRole($request->role);
 
         return Redirect::route('users.index')->with('message', 'User has been created');
@@ -73,6 +74,7 @@ class UserController extends Controller
             'username' => $request->username,
             'email' => strtolower($request->email),
             'phone' => $request->phone,
+            'location' => $request->location,
         ]);
 
         // update password if entered

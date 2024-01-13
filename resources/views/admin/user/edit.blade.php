@@ -87,17 +87,31 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <label for="location" class="form-label">
+                                        Address
+                                    </label>
+                                    <div class="input-group input-group-outline">
+                                        <input type="text" class="form-control @error('location') is-invalid @enderror" name="location" value="{{ $user->location }}">
+                                    </div>
+
+                                    @error('location')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
                                     <label for="role" class="form-label">
                                         Role <span class="text-danger">*</span>
                                     </label>
 
                                     @foreach ($roles as $role)
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="role" id="{{ $role->name }}" value="{{ $role->name }}" {{ ($user->roles->pluck('name')->first() == $role->name) ? 'checked' : '' }}>
-        <label class="form-check-label" for="{{ $role->name }}">{{ Str::ucfirst($role->name) }}</label>
-    </div>
-@endforeach
-
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="role" id="{{ $role->name }}" value="{{ $role->name }}" {{ ($user->roles->pluck('name')->first() == $role->name) ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="{{ $role->name }}">{{ Str::ucfirst($role->name) }}</label>
+                                        </div>
+                                    @endforeach
 
                                     @error('role')
                                     <span class="invalid-feedback" role="alert">
