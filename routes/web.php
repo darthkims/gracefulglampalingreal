@@ -60,9 +60,7 @@ Route::get('about', function () {
 	return view('customer.about');
 })->name('about');
 
-Route::get('carts', function () {
-	return view('carts.index');
-})->name('shoppingcarts.index');
+
 
 
 // Product Listing
@@ -73,33 +71,17 @@ Route::post('sign-out', [SessionsController::class, 'destroy'])->middleware('aut
 Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')->name('profile');
 Route::post('user-profile', [ProfileController::class, 'update'])->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
-	Route::get('billing', function () {
-		return view('pages.billing');
-	})->name('billing');
-	Route::get('tables', function () {
-		return view('pages.tables');
-	})->name('tables');
-	Route::get('rtl', function () {
-		return view('pages.rtl');
-	})->name('rtl');
-	Route::get('virtual-reality', function () {
-		return view('pages.virtual-reality');
-	})->name('virtual-reality');
-	Route::get('notifications', function () {
-		return view('pages.notifications');
-	})->name('notifications');
 	Route::get('static-sign-in', function () {
 		return view('pages.static-sign-in');
 	})->name('static-sign-in');
 	Route::get('static-sign-up', function () {
 		return view('pages.static-sign-up');
 	})->name('static-sign-up');
-	Route::get('user-management', function () {
-		return view('pages.laravel-examples.user-management');
-	})->name('user-management');
-	Route::get('user-profile', function () {
-		return view('pages.laravel-examples.user-profile');
-	})->name('user-profile');
+	Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
+	Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
+	Route::patch('/update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+	Route::post('/apply-promo', [CartController::class, 'applyPromo'])->name('cart.promo');
+	Route::delete('/remove-cart', [CartController::class, 'removeCart'])->name('cart.remove');
 	Route::resource('products', ProductController::class);
 	Route::resource('categories', CategoryController::class);
 	});
@@ -209,12 +191,6 @@ Route::group(['middleware' => 'auth'], function () {
 	
 
 // ... (existing routes)
-
-Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
-Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
-Route::patch('/update-cart', [CartController::class, 'updateCart'])->name('cart.update');
-Route::post('/apply-promo', [CartController::class, 'applyPromo'])->name('cart.promo');
-Route::delete('/remove-cart', [CartController::class, 'removeCart'])->name('cart.remove');
 
 
 // Customer Routes

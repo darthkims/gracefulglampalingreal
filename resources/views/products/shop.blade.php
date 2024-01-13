@@ -34,6 +34,7 @@
                     <div class="shop__sidebar">
                         <div class="shop__sidebar__accordion">
                             <div class="accordion" id="accordionExample">
+                                <!-- Categories Section -->
                                 <div class="card">
                                     <div class="card-heading">
                                         <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
@@ -48,11 +49,12 @@
                                                         </a>
                                                     </li>
                                                     @forelse($categories as $index => $category)
-                                                    <li>
-                                                        <a href="{{ route('cust.products.index', ['category' => $category->id, 'brand' => $selectedBrand, 'size' => $selectedSize, 'sort' => request('sort')]) }}">
-                                                            {{ $category->name }} ({{ $category->product_count }})
-                                                        </a>
-                                                    </li>
+                                                        <li>
+                                                            <a href="{{ route('cust.products.index', ['category' => $category->id, 'brand' => $selectedBrand, 'size' => $selectedSize, 'sort' => request('sort')]) }}"
+                                                               style="{{ $category->id == $selectedCategory ? 'font-weight: bold;' : '' }}">
+                                                                {{ $category->name }} ({{ $category->product_count }})
+                                                            </a>
+                                                        </li>
                                                     @empty
                                                         <li><a href="#">No categories found</a></li>
                                                     @endforelse
@@ -61,14 +63,13 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="card">
                                     <div class="card-heading">
                                         <a data-toggle="collapse" data-target="#collapseTwo">Branding</a>
                                     </div>
                                     <div id="collapseTwo" class="collapse show" data-parent="#accordionExample">
                                         <div class="card-body">
-                                            <div class="shop__sidebar__brand">
+                                            <div class="shop__sidebar__categories">
                                                 <ul class="nice-scroll">
                                                     <li>
                                                         <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'size' => $selectedSize, 'sort' => request('sort')]) }}">
@@ -77,7 +78,8 @@
                                                     </li>
                                                     @forelse($brands as $index => $brand)
                                                         <li>
-                                                            <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'brand' => $brand->id, 'size' => $selectedSize, 'sort' => request('sort')]) }}">
+                                                            <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'brand' => $brand->id, 'size' => $selectedSize, 'sort' => request('sort')]) }}"
+                                                            style="{{ $brand->id == $selectedBrand ? 'font-weight: bold;' : '' }}">
                                                                 {{ $brand->name }} ({{ $brand->product_count }})
                                                             </a>
                                                         </li>
@@ -92,9 +94,9 @@
 
                                 <div class="card">
                                     <div class="card-heading">
-                                        <a data-toggle="collapse" data-target="#collapseFour">Size</a>
+                                        <a data-toggle="collapse" data-target="#collapseThree">Size</a>
                                     </div>
-                                    <div id="collapseFour" class="collapse show" data-parent="#accordionExample">
+                                    <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
                                         <div class="card-body">
                                             <div class="shop__sidebar__size">
                                                 <label for="">
@@ -142,6 +144,7 @@
                                         <input type="hidden" name="category" value="{{ $selectedCategory }}">
                                         <input type="hidden" name="brand" value="{{ $selectedBrand }}">
                                         <input type="hidden" name="size" value="{{ $selectedSize }}">
+                                        
                                         <select name="sort" onchange="this.form.submit()">
                                             <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest</option>
                                             <option value="low_to_high" {{ request('sort') == 'low_to_high' ? 'selected' : '' }}>Low To High</option>
@@ -213,6 +216,8 @@
         });
     });
 </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <x-customer_footer activePage="shop" bodyClass="g-sidenav-show bg-gray-200">
 </x-customer_footer>

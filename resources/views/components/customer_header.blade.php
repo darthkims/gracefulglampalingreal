@@ -118,6 +118,7 @@
                             <li><a>Categories</a>
                             @php
                             $categories = App\Models\Category::all();
+                            $brands = App\Models\Brand::all();
                             @endphp
                                 <ul class="dropdown">
                                     @forelse($categories as $index => $category)
@@ -132,9 +133,6 @@
                                 </ul>
                             </li>
                             <li><a>Brands</a>
-                            @php
-                            $brands = App\Models\Brand::all();
-                            @endphp
                                 <ul class="dropdown">
                                     @forelse($brands as $index => $brand)
                                     <li>
@@ -197,6 +195,18 @@
         </div>
     </div>
     <!-- Search End -->
+
+        <!-- Js Plugins -->
+        <script src="{{ asset('customer')}}/js/jquery-3.3.1.min.js"></script>
+    <script src="{{ asset('customer')}}/js/bootstrap.min.js"></script>
+    <script src="{{ asset('customer')}}/js/jquery.nice-select.min.js"></script>
+    <script src="{{ asset('customer')}}/js/jquery.nicescroll.min.js"></script>
+    <script src="{{ asset('customer')}}/js/jquery.magnific-popup.min.js"></script>
+    <script src="{{ asset('customer')}}/js/jquery.countdown.min.js"></script>
+    <script src="{{ asset('customer')}}/js/jquery.slicknav.js"></script>
+    <script src="{{ asset('customer')}}/js/mixitup.min.js"></script>
+    <script src="{{ asset('customer')}}/js/owl.carousel.min.js"></script>
+    <script src="{{ asset('customer')}}/js/main.js"></script>
 
     <!-- Js Plugins -->
     <script src="{{ asset('customer')}}/js/jquery-3.3.1.min.js"></script>

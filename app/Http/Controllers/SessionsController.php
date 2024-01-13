@@ -52,7 +52,7 @@ class SessionsController extends Controller
         if ($prevParam) {
             return redirect($prevParam);
         } else {
-            return redirect('/dashboard');
+            return redirect('/main');
         }
     }
 
