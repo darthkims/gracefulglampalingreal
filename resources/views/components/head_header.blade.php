@@ -132,7 +132,7 @@
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img src="{{ asset('customer')}}/img/icon/search.png" alt=""></a>
                         <a href="#"><img src="{{ asset('customer')}}/img/icon/heart.png" alt=""></a>
-                        <a href="{{ route('cart.show') }}"><img src="{{ asset('customer')}}/img/icon/cart.png" alt="">
+                        <a href="{{ route('cart.index') }}"><img src="{{ asset('customer')}}/img/icon/cart.png" alt="">
                             <span class="badge badge-pill badge-danger text-white">
                                 @if(session('cart.products'))
                                     {{ count(array_unique(session('cart.products')->pluck('id')->toArray())) }}

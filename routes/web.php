@@ -16,7 +16,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\PromoCodeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
-// use App\Http\Controllers\Admin\CartController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Customer\CartController;
 
 
@@ -77,11 +77,12 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('static-sign-up', function () {
 		return view('pages.static-sign-up');
 	})->name('static-sign-up');
-	Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
-	Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
-	Route::patch('/update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+	Route::post('/addToCart/{productId}', [CartController::class, 'addToCart'])->name('addToCart');
+	Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+	Route::get('/checkout', [CartController::class, 'show'])->name('checkout');
+	Route::patch('/update-cart', [CartController::class, 'update'])->name('cart.update');
 	Route::post('/apply-promo', [CartController::class, 'applyPromo'])->name('cart.promo');
-	Route::delete('/remove-cart', [CartController::class, 'removeCart'])->name('cart.remove');
+	Route::delete('/remove-cart/{productId}', [CartController::class, 'destroy'])->name('cart.remove');
 	Route::resource('products', ProductController::class);
 	Route::resource('categories', CategoryController::class);
 	});
@@ -123,12 +124,12 @@ Route::group(['middleware' => 'auth'], function () {
 		});
 
 		Route::prefix('/carts')->group(function () {
-			Route::get('/', [CartController::class, 'index'])->name('carts.index');
-			Route::get('/create', [CartController::class, 'create'])->name('carts.create');
-			Route::post('/', [CartController::class, 'store'])->name('carts.store');
-			Route::get('/edit/{id}', [CartController::class, 'edit'])->name('carts.edit');
-			Route::patch('/{id}', [CartController::class, 'update'])->name('carts.update');
-			Route::delete('/{id}', [CartController::class, 'destroy'])->name('carts.destroy');
+			Route::get('/', [OrderController::class, 'index'])->name('carts.index');
+			Route::get('/create', [OrderController::class, 'create'])->name('carts.create');
+			Route::post('/', [OrderController::class, 'store'])->name('carts.store');
+			Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('carts.edit');
+			Route::patch('/{id}', [OrderController::class, 'update'])->name('carts.update');
+			Route::delete('/{id}', [OrderController::class, 'destroy'])->name('carts.destroy');
 		});
 
 		Route::prefix('/roles')->group(function () {
