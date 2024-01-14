@@ -58,7 +58,10 @@ class ProductController extends Controller
         if ($request->hasFile('product_image')) {
             $image = $request->file('product_image');
             $imageName = 'product-' . $productId . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('customer/img/product'), $imageName);
+            $image->move(public_path('storage'), $imageName);
+            $product = Product::find($productId);
+            $product->productimg = $imageName;
+            $product->save();
             // You may want to save $imageName in the database for later use.
         }
     
