@@ -26,25 +26,25 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">
-                                    <div class="product__thumb__pic set-bg" data-setbg="{{ asset('customer/img/shop-details/thumb-1-' . $product-> id . '.jpg') }}">
+                                    <div class="product__thumb__pic set-bg" data-setbg="{{ asset("storage/$product->productthumb1") }}">
                                     </div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">
-                                    <div class="product__thumb__pic set-bg" data-setbg="{{ asset('customer/img/shop-details/thumb-2-' . $product-> id . '.jpg') }}">
+                                    <div class="product__thumb__pic set-bg" data-setbg="{{ asset("storage/$product->productthumb2") }}">
                                     </div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">
-                                    <div class="product__thumb__pic set-bg" data-setbg="{{ asset('customer/img/shop-details/thumb-3-' . $product-> id . '.jpg') }}">
+                                    <div class="product__thumb__pic set-bg" data-setbg="{{ asset("storage/$product->productthumb3") }}">
                                     </div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">
-                                    <div class="product__thumb__pic set-bg" data-setbg="{{ asset('customer/img/shop-details/thumb-4-' . $product-> id . '.jpg') }}">
+                                    <div class="product__thumb__pic set-bg" data-setbg="{{ asset("storage/$product->productthumb4") }}">
                                     </div>
                                 </a>
                             </li> 
@@ -54,22 +54,22 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__pic__item">
-                                <img src="{{ asset('customer/img/shop-details/thumb-1-' . $product-> id . '.jpg') }}" alt="Product Image">
+                                <img src="{{ asset("storage/$product->productthumb1") }}" alt="Product Image">
                                 </div>
                             </div>
                             <div class="tab-pane" id="tabs-2" role="tabpanel">
                                 <div class="product__details__pic__item">
-                                <img src="{{ asset('customer/img/shop-details/thumb-2-' . $product-> id . '.jpg') }}" alt="Product Image">
+                                <img src="{{ asset("storage/$product->productthumb2") }}" alt="Product Image">
                                 </div>
                             </div>
                             <div class="tab-pane" id="tabs-3" role="tabpanel">
                                 <div class="product__details__pic__item">
-                                <img src="{{ asset('customer/img/shop-details/thumb-3-' . $product-> id . '.jpg') }}" alt="Product Image">
+                                <img src="{{ asset("storage/$product->productthumb3") }}" alt="Product Image">
                                 </div>
                             </div>
                             <div class="tab-pane" id="tabs-4" role="tabpanel">
                                 <div class="product__details__pic__item">
-                                <img src="{{ asset('customer/img/shop-details/thumb-4-' . $product-> id . '.jpg') }}" alt="Product Image">
+                                <img src="{{ asset("storage/$product->productthumb4") }}" alt="Product Image">
                                 </div>
                             </div> 
                         </div>

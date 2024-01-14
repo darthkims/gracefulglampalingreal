@@ -161,11 +161,8 @@
                         @if (!$selectedCategory || $product->categories->contains('id', $selectedCategory))
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
-                                @php 
-                                    $imagePath = asset("customer/img/product/product-{$product->id}.jpg");
-                                @endphp
                                 <a href="{{ route('cust.products.display',$product->id) }}">
-                                    <div class="product__item__pic set-bg" data-setbg="{{ $imagePath }}">
+                                    <div class="product__item__pic set-bg" data-setbg="{{ asset("storage/$product->productimg") }}">
                                         <!-- Additional product display elements can be added here -->
                                     </div>
                                 </a>
