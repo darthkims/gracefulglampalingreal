@@ -130,10 +130,11 @@
                     </div>
                 </div>
                 <div class="col-lg-9">
-                    <div class="shop__product__option">
+                    <div id="lepassortpergisini" class="shop__product__option">
+                    <h2><b>Shop our freshest item!<b></h2>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div id="lepassortpergisini" class="shop__product__option__left">
+                                <div class="shop__product__option__left">
                                     <p>{{ count($products) }} results</p>
                                 </div>
                             </div>
