@@ -40,10 +40,15 @@
                                 <h4 class="order__title">Your order</h4>
                                 <div class="checkout__order__products">Product <span>Total</span></div>
                                 <ul class="checkout__total__products">
-                                    <li>01. Vanilla salted caramel <span>$ 300.0</span></li>
-                                    <li>02. German chocolate <span>$ 170.0</span></li>
-                                    <li>03. Sweet autumn <span>$ 170.0</span></li>
-                                    <li>04. Cluten free mini dozen <span>$ 110.0</span></li>
+                                @if (count($products) > 0)
+                                    @foreach ($products as $product)
+                                    <li>{{ $loop->iteration }}. {{ $product->name }} <span>RM{{ number_format($product->price * $product->pivot->quantity, 2) }}</span></li>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="4">No products in the cart</td>
+                                    </tr>
+                                @endif
                                 </ul>
                                 <ul class="checkout__total__all">
                                     <li>Subtotal <span>RM{{number_format($cartSubTotal, 2)}}</span></li>
