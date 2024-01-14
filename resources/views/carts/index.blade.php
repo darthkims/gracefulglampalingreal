@@ -23,6 +23,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
+
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
                     <div class="shopping__cart__table">
                         <table>
                             <thead>
