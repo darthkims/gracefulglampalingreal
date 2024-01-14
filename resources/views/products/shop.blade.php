@@ -168,11 +168,12 @@
                                 </a>
                                 <div class="product__item__text">
                                     <h6>{{ $product->name }}</h6>
-                                    <button class="add-to-cart-btn add-cart" data-product-id="{{ $product->id }}">+ Add To Cart</button>
-                                    {{-- <a href="{{ route('login') . '?prev=shop' }}" class="add-cart">+ Add To Cart</a> --}}
-                                    <div class="rating">
-                                        <!-- Display product rating here -->
-                                    </div>
+                                    <form method="POST" action="{{ route('addToCart', ['productId' => $product->id]) }}">
+                                        @csrf
+                                        <!-- Other form fields or data -->
+                                        <button type="submit" class="add-cart">+ Add To Cart</button>
+                                    </form>
+                                        
                                     <h5>RM{{ $product->price }}</h5>
                                     <!-- Set default quantity to 1 -->
                                     <input type="number" id="quantityInput_{{ $product->id }}" value="1" style="display: none;">
