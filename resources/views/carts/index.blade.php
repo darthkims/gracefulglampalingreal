@@ -21,15 +21,21 @@
     <!-- Shopping Cart Section Begin -->
     <section class="shopping-cart spad">
         <div class="container">
+            @if(session('success'))
+                <div id="success-alert" class="alert alert-success fade show text-center">
+                    {{ session('success') }}
+                </div>
+
+                <script>
+                    // Add fade-out effect using Bootstrap's transition class
+                    setTimeout(function(){
+                        $("#success-alert").removeClass('show');
+                    }, 5000); // Adjust the duration (in milliseconds) to fit your desired fade-out speed
+                </script>
+            @endif
+
             <div class="row">
                 <div class="col-lg-8">
-
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-
                     <div class="shopping__cart__table">
                         <table>
                             <thead>

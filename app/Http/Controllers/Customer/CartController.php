@@ -94,7 +94,7 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success', 'Product added to cart');
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $quantity)
     {
         $user = auth()->user();
         $cart = $user->cart;

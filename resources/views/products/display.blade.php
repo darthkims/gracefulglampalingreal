@@ -140,13 +140,20 @@
                                 </div>
                             </div>
                             <div class="product__details__cart__option">
-                                <div class="quantity">
-                                    <div class="pro-qty">
-                                        <input type="text" value="1">
+                                <form method="POST" action="{{ route('addToCart', ['productId' => $product->id]) }}">
+                                    @csrf
+                                    <!-- Other form fields or data -->
+                                    
+                                    <div class="quantity">
+                                        <div class="pro-qty">
+                                            <input type="text" value="1">
+                                        </div>
                                     </div>
-                                </div>
-                                <a href="#" class="primary-btn">add to cart</a>
+
+                                    <button type="submit" class="primary-btn">+ Add To Cart</button>
+                                </form>
                             </div>
+
                             <br>
                             <div class="product__details__last__option">
                                 <h5><span>Guaranteed Safe Checkout</span></h5>
