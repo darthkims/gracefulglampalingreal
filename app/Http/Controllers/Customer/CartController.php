@@ -19,7 +19,8 @@ class CartController extends Controller
 
         // Ensure the cart exists
         if (!$cart) {
-            return redirect()->route('cart.show')->with('error', 'Cart not found');
+            $cart = new Cart();
+            $user->cart()->save($cart);
         }
 
         $products = $cart->products;
