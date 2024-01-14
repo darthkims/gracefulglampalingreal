@@ -105,7 +105,10 @@
                             <li>Subtotal<span>RM{{number_format($cartSubTotal, 2)}}</span></li>
                             <li>Total<span>Calculated In Checkout</span></li>
                         </ul>
-                        <a href="{{'checkout'}}" class="primary-btn">Proceed to checkout</a>
+                        <a href="{{ count($products) > 0 ? route('checkout') : '#' }}" class="primary-btn"
+                            style="@if (count($products) == 0) background-color: #d3d3d3; color: #808080; cursor: not-allowed; pointer-events: none; @endif">
+                            Proceed to checkout
+                        </a>
                     </div>
                 </div>
             </div>

@@ -168,6 +168,7 @@
                                 </a>
                                 <div class="product__item__text">
                                     <h6>{{ $product->name }}</h6>
+                                    
                                     <form method="POST" action="{{ route('addToCart', ['productId' => $product->id]) }}">
                                         @csrf
                                         <!-- Other form fields or data -->

@@ -198,9 +198,8 @@
                                 <a href="{{ route('cust.products.display', $random ->id) }}"> <!-- Set your product details route -->
                                     <div class="product__item__pic set-bg" data-setbg="{{ asset('customer/img/shop-details/thumb-1-' . $random ->id . '.jpg') }}">
                                     </div>
-                                    <div class="product__item__text">
-                                        <a href="#" class="add-cart">+ Add To Cart</a>
-                                        <h6>{{ $random ->name }}</h6>
+                                    <div class="product__item__text">                                      
+                                    <h6>{{ $random ->name }}</h6>
                                         <h5>RM{{ $random ->price }}</h5>
                                     </div>
                                 </a>
