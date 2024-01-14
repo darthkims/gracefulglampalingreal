@@ -51,7 +51,7 @@
                                                     @forelse($categories as $index => $category)
                                                         <li>
                                                             <a href="{{ route('cust.products.index', ['category' => $category->id, 'brand' => $selectedBrand, 'size' => $selectedSize, 'sort' => request('sort')]) }}#lepassortpergisini"
-                                                               style="{{ $category->id == $selectedCategory ? 'font-weight: bold;' : '' }}">
+                                                               style="{{ $category->id == $selectedCategory ? 'font-weight: bold; color: black;' : '' }}">
                                                                 {{ $category->name }} ({{ $category->product_count }})
                                                             </a>
                                                         </li>
@@ -79,7 +79,7 @@
                                                     @forelse($brands as $index => $brand)
                                                         <li>
                                                             <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'brand' => $brand->id, 'size' => $selectedSize, 'sort' => request('sort')]) }}#lepassortpergisini"
-                                                            style="{{ $brand->id == $selectedBrand ? 'font-weight: bold;' : '' }}">
+                                                            style="{{ $brand->id == $selectedBrand ? 'font-weight: bold; color: black;' : '' }}">
                                                                 {{ $brand->name }} ({{ $brand->product_count }})
                                                             </a>
                                                         </li>
