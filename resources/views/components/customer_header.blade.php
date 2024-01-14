@@ -75,6 +75,7 @@
                             <p>Free shipping, 30-day return or refund guarantee.</p>
                         </div>
                     </div>
+
                     <div class="col-lg-6 col-md-5">
                         <div class="header__top__right">
                             <div class="header__top__links">
@@ -100,6 +101,7 @@
                             </div> -->
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -151,30 +153,33 @@
                 </div>
 
                 @php
-                        use Illuminate\Support\Facades\Auth;
+                    use Illuminate\Support\Facades\Auth;
 
-                        // Retrieve the currently logged-in user
-                        $user = Auth::user();
+                    // Retrieve the currently logged-in user
+                    $user = Auth::user();
 
-                        // Check if the user is logged in
-                        if ($user) {
-                            // Access the user's cart and retrieve the products
-                            $products = $user->cart->products;
-                        
-                            // Initialize the cart subtotal
-                            $cartSubTotal = 0;
-                        
-                            // Iterate through each product in the cart and calculate the subtotal
-                            foreach ($products as $product) {
-                                $cartSubTotal += $product->price * $product->pivot->quantity;
-                            }
-                        
-                            // Now $cartSubTotal contains the sum of all product totals in the user's cart
-                            // You can use $cartSubTotal as needed
-                        } else {
-                            // Handle the case when the user is not logged in
+                    // Check if the user is logged in
+                    if ($user && $user->cart) {
+                        // Access the user's cart and retrieve the products
+                        $products = $user->cart->products;
+                    
+                        // Initialize the cart subtotal
+                        $cartSubTotal = 0;
+                    
+                        // Iterate through each product in the cart and calculate the subtotal
+                        foreach ($products as $product) {
+                            $cartSubTotal += $product->price * $product->pivot->quantity;
                         }
-                        @endphp
+                    
+                        // Now $cartSubTotal contains the sum of all product totals in the user's cart
+                        // You can use $cartSubTotal as needed
+                    } else {
+                        // Handle the case when the user is not logged in or has no cart
+                        $products = collect(); // Create an empty collection if there is no user or cart
+                        $cartSubTotal = 0; // Set the cart subtotal to 0                        
+                    }
+                @endphp
+
                 
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
@@ -185,7 +190,7 @@
                             @if ($products->count() > 0)
                                 {{ $products->count() }}
                             @else
-                                <p>0</p>
+                                0
                             @endif
                             </span>
                         </a>
