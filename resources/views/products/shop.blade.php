@@ -44,13 +44,13 @@
                                             <div class="shop__sidebar__categories">
                                                 <ul class="nice-scroll">
                                                     <li>
-                                                        <a href="{{ route('cust.products.index', ['brand' => $selectedBrand, 'size' => $selectedSize, 'sort' => request('sort')]) }}">
+                                                        <a href="{{ route('cust.products.index', ['brand' => $selectedBrand, 'size' => $selectedSize, 'sort' => request('sort')]) }}#lepassortpergisini">
                                                             All Categories
                                                         </a>
                                                     </li>
                                                     @forelse($categories as $index => $category)
                                                         <li>
-                                                            <a href="{{ route('cust.products.index', ['category' => $category->id, 'brand' => $selectedBrand, 'size' => $selectedSize, 'sort' => request('sort')]) }}"
+                                                            <a href="{{ route('cust.products.index', ['category' => $category->id, 'brand' => $selectedBrand, 'size' => $selectedSize, 'sort' => request('sort')]) }}#lepassortpergisini"
                                                                style="{{ $category->id == $selectedCategory ? 'font-weight: bold;' : '' }}">
                                                                 {{ $category->name }} ({{ $category->product_count }})
                                                             </a>
@@ -72,13 +72,13 @@
                                             <div class="shop__sidebar__categories">
                                                 <ul class="nice-scroll">
                                                     <li>
-                                                        <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'size' => $selectedSize, 'sort' => request('sort')]) }}">
+                                                        <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'size' => $selectedSize, 'sort' => request('sort')]) }}#lepassortpergisini">
                                                             All Brands
                                                         </a>
                                                     </li>
                                                     @forelse($brands as $index => $brand)
                                                         <li>
-                                                            <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'brand' => $brand->id, 'size' => $selectedSize, 'sort' => request('sort')]) }}"
+                                                            <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'brand' => $brand->id, 'size' => $selectedSize, 'sort' => request('sort')]) }}#lepassortpergisini"
                                                             style="{{ $brand->id == $selectedBrand ? 'font-weight: bold;' : '' }}">
                                                                 {{ $brand->name }} ({{ $brand->product_count }})
                                                             </a>
@@ -100,7 +100,7 @@
                                         <div class="card-body">
                                             <div class="shop__sidebar__size">
                                                 <label for="">
-                                                    <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'brand' => $selectedBrand, 'sort' => request('sort')]) }}"
+                                                    <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'brand' => $selectedBrand, 'sort' => request('sort')]) }}#lepassortpergisini"
                                                        style="color: black;"
                                                        class="">
                                                         All Size
@@ -110,7 +110,7 @@
                                                 </label>
                                                 @forelse($sizes as $size)
                                                     <label for="size_{{ $size->id }}">
-                                                        <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'brand' => $selectedBrand, 'size' => $size->id, 'sort' => request('sort')]) }}"
+                                                        <a href="{{ route('cust.products.index', ['category' => $selectedCategory, 'brand' => $selectedBrand, 'size' => $size->id, 'sort' => request('sort')]) }}#lepassortpergisini"
                                                            style="color: black;"
                                                            class="{{ $size->id == $selectedSize ? 'active' : '' }}">
                                                             {{ $size->name }} ({{ optional($size->products)->count() ?? 0 }})
@@ -130,7 +130,8 @@
                     </div>
                 </div>
                 <div class="col-lg-9">
-                    <div class="shop__product__option">
+                    <div id="lepassortpergisini" class="shop__product__option">
+                    <h2><b>Shop our freshest item!<b></h2>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="shop__product__option__left">
@@ -140,7 +141,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="shop__product__option__right">
                                     <p>Sort by Price:</p>
-                                    <form action="{{ route('cust.products.index') }}" method="GET">
+                                    <form action="{{ route('cust.products.index') }}#lepassortpergisini" method="GET">
                                         <input type="hidden" name="category" value="{{ $selectedCategory }}">
                                         <input type="hidden" name="brand" value="{{ $selectedBrand }}">
                                         <input type="hidden" name="size" value="{{ $selectedSize }}">
