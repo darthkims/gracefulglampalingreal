@@ -77,7 +77,7 @@ class CartController extends Controller
         $product = Product::find($productId);
 
         if (!$product) {
-            return redirect()->route('cart.index')->with('error', 'Product not found');
+            return redirect()->route('cart.index')->with('success', 'Product not found');
         }
 
         $existingProduct = $cart->products()->where('product_id', $productId)->first();
@@ -101,7 +101,7 @@ class CartController extends Controller
 
         // Ensure the cart exists
         if (!$cart) {
-            return redirect()->route('cart.index')->with('error', 'Cart not found');
+            return redirect()->route('cart.index')->with('success', 'Cart not found');
         }
 
         $products = $request->input('products');
@@ -126,7 +126,7 @@ class CartController extends Controller
 
         // Ensure the cart exists
         if (!$cart) {
-            return redirect()->route('cart.index')->with('error', 'Cart not found');
+            return redirect()->route('cart.index')->with('success', 'Cart not found');
         }
 
         // Detach the product from the cart
