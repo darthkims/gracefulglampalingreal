@@ -16,12 +16,52 @@
                       <!-- Add this code inside the <form> element -->
                       <div class="mb-3">
                         <label for="product_image" class="form-label">
-                          Product Image</span>
+                          <span>Product Image</span>
                         </label>
                         <div class="input-group input-group-outline">
                             <input type="file" class="form-control" name="product_image" accept=".jpg">
                         </div>
                       </div>
+
+                      <!-- <div class="mb-3">
+                        <label for="product_image" class="form-label">
+                          <span>Thumbnail 1</span>
+                        </label>
+                          <div class="input-group input-group-outline">
+                              <input type="file" class="form-control" name="product_image" accept=".jpg">
+                              <input type="hidden" name="image_number" value="1">
+                          </div>
+                      </div>
+                  
+                      <div class="mb-3">
+                        <label for="product_image" class="form-label">
+                          <span>Thumbnail 2</span>
+                        </label>
+                          <div class="input-group input-group-outline">
+                              <input type="file" class="form-control" name="product_image" accept=".jpg">
+                              <input type="hidden" name="image_number" value="2">
+                          </div>
+                      </div>
+                  
+                      <div class="mb-3">
+                        <label for="product_image" class="form-label">
+                          <span>Thumbnail 3</span>
+                        </label>
+                          <div class="input-group input-group-outline">
+                              <input type="file" class="form-control" name="product_image" accept=".jpg">
+                              <input type="hidden" name="image_number" value="3">
+                          </div>
+                      </div>
+                  
+                      <div class="mb-3">
+                        <label for="product_image" class="form-label">
+                          <span>Thumbnail 4</span>
+                        </label>
+                          <div class="input-group input-group-outline">
+                              <input type="file" class="form-control" name="product_image" accept=".jpg">
+                              <input type="hidden" name="image_number" value="4">
+                          </div>
+                      </div> -->
                       
                       <div class="mb-3">
                         <label for="name" class="form-label">

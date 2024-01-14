@@ -156,7 +156,7 @@ class ProductController extends Controller
     private function deleteProductImages(Product $product)
     {
         // Construct the image file path based on the product ID
-        $imageFilePath = public_path('customer/img/product/product-' . $product->id . '.jpg');
+        $imageFilePath = public_path('storage/product-' . $product->id . '.jpg');
 
         // Check if the image exists before attempting to delete it
         if (File::exists($imageFilePath)) {
