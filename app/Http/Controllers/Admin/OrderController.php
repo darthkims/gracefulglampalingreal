@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 
-class CartController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,9 +37,9 @@ class CartController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show()
     {
-       
+        //
     }
     /**
      * Show the form for editing the specified resource.
@@ -65,6 +65,6 @@ class CartController extends Controller
         // Student::where('student_id', $id)->delete();
         Cart::destroy($id);
 
-        return Redirect::route('carts.index')->with('message', 'Cart has been deleted');
+        //return Redirect::route('carts.index')->with('message', 'Cart has been deleted');
     }
 }
