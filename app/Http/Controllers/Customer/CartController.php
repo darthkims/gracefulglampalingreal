@@ -18,9 +18,9 @@ class CartController extends Controller
         $user = auth()->user();
         $cart = $user->cart;
 
-        //count cart if cart is empty and has pending order which order PENDING PAYMENT
+        //count cart if cart is empty and has pending order which order pendings
         $order = $user->orders()
-            ->where('status', 'PENDING PAYMENT')
+            ->where('status', 'pending')
             ->latest()
             ->first();
         
@@ -62,7 +62,7 @@ class CartController extends Controller
             $order = Order::create([
                 'user_id' => $user->id,
                 'total' => $cart->total,
-                'status' => 'PENDING PAYMENT',
+                'status' => 'pending',
             ]);
 
             // Transfer cart products to order products
@@ -78,7 +78,7 @@ class CartController extends Controller
         } 
 
         $order = $user->orders()
-            ->where('status', 'PENDING PAYMENT')
+            ->where('status', 'pending')
             ->latest()
             ->first();
 
@@ -103,61 +103,56 @@ class CartController extends Controller
         return view('carts.checkout', compact('user', 'cart', 'products', 'productTotals', 'cartSubTotal', 'cartTotal'));
     }
 
-    public function addToCart(Request $request, $productId)
+    public function addToCart(Request $request, $productId, $quantity = 1)
     {
         $user = auth()->user();
         $cart = $user->cart;
-
+    
         // Create a cart for the user if they don't have one
         if (!$cart) {
             $cart = new Cart();
             $user->cart()->save($cart);
         }
-
+    
         $product = Product::find($productId);
-
+    
         if (!$product) {
-            return redirect()->route('cart.index')->with('success', 'Product not found');
+            return redirect()->route('cart.index')->with('error', 'Product not found');
         }
-
+    
         $existingProduct = $cart->products()->where('product_id', $productId)->first();
-
+        $quantity = $request->input('quantity', 1);
+    
         if ($existingProduct) {
-            // If the product is already in the cart, you might want to update quantity or do nothing
-            $existingProduct->pivot->quantity += 1;
+            // If the product is already in the cart, update quantity
+            $existingProduct->pivot->quantity += $quantity;
             $existingProduct->pivot->save();
         } else {
-            // If the product is not in the cart, attach it
-            $cart->products()->attach($productId, ['quantity' => 1]);
+            // If the product is not in the cart, attach it with the given quantity
+            $cart->products()->attach($productId, ['quantity' => $quantity]);
         }
-
-        return redirect()->route('cart.index')->with('success', 'Product added to cart');
+    
+        return redirect()->to(route('cart.index') . '#success-alert')->with('success', 'Product added to cart');
     }
+    
 
-    public function update(Request $request, $quantity)
+    public function update(Request $request)
     {
-        $user = auth()->user();
-        $cart = $user->cart;
-
-        // Ensure the cart exists
-        if (!$cart) {
-            return redirect()->route('cart.index')->with('success', 'Cart not found');
-        }
-
-        $products = $request->input('products');
-
-        foreach ($products as $productId => $quantity) {
-            // Validate that the product exists
+        $quantities = $request->input('quantities');
+    
+        // Loop through the submitted quantities and update the cart
+        foreach ($quantities as $productId => $quantity) {
+            // You may want to add validation to ensure the product exists in the cart
             $product = Product::find($productId);
-
-            if ($product) {
-                // Update the quantity for the specified product in the cart
-                $cart->products()->updateExistingPivot($productId, ['quantity' => $quantity]);
-            }
+    
+            // Assuming you have a relationship between User and Cart models
+            auth()->user()->cart->products()->updateExistingPivot($productId, ['quantity' => $quantity]);
         }
-
-        return redirect()->route('cart.index')->with('success', 'Cart updated successfully');
+    
+        // Optionally, you can return a response or redirect back to the cart page
+        return redirect()->to(route('cart.index') . '#success-alert')->with('success', 'Cart updated successfully');
     }
+    
 
     public function destroy($productId)
     {
@@ -166,12 +161,12 @@ class CartController extends Controller
 
         // Ensure the cart exists
         if (!$cart) {
-            return redirect()->route('cart.index')->with('success', 'Cart not found');
+            return redirect()->to(route('cart.index') . '#success-alert')->with('success', 'Cart not found');
         }
 
         // Detach the product from the cart
         $cart->products()->detach($productId);
 
-        return redirect()->route('cart.index')->with('success', 'Product removed from cart');
+        return redirect()->to(route('cart.index') . '#success-alert')->with('success', 'Product removed from cart');
     }
 }

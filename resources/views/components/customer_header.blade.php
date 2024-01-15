@@ -183,9 +183,17 @@
                 
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
-                        <a href="#" class="search-switch"><img src="{{ asset('customer')}}/img/icon/search.png" alt=""></a>
-                        <a href="{{route('cust.edit')}}"><img src="{{ asset('customer')}}/img/icon/profile.png" alt=""></a>
-                        <a href="{{ route('cart.index') }}"><img src="{{ asset('customer')}}/img/icon/cart.png" alt="">
+                    <div class="dropdown">
+        <a class="btn dropdown-toggle" href="#" role="button" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="{{ asset('customer')}}/img/icon/profile.png" alt="">
+        </a>
+        <div class="dropdown-menu" aria-labelledby="profileDropdown">
+            <a class="dropdown-item" href="{{ route('cust.edit')}}">Edit Profile</a>
+            <a class="dropdown-item" href="{{ route('cust.orders')}}">Order History</a>
+            
+        </div>
+    </div>
+                            <a href="{{ route('cart.index') }}"><img src="{{ asset('customer')}}/img/icon/cart.png" alt="">
                             <span class="badge badge-pill badge-danger text-white">
                             @if ($products->count() > 0)
                                 {{ $products->count() }}

@@ -87,6 +87,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::patch('/{id}', [CustomerController::class, 'update'])->name('cust.update');
 
 	Route::patch('account/update-profile/{id}', [CustomerController::class, 'update'])->name('cust.update-profile');
+
+	Route::get('account/order-history', [CustomerController::class, 'orderHistory'])->name('cust.orders');
 	});
 
 
