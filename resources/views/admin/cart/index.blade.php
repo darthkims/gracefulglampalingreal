@@ -10,10 +10,7 @@
                 <div class="col-12">
                     <div class="card my-4">
                         <div class=" me-3 my-3 d-flex justify-content-between align-items-center">
-                            <h2 class="text-gradient text-dark mb-0 ms-3">Cart</h2>
-                            <!-- <a class="btn bg-gradient-dark mb-0" href="{{ route('customers.create') }}">
-                                <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Customer
-                            </a> -->
+                            <h2 class="text-gradient text-dark mb-0 ms-3">Orders</h2>
                         </div>
                         <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">
@@ -26,13 +23,10 @@
                                             </th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                USERNAME</th>
+                                                USER ID</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                PRODUCTS ORDERED</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                DATE CREATED</th>
+                                                NO. OF ORDERS</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 DATE UPDATED</th>
