@@ -203,7 +203,7 @@
                                     $random = App\Models\Product::find($randomId);
                                 ?>
                                 <a href="{{ route('cust.products.display', $random ->id) }}"> <!-- Set your product details route -->
-                                    <div class="product__item__pic set-bg" data-setbg="{{ asset('customer/img/shop-details/thumb-1-' . $random ->id . '.jpg') }}">
+                                    <div class="product__item__pic set-bg" data-setbg="{{ asset("storage/$random->productthumb1") }}">
                                     </div>
                                     <div class="product__item__text">                                      
                                     <h6>{{ $random ->name }}</h6>

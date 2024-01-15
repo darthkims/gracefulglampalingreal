@@ -184,7 +184,7 @@
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img src="{{ asset('customer')}}/img/icon/search.png" alt=""></a>
-                        <a href="#"><img src="{{ asset('customer')}}/img/icon/heart.png" alt=""></a>
+                        <a href="{{route('cust.edit')}}"><img src="{{ asset('customer')}}/img/icon/profile.png" alt=""></a>
                         <a href="{{ route('cart.index') }}"><img src="{{ asset('customer')}}/img/icon/cart.png" alt="">
                             <span class="badge badge-pill badge-danger text-white">
                             @if ($products->count() > 0)

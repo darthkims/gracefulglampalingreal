@@ -190,33 +190,6 @@
     </section>
     <!-- Shop Section End -->
 
-<script>
-    $(document).ready(function () {
-        $('.add-to-cart-btn').on('click', function () {
-            let productId = $(this).data('product-id');
-            let quantity = $('#quantityInput_' + productId).val();
-
-            console.log(quantity);
-
-            $.ajax({
-                type: 'POST',
-                url: '/add-to-cart',
-                data: {
-                    product_id: productId,
-                    quantity: quantity,
-                    _token: '{{ csrf_token() }}',
-                },
-                success: function (response) {
-                    alert(response.success);
-                },
-                error: function (error) {
-                    alert(error.responseJSON.error);
-                },
-            });
-        });
-    });
-</script>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <x-customer_footer activePage="shop" bodyClass="g-sidenav-show bg-gray-200">

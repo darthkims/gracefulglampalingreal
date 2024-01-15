@@ -9,7 +9,6 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\DashboardController;
@@ -18,6 +17,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Customer\CartController;
+use App\Http\Controllers\Customer\CustomerController;
 
 
 /*
@@ -85,6 +85,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::delete('/remove-cart/{productId}', [CartController::class, 'destroy'])->name('cart.remove');
 	Route::resource('products', ProductController::class);
 	Route::resource('categories', CategoryController::class);
+	Route::get('account/edit', [CustomerController::class, 'edit'])->name('cust.edit');
+	Route::patch('/{id}', [CustomerController::class, 'update'])->name('cust.update');
 	});
 
 
@@ -112,15 +114,6 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
 			Route::patch('/{id}', [UserController::class, 'update'])->name('users.update');
 			Route::delete('/{id}', [UserController::class, 'destroy'])->name('users.destroy');
-		});
-
-		Route::prefix('/customers')->group(function () {
-			Route::get('/', [CustomerController::class, 'index'])->name('customers.index');
-			Route::get('/create', [CustomerController::class, 'create'])->name('customers.create');
-			Route::post('/', [CustomerController::class, 'store'])->name('customers.store');
-			Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('customers.edit');
-			Route::patch('/{id}', [CustomerController::class, 'update'])->name('customers.update');
-			Route::delete('/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
 		});
 
 		Route::prefix('/carts')->group(function () {
@@ -188,36 +181,5 @@ Route::group(['middleware' => 'auth'], function () {
 			});
 		});
 	});
-
-	
-
-// ... (existing routes)
-
-
-// Customer Routes
-Route::prefix('/customer')->middleware(['auth', 'role:customer'])->group(function () {
-	// Cart Routes
-	Route::prefix('/carts')->group(function () {
-		// Route::get('/', [CartController::class, 'index'])->name('customer.carts.index');
-		Route::get('/create', [CartController::class, 'create'])->name('customer.carts.create');
-		Route::post('/', [CartController::class, 'store'])->name('customer.carts.store');
-		Route::get('/edit/{id}', [CartController::class, 'edit'])->name('customer.carts.edit');
-		Route::patch('/{id}', [CartController::class, 'update'])->name('customer.carts.update');
-		Route::delete('/{id}', [CartController::class, 'destroy'])->name('customer.carts.destroy');
-
-		// Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
-		// Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
-		// Route::patch('/update-cart', [CartController::class, 'updateCart'])->name('cart.update');
-	});
-
-	// Product Routes
-	Route::prefix('/products')->group(function () {
-		Route::get('/', [ProductController::class, 'index'])->name('customer.products.index');
-		Route::get('/details/{product}', [ProductController::class, 'display'])->name('customer.products.display');
-		// Add other product routes if needed
-	});
-
-	// Add routes for other customer-related controllers
-});
 
 

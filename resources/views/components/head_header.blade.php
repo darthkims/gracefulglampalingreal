@@ -95,6 +95,7 @@
                             <li><a>Categories</a>
                             @php
                             $categories = App\Models\Category::all();
+                            $brands = App\Models\Brand::all();
                             @endphp
                                 <ul class="dropdown">
                                     @forelse($categories as $index => $category)
@@ -109,9 +110,6 @@
                                 </ul>
                             </li>
                             <li><a>Brands</a>
-                            @php
-                            $brands = App\Models\Brand::all();
-                            @endphp
                                 <ul class="dropdown">
                                     @forelse($brands as $index => $brand)
                                     <li>
@@ -128,31 +126,50 @@
                         </ul>
                     </nav>
                 </div>
+
+                @php
+                    use Illuminate\Support\Facades\Auth;
+
+                    // Retrieve the currently logged-in user
+                    $user = Auth::user();
+
+                    // Check if the user is logged in
+                    if ($user && $user->cart) {
+                        // Access the user's cart and retrieve the products
+                        $products = $user->cart->products;
+                    
+                        // Initialize the cart subtotal
+                        $cartSubTotal = 0;
+                    
+                        // Iterate through each product in the cart and calculate the subtotal
+                        foreach ($products as $product) {
+                            $cartSubTotal += $product->price * $product->pivot->quantity;
+                        }
+                    
+                        // Now $cartSubTotal contains the sum of all product totals in the user's cart
+                        // You can use $cartSubTotal as needed
+                    } else {
+                        // Handle the case when the user is not logged in or has no cart
+                        $products = collect(); // Create an empty collection if there is no user or cart
+                        $cartSubTotal = 0; // Set the cart subtotal to 0                        
+                    }
+                @endphp
+
+                
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img src="{{ asset('customer')}}/img/icon/search.png" alt=""></a>
-                        <a href="#"><img src="{{ asset('customer')}}/img/icon/heart.png" alt=""></a>
+                        <a href="{{route('cust.edit')}}"><img src="{{ asset('customer')}}/img/icon/profile.png" alt=""></a>
                         <a href="{{ route('cart.index') }}"><img src="{{ asset('customer')}}/img/icon/cart.png" alt="">
                             <span class="badge badge-pill badge-danger text-white">
-                                @if(session('cart.products'))
-                                    {{ count(array_unique(session('cart.products')->pluck('id')->toArray())) }}
-                                @else
-                                    0
-                                @endif
+                            @if ($products->count() > 0)
+                                {{ $products->count() }}
+                            @else
+                                0
+                            @endif
                             </span>
                         </a>
-                        @php
-                            $total = 0;
-                            $cartProducts = session('cart.products');
-
-                            if ($cartProducts) {
-                                foreach ($cartProducts as $product) {
-                                    $total += $product->price * $product->pivot->quantity;
-                                }
-                            }
-                        @endphp
-
-                        <div class="price">RM {{ number_format($total, 2) }}</div>
+                        <div class="price">RM {{ number_format($cartSubTotal, 2) }}</div>
                     </div>
                 </div>
             </div>
