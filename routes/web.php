@@ -52,9 +52,7 @@ Route::get('/reset-password/{token}', function ($token) {
 })->middleware('guest')->name('password.reset'); 
 
 
-Route::get('main', function () {
-	return view('products.main');
-})->name('main');
+Route::get('main', [ProductController::class, 'main'])->name('main');
 
 Route::get('about', function () {
 	return view('customer.about');

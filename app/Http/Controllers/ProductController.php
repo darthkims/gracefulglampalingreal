@@ -7,12 +7,14 @@ use App\Models\Size;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use DB;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    
     public function index(Request $request)
     {
         $categories = Category::all();
@@ -87,4 +89,41 @@ class ProductController extends Controller
         return view('products.display', compact('product', 'randomIds'));    
     }
 
+    public function main()
+    {
+        $products = Product::all();
+        $top_sales = DB::table('products')
+            ->leftJoin('cart_product','products.id','=','cart_product.product_id')
+            ->selectRaw('products.id, SUM(cart_product.quantity) as total')
+            ->groupBy('products.id')
+            ->orderBy('total','desc')
+            ->take(4)
+            ->get();
+        $topProducts = [];
+        foreach ($top_sales as $s){
+            $p = Product::findOrFail($s->id);
+            $p->totalQty = $s->total;
+            $topProducts[] = $p;
+        }
+        
+        $latest_products = DB::table('products')
+            
+            ->selectRaw('products.id, MAX(created_at) as latest_date')
+            ->groupBy('products.id')
+            ->orderByDesc('latest_date')
+            ->take(4)
+            ->get();
+        $newProducts = [];
+        foreach ($latest_products as $l){
+            $q = Product::findOrFail($l->id);
+            $q->totalQty = $l->latest_date;
+            $newProducts[] = $q;
+        }
+
+        return view('products.main',compact('products','topProducts','newProducts'));
+    }
+
+    
+
 }
+

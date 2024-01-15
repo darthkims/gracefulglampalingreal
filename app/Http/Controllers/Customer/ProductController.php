@@ -14,4 +14,5 @@ class ProductController extends Controller
 
         return view('product.main',compact('product'));
     }
+  
 }
