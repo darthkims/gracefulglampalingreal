@@ -17,6 +17,10 @@
         </div>
     </section>
     <!-- Breadcrumb Section End -->
+    <form id="update-cart-form" action="{{ route('cart.update') }}" method="POST">
+    @csrf
+    @method('PATCH')
+
 
     <!-- Shopping Cart Section Begin -->
     <section class="shopping-cart spad">
@@ -79,11 +83,11 @@
                                     RM{{ number_format($productTotals[$product->id], 2) }}
                                     </td>
                                     <td class="cart__close">
-                                        <form action="{{ route('cart.remove', ['productId' => $product->id]) }}" method="POST">
+                                        <!-- <form action="{{ route('cart.remove', ['productId' => $product->id]) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" style="border: none; border-radius: 40%;"><i class="fa fa-close"></i></button>
-                                        </form>
+                                        </form> -->
                                     </td>                                    
                                 </tr>
                                 @endforeach
@@ -103,7 +107,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="continue__btn update__btn">
-                                <a href="#"  id="update-cart-btn"><i class="fa fa-spinner"></i> Update cart</a>
+                            <button type="button" id="update-cart-btn"><i class="fa fa-spinner"></i> Update cart</button>
                             </div>
                         </div>
                     </div>
@@ -134,8 +138,18 @@
     </section>
     <!-- Shopping Cart Section End -->
 
+    </form>
+
 </x-customer_header>
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Add event listener to the "Update Cart" button
+        document.getElementById('update-cart-btn').addEventListener('click', function () {
+            // Gather updated quantities and submit the form
+            updateCart();
+        });
+    });
+
     function updateQuantity(element, value, productId) {
         // Get the input field using the product id
         var inputField = document.getElementById('quantityInput_' + productId);
@@ -152,8 +166,49 @@
         // Update the input field value
         inputField.value = newValue;
     }
-</script>
 
+    function updateCart() {
+    // Remove existing hidden input fields
+    var existingHiddenInputs = document.querySelectorAll('input[name^="quantities["]');
+    existingHiddenInputs.forEach(function (input) {
+        input.remove();
+    });
+
+    // Iterate through each product row and add the quantity to the form
+    @foreach ($products as $product)
+        var productId = '{{ $product->id }}';
+        var inputField = document.getElementById('quantityInput_' + productId);
+        var quantity = inputField.value;
+
+        // Create a hidden input field dynamically
+        var hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'quantities[' + productId + ']';
+        hiddenInput.value = quantity;
+
+        // Append the hidden input to the form
+        document.getElementById('update-cart-form').appendChild(hiddenInput);
+    @endforeach
+
+    // Temporarily disable the delete buttons
+    var deleteButtons = document.querySelectorAll('button[name^="deleteProduct"]');
+    deleteButtons.forEach(function (button) {
+        button.disabled = true;
+    });
+
+    // Submit the form
+    document.getElementById('update-cart-form').submit();
+
+    // Enable the delete buttons after form submission
+    setTimeout(function () {
+        deleteButtons.forEach(function (button) {
+            button.disabled = false;
+        });
+    }, 500); // Adjust the duration (in milliseconds) based on your needs
+}
+
+
+</script>
 
 
 <x-customer_footer activePage="" bodyClass="g-sidenav-show bg-gray-200">

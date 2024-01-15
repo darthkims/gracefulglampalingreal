@@ -134,30 +134,23 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success', 'Product added to cart');
     }
 
-    public function update(Request $request, $quantity)
+    public function update(Request $request)
     {
-        $user = auth()->user();
-        $cart = $user->cart;
-
-        // Ensure the cart exists
-        if (!$cart) {
-            return redirect()->route('cart.index')->with('success', 'Cart not found');
-        }
-
-        $products = $request->input('products');
-
-        foreach ($products as $productId => $quantity) {
-            // Validate that the product exists
+        $quantities = $request->input('quantities');
+    
+        // Loop through the submitted quantities and update the cart
+        foreach ($quantities as $productId => $quantity) {
+            // You may want to add validation to ensure the product exists in the cart
             $product = Product::find($productId);
-
-            if ($product) {
-                // Update the quantity for the specified product in the cart
-                $cart->products()->updateExistingPivot($productId, ['quantity' => $quantity]);
-            }
+    
+            // Assuming you have a relationship between User and Cart models
+            auth()->user()->cart->products()->updateExistingPivot($productId, ['quantity' => $quantity]);
         }
-
+    
+        // Optionally, you can return a response or redirect back to the cart page
         return redirect()->route('cart.index')->with('success', 'Cart updated successfully');
     }
+    
 
     public function destroy($productId)
     {
