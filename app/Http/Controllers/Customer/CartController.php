@@ -104,36 +104,38 @@ class CartController extends Controller
         return view('carts.checkout', compact('user', 'cart', 'products', 'productTotals', 'cartSubTotal', 'cartTotal'));
     }
 
-    public function addToCart(Request $request, $productId)
+    public function addToCart(Request $request, $productId, $quantity = 1)
     {
         $user = auth()->user();
         $cart = $user->cart;
-
+    
         // Create a cart for the user if they don't have one
         if (!$cart) {
             $cart = new Cart();
             $user->cart()->save($cart);
         }
-
+    
         $product = Product::find($productId);
-
+    
         if (!$product) {
-            return redirect()->route('cart.index')->with('success', 'Product not found');
+            return redirect()->route('cart.index')->with('error', 'Product not found');
         }
-
+    
         $existingProduct = $cart->products()->where('product_id', $productId)->first();
-
+        $quantity = $request->input('quantity', 1);
+    
         if ($existingProduct) {
-            // If the product is already in the cart, you might want to update quantity or do nothing
-            $existingProduct->pivot->quantity += 1;
+            // If the product is already in the cart, update quantity
+            $existingProduct->pivot->quantity += $quantity;
             $existingProduct->pivot->save();
         } else {
-            // If the product is not in the cart, attach it
-            $cart->products()->attach($productId, ['quantity' => 1]);
+            // If the product is not in the cart, attach it with the given quantity
+            $cart->products()->attach($productId, ['quantity' => $quantity]);
         }
-
+    
         return redirect()->to(route('cart.index') . '#success-alert')->with('success', 'Product added to cart');
     }
+    
 
     public function update(Request $request)
     {
