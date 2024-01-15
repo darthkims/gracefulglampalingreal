@@ -18,9 +18,9 @@ class CartController extends Controller
         $user = auth()->user();
         $cart = $user->cart;
 
-        //count cart if cart is empty and has pending order which order PENDING PAYMENT
+        //count cart if cart is empty and has pending order which order pendings
         $order = $user->orders()
-            ->where('status', 'PENDING PAYMENT')
+            ->where('status', 'pending')
             ->latest()
             ->first();
         
@@ -62,7 +62,7 @@ class CartController extends Controller
             $order = Order::create([
                 'user_id' => $user->id,
                 'total' => $cart->total,
-                'status' => 'PENDING PAYMENT',
+                'status' => 'pending',
             ]);
 
             // Transfer cart products to order products
@@ -78,7 +78,7 @@ class CartController extends Controller
         } 
 
         $order = $user->orders()
-            ->where('status', 'PENDING PAYMENT')
+            ->where('status', 'pending')
             ->latest()
             ->first();
 

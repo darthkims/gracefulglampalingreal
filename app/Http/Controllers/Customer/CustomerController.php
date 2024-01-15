@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Customer;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -50,5 +51,22 @@ class CustomerController extends Controller
     //     }
     // }
 
+    // add function view all user order history
+    public function orderHistory()
+    {
+        $user = Auth::user();
+        $orders = $user->orders()->get();
+        $orders->load('products');
+
+        $orders->each(function ($order) {
+            $order->productTotal = $order->products->sum(function ($product) {
+                return $product->price * $product->pivot->quantity;
+            });
+
+            $order->productTotal = $order->productTotal * 1.1 + 10;
+        });
+
+        return view('customer.order-history', compact('orders'));
+    }
 
 }
