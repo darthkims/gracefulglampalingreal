@@ -23,7 +23,7 @@
                                             </th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                USER ID</th>
+                                                CUSTOMER NAME</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 NO. OF ORDERS</th>
