@@ -87,6 +87,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('categories', CategoryController::class);
 	Route::get('account/edit', [CustomerController::class, 'edit'])->name('cust.edit');
 	Route::patch('/{id}', [CustomerController::class, 'update'])->name('cust.update');
+
+	Route::patch('account/update-profile/{id}', [CustomerController::class, 'update'])->name('cust.update-profile');
 	});
 
 
