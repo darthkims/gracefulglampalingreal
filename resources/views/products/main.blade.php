@@ -20,16 +20,15 @@
                                 <h2>Fall - Winter Collections 2030</h2>
                                 <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
                                 commitment to exceptional quality.</p>
-                                <a href="http://gracefulglampalingreal.test/gracefulglampalingreal/public/shop?category=7" class="primary-btn" >SHOP MEN <span class="arrow_right"></span></a>
-                                <a href="http://gracefulglampalingreal.test/gracefulglampalingreal/public/shop?category=8" class="primary-btn" >SHOP WOMEN <span class="arrow_right"></span></a>
-                                
+                                <a href="{{route('cust.products.index', ['category' => 7])}}" class="primary-btn" >SHOP MEN <span class="arrow_right"></span></a>
+                                <a href="{{route('cust.products.index', ['category' => 8])}}" class="primary-btn" >SHOP WOMEN <span class="arrow_right"></span></a>
+                              
                                         
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </div>
     </section>
     <!-- Hero Section End -->
@@ -107,21 +106,22 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="categories__hot__deal">
-                    <img src="http://gracefulglampalingreal.test/gracefulglampalingreal/public/storage/thumb-1-1.jpg" alt="Product Image">
+                    <img src="{{ asset("storage/$product->productimg") }}" alt="Product Image">
                         <div class="hot__deal__sticker">
                             <span>Sale Of</span>
-                            <h5>RM479.00</h5>
+                            <h5>RM899.00</h5>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 offset-lg-1">
                     <div class="categories__deal__countdown">
                         <span>Deal Of The Month</span>
-                        <h2>Nike Blazer Mid 77 Jumbo</h2>
+                        <h2>4DFWD 3 RUNNING SHOES</h2>
                         <div class="categories__deal__countdown__timer" id="countdown">
                             
                         </div>
-                        <a href="http://gracefulglampalingreal.test/gracefulglampalingreal/public/products/details/1" class="primary-btn">Shop now</a>
+                        <a href={{route('cust.products.display', ['product' => 4])}} class="primary-btn">Shop now</a>
+                        
                         
                     </div>
                 </div>
