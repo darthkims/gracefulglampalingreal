@@ -49,21 +49,25 @@
                             <tbody>
                             @if (count($products) > 0)
                             @foreach ($products as $product)
-                                <tr>
-                                    
-                                    <td class="product__cart__item">
+                                <tr>            
+                                <td class="product__cart__item">
                                         <div class="product__cart__item__pic">
-                                            <img src="{{ asset("storage/$product->productimg") }}" alt="" style="width: 100px;"">
+                                            <a href="{{ route('cust.products.display', $product->id) }}" class="product__cart__item__link">
+                                            <img src="{{ asset("storage/$product->productimg") }}" style="width: 100px;">
+                                            </a>
+
                                         </div>
                                         <div class="product__cart__item__text">
                                             <h6>{{ $product->name }}</h6>
                                             <h5>RM{{ $product->price }}</h5>
                                         </div>
-                                    </td>
+                                </td>
                                     <td class="quantity__item">
                                         <div class="quantity">
-                                        <div class="pro-qty-2">
-                                                <input type="text" value="{{ $product->pivot->quantity }}">
+                                            <div>
+                                                <span class="qty-btn qty-dec" onclick="updateQuantity(this, -1)"><i class="fa fa-minus"></i></span>
+                                                <input type="text" value="{{ $product->pivot->quantity }}" style="width: 50px; text-align: center; border-radius: 10px;" id="quantityInput">
+                                                <span class="qty-btn qty-inc" onclick="updateQuantity(this, 1)"><i class="fa fa-plus"></i></span>
                                             </div>
                                         </div>
                                     </td>
@@ -130,3 +134,25 @@
     <!-- Shopping Cart Section End -->
 
 </x-customer_header>
+<script>
+    function updateQuantity(element, value) {
+        // Get the input field
+        var inputField = document.getElementById('quantityInput');
+
+        // Get the current quantity value
+        var currentValue = parseInt(inputField.value);
+
+        // Update the quantity value based on the button clicked
+        var newValue = currentValue + value;
+
+        // Ensure the quantity doesn't go below 0
+        newValue = Math.max(0, newValue);
+
+        // Update the input field value
+        inputField.value = newValue;
+    }
+</script>
+
+
+<x-customer_footer activePage="" bodyClass="g-sidenav-show bg-gray-200">
+</x-customer_footer>

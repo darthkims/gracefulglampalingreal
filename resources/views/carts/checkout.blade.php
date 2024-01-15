@@ -80,5 +80,5 @@
         }
     </script>
 
-<x-customer_footer activePage="shop" bodyClass="g-sidenav-show bg-gray-200">
+<x-customer_footer activePage="" bodyClass="g-sidenav-show bg-gray-200">
 </x-customer_footer>
