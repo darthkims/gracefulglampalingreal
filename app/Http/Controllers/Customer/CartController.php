@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Customer;
 
+use Auth;
 use App\Models\Cart;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\PromoCode;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Auth;
 
 class CartController extends Controller
 {
@@ -16,6 +17,16 @@ class CartController extends Controller
     {
         $user = auth()->user();
         $cart = $user->cart;
+
+        //count cart if cart is empty and has pending order which order PENDING PAYMENT
+        $order = $user->orders()
+            ->where('status', 'PENDING PAYMENT')
+            ->latest()
+            ->first();
+        
+        if ($order) {
+            return redirect()->route('checkout');
+        }
 
         // Ensure the cart exists
         if (!$cart) {
@@ -46,17 +57,46 @@ class CartController extends Controller
         $user = Auth::user();
         $cart = $user->cart;
 
-        $products = $cart->products;
+        if ($cart) {
+            // Create a new order
+            $order = Order::create([
+                'user_id' => $user->id,
+                'total' => $cart->total,
+                'status' => 'PENDING PAYMENT',
+            ]);
 
-        $productTotals = [];
-        foreach ($products as $product) {
-            $productTotals[$product->id] = $product->price * $product->pivot->quantity;
-        }
+            // Transfer cart products to order products
+            foreach ($cart->products as $cartProduct) {
+                $order->products()->attach($cartProduct['pivot']['product_id'], [
+                    'quantity' => $cartProduct['pivot']['quantity'],
+                ]);
+            }
 
-        $cartSubTotal = 0;
-        foreach ($products as $product) {
-            $cartSubTotal += $product->price * $product->pivot->quantity;
-        }
+            // Delete the user's cart and cart products
+            $cart->products()->detach();
+            $cart->delete();
+        } 
+
+        $order = $user->orders()
+            ->where('status', 'PENDING PAYMENT')
+            ->latest()
+            ->first();
+
+        if ($order) {
+            $order->load('products');
+            $productTotals = 0;
+
+            foreach ($order->products as $product) {
+                $productTotals += $product->price * $product->pivot->quantity;
+            }
+
+            $cartSubTotal = 0;
+            foreach ($order->products as $product) {
+                $cartSubTotal += $product->price * $product->pivot->quantity;
+            }
+
+            $products = $order->products;
+        } 
 
         $cartTotal=$cartSubTotal*1.1+10;
 
