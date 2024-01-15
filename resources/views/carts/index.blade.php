@@ -65,9 +65,10 @@
                                     <td class="quantity__item">
                                         <div class="quantity">
                                             <div>
-                                                <span class="qty-btn qty-dec" onclick="updateQuantity(this, -1)"><i class="fa fa-minus"></i></span>
-                                                <input type="text" value="{{ $product->pivot->quantity }}" style="width: 50px; text-align: center; border-radius: 10px;" id="quantityInput">
-                                                <span class="qty-btn qty-inc" onclick="updateQuantity(this, 1)"><i class="fa fa-plus"></i></span>
+                                            <span class="qty-btn qty-dec" onclick="updateQuantity(this, -1, '{{ $product->id }}')"><i class="fa fa-minus"></i></span>
+<input type="text" value="{{ $product->pivot->quantity }}" style="width: 50px; text-align: center; border-radius: 10px;" id="quantityInput_{{ $product->id }}">
+<span class="qty-btn qty-inc" onclick="updateQuantity(this, 1, '{{ $product->id }}')"><i class="fa fa-plus"></i></span>
+
                                             </div>
                                         </div>
                                     </td>
@@ -135,9 +136,9 @@
 
 </x-customer_header>
 <script>
-    function updateQuantity(element, value) {
-        // Get the input field
-        var inputField = document.getElementById('quantityInput');
+    function updateQuantity(element, value, productId) {
+        // Get the input field using the product id
+        var inputField = document.getElementById('quantityInput_' + productId);
 
         // Get the current quantity value
         var currentValue = parseInt(inputField.value);
@@ -152,6 +153,7 @@
         inputField.value = newValue;
     }
 </script>
+
 
 
 <x-customer_footer activePage="" bodyClass="g-sidenav-show bg-gray-200">

@@ -9,8 +9,8 @@
                 <form action="#" onsubmit="return validateForm()">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
-                            <h6 class="coupon__code"><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click
-                            here</a> to enter your code</h6>
+                            <!-- <h6 class="coupon__code"><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click
+                            here</a> to enter your code</h6> -->
                             <h6 class="checkout__title">Billing Details</h6>
                             <div class="checkout__input">
                                 <p>Full Name<span>*</span></p>
@@ -42,7 +42,7 @@
                                 <ul class="checkout__total__products">
                                 @if (count($products) > 0)
                                     @foreach ($products as $product)
-                                    <li>{{ $loop->iteration }}. {{ $product->name }} <span>RM{{ number_format($product->price * $product->pivot->quantity, 2) }}</span></li>
+                                    <li>{{ $loop->iteration }}. {{ $product->name }} (x{{$product->pivot->quantity}})<span>RM{{ number_format($product->price * $product->pivot->quantity, 2) }}</span></li>
                                     @endforeach
                                 @else
                                     <tr>
