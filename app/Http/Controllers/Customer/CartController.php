@@ -131,7 +131,7 @@ class CartController extends Controller
             $cart->products()->attach($productId, ['quantity' => 1]);
         }
 
-        return redirect()->route('cart.index')->with('success', 'Product added to cart');
+        return redirect()->to(route('cart.index') . '#success-alert')->with('success', 'Product added to cart');
     }
 
     public function update(Request $request)
@@ -148,7 +148,7 @@ class CartController extends Controller
         }
     
         // Optionally, you can return a response or redirect back to the cart page
-        return redirect()->route('cart.index')->with('success', 'Cart updated successfully');
+        return redirect()->to(route('cart.index') . '#success-alert')->with('success', 'Cart updated successfully');
     }
     
 
@@ -159,12 +159,12 @@ class CartController extends Controller
 
         // Ensure the cart exists
         if (!$cart) {
-            return redirect()->route('cart.index')->with('success', 'Cart not found');
+            return redirect()->to(route('cart.index') . '#success-alert')->with('success', 'Cart not found');
         }
 
         // Detach the product from the cart
         $cart->products()->detach($productId);
 
-        return redirect()->route('cart.index')->with('success', 'Product removed from cart');
+        return redirect()->to(route('cart.index') . '#success-alert')->with('success', 'Product removed from cart');
     }
 }
