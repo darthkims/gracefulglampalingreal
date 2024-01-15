@@ -21,6 +21,10 @@ class Product extends Model
         'updated_at'
     ];
 
+    protected $casts = [
+        'price' => 'decimal:2',
+    ];
+
     public function colors()
     {
         return $this->belongsToMany(Color::class, 'product_color')

@@ -6,7 +6,8 @@
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
-                <form action="#" onsubmit="return validateForm()">
+                <form action="{{ route('session') }}" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <!-- <h6 class="coupon__code"><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click
@@ -55,6 +56,8 @@
                                     <li>Delivery <span>RM10.00</span></li>
                                     <li>Total (Service Fee 10%)<span>RM{{ number_format($cartTotal, 2)}}</span></li>
                                 </ul>
+                                <input type="hidden" value="{{ $cartTotal }}" name="total">
+                                <input type="hidden" value="{{ request()->orderId }}" name="orderId">
                                 <button type="submit" class="site-btn">PLACE ORDER</button>
                             </div>
                         </div>

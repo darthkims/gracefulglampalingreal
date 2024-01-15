@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\SizeController;
@@ -89,6 +90,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::patch('account/update-profile/{id}', [CustomerController::class, 'update'])->name('cust.update-profile');
 
 	Route::get('account/order-history', [CustomerController::class, 'orderHistory'])->name('cust.orders');
+
+	// Route::get('/checkout', [StripeController::class, 'checkout']);
+	Route::post('/session', [StripeController::class, 'session'])->name('session');
+	Route::get('/success', [StripeController::class, 'success'])->name('success');
 	});
 
 

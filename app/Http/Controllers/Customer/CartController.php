@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Customer;
 
-use Auth;
 use App\Models\Cart;
 use App\Models\User;
 use App\Models\Order;
@@ -10,6 +9,7 @@ use App\Models\Product;
 use App\Models\PromoCode;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -24,9 +24,9 @@ class CartController extends Controller
             ->latest()
             ->first();
         
-        if ($order) {
-            return redirect()->route('checkout');
-        }
+        // if ($order) {
+        //     return redirect()->route('checkout');
+        // }
 
         // Ensure the cart exists
         if (!$cart) {
@@ -52,7 +52,7 @@ class CartController extends Controller
         return view('carts.index', compact('user', 'cart', 'products', 'productTotals', 'cartSubTotal', 'cartTotal'));
     }
 
-    public function show()
+    public function show(Request $request)
     {
         $user = Auth::user();
         $cart = $user->cart;
@@ -77,10 +77,11 @@ class CartController extends Controller
             $cart->delete();
         } 
 
-        $order = $user->orders()
-            ->where('status', 'pending')
-            ->latest()
-            ->first();
+        // $order = $user->orders()
+        //     ->where('status', 'pending')
+        //     ->latest()
+        //     ->first();
+        $order = Order::with('products')->where('id', $request->orderId)->first();
 
         if ($order) {
             $order->load('products');

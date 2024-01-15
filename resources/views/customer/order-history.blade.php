@@ -70,7 +70,9 @@
                           @endif
                       </td>
                       <td class="align-middle">
-                        <a href="{{ route('checkout') }}" class="btn btn-danger btn-sm">Pay Now</a>
+                        @if ($order->status == 'pending')
+                          <a href="{{ route('checkout', ['orderId' => $order->id]) }}" class="btn btn-danger btn-sm">Pay Now</a>
+                        @endif
                       </td>
                     </tr>
                   @endforeach
