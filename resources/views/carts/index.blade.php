@@ -40,7 +40,8 @@
             
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="continue__btn update__btn">
-                <a type="button" id="update-cart-btn"><i class="fa fa-spinner"></i> Update cart</a>
+                <a type="button" id="update-cart-btn" style="@if (count($products) == 0) background-color: #d3d3d3; color: #808080; cursor: not-allowed; pointer-events: none; @endif">
+                    <i class="fa fa-spinner"></i> Update cart</a>
                 </div>
             </div>
 

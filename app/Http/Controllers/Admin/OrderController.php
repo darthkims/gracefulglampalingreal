@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Order;
 
 class OrderController extends Controller
 {
@@ -13,7 +14,8 @@ class OrderController extends Controller
      */
     public function index ()
     {
-        $carts = Cart::orderBy('created_at', 'desc')->get();
+        $carts = Order::orderBy('created_at', 'asc')->get();
+        
 
         return view('admin.cart.index', compact('carts'));
     }
