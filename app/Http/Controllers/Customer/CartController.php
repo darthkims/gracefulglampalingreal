@@ -100,7 +100,7 @@ class CartController extends Controller
             // Create a new order
             $order = Order::create([
                 'user_id' => $user->id,
-                'total' => $cart->total,
+                'total' => $cart->grand_total,
                 'status' => 'pending',
             ]);
 

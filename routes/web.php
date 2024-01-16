@@ -189,6 +189,9 @@ Route::group(['middleware' => 'auth'], function () {
 				Route::patch('/{id}', [PromoCodeController::class, 'update'])->name('promo-codes.update');
 				Route::delete('/{id}', [PromoCodeController::class, 'destroy'])->name('promo-codes.destroy');
 			});
+
+			
+    		Route::get('/export-orders',[OrderController::class,'exportOrders'])->name('export.orders');
 		});
 	});
 

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
@@ -91,13 +92,6 @@ class Order extends Model
         return $this->total;
     }
 
-    // Override the save method to ensure total is always calculated before saving
-    public function save(array $options = [])
-    {
-        $this->calculateGrandTotal();
-        parent::save($options);
-    }
-
     protected static function boot()
     {
         parent::boot();
@@ -129,4 +123,6 @@ class Order extends Model
             return '001';
         }
     }
+
+
 }

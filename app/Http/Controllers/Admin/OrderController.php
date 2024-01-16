@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Exports\ExportOrder;
 use App\Models\Cart;
 use App\Models\Order;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
 {
@@ -69,4 +71,10 @@ class OrderController extends Controller
 
         //return Redirect::route('carts.index')->with('message', 'Cart has been deleted');
     }
+
+    public function exportOrders(Request $request){
+        return Excel::download(new ExportOrder, 'orders.xlsx');
+    }
+
+    
 }

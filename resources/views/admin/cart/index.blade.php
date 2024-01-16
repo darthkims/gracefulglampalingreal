@@ -47,12 +47,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($carts as $cart)
+                                    @foreach ($carts as $index => $cart)
                                         <tr>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <p class="mb-0 text-sm">{{ $cart->id }}</p>
+                                                        <p class="mb-0 text-sm">{{ $index + 1 }}</p>
                                                     </div>
                                                 </div>
                                             </td>
