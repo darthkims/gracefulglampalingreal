@@ -22,21 +22,58 @@ class StripeController extends Controller
         $total = $request->total;
         $order = Order::with('products')->where('id', $orderId)->first();
 
-        $lineItems = [];
+    // Calculate the total amount without tax
+    $subtotal = 0;
 
-        foreach ($order->products as $product) {
-            // Add each product as a line item
-            $lineItems[] = [
-                'price_data' => [
-                    'currency'     => 'myr',
-                    'product_data' => [
-                        "name" => $product['name'],
-                    ],
-                    'unit_amount'  => $product['price'] * 100, // Stripe requires amount in cents
+    foreach ($order->products as $product) {
+        $subtotal += $product->price * $product->pivot->quantity;
+    }
+
+    // Calculate tax amount (replace 0.1 with your actual tax rate)
+    $taxRate = 0.1;
+    $taxAmount = round($subtotal * $taxRate, 2);
+
+    // Calculate the total amount including tax
+    $totalWithTax = $subtotal + $taxAmount;
+
+    // Create an array of line items
+    $lineItems = [];
+
+    foreach ($order->products as $product) {
+        $lineItems[] = [
+            'price_data' => [
+                'currency'     => 'myr',
+                'product_data' => [
+                    'name' => $product->name,
                 ],
-                'quantity'   => $product->pivot->quantity,
-            ];
-        }
+                'unit_amount'  => $product->price * 100, // Amount in cents
+            ],
+            'quantity'   => $product->pivot->quantity,
+        ];
+    }
+
+    // Add a line item for tax
+    $lineItems[] = [
+        'price_data' => [
+            'currency'     => 'myr',
+            'product_data' => [
+                'name' => 'Service Fee 10%',
+            ],
+            'unit_amount'  => $taxAmount * 100, // Amount in cents
+        ],
+        'quantity'   => 1,
+    ];
+
+    $lineItems[] = [
+        'price_data' => [
+            'currency'     => 'myr',
+            'product_data' => [
+                'name' => 'Delivery',
+            ],
+            'unit_amount'  => 10 * 100, // Amount in cents
+        ],
+        'quantity'   => 1,
+    ];
 
         // Create a Stripe checkout session
         $session = Session::create([
