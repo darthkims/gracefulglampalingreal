@@ -12,8 +12,11 @@
                         <div class=" me-3 my-3 d-flex justify-content-between align-items-center">
                             <h2 class="text-gradient text-dark mb-0 ms-3">Orders</h2>
                         </div>
-                        <div class="card-body px-0 pb-2">
+                        <div class="card-body px-4 pb-2">
                             <div class="table-responsive p-0">
+                                <a class="btn btn-warning"
+                                    href="{{ route('export.orders') }}"> Export Orders
+                                </a>
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr>
