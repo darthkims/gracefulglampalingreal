@@ -52,7 +52,7 @@ class CartController extends Controller
         return view('carts.index', compact('user', 'cart', 'products', 'productTotals', 'cartSubTotal', 'cartTotal'));
     }
 
-    public function show(Request $request)
+    public function checkoutRedirect(Request $request)
     {
         $user = Auth::user();
         $cart = $user->cart;
@@ -76,11 +76,13 @@ class CartController extends Controller
             $cart->products()->detach();
             $cart->delete();
 
-            return redirect()->route('checkout.show', ['orderId' => $order->id]);
-        } 
+            return redirect()->route('checkout.redirect', ['orderId' => $order->id]);
+        } else {
+            return redirect()->route('checkout.redirect', ['orderId' => $request->orderId]);
+        }
     }
 
-    public function checkoutShow (Request $request) 
+    public function checkout(Request $request) 
     {
         $user = Auth::user();
         $order = Order::with('products')->where('id', $request->orderId)->first();

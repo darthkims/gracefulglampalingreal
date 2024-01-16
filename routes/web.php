@@ -78,8 +78,8 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('static-sign-up');
 	Route::post('/addToCart/{productId}', [CartController::class, 'addToCart'])->name('addToCart');
 	Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-	Route::get('/checkout-show', [CartController::class, 'show'])->name('checkout');
-	Route::get('/checkout', [CartController::class, 'checkoutShow'])->name('checkout.show');
+	Route::get('/checkout-redirect', [CartController::class, 'checkoutRedirect'])->name('checkout.redirect');
+	Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
 	Route::patch('/update-cart', [CartController::class, 'update'])->name('cart.update');
 	Route::post('/apply-promo', [CartController::class, 'applyPromo'])->name('cart.promo');
 	Route::delete('/remove-cart/{productId}', [CartController::class, 'destroy'])->name('cart.remove');
