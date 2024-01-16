@@ -4,9 +4,9 @@
 
 <div class="container">
   <div class="checkout__form">
-    @if (session('message'))
+    @if (session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('message') }}
+        {{ session('success') }}
     </div>
     @endif
 
@@ -17,6 +17,7 @@
             <h6 class="checkout__title">Order History</h6>
             
             <div class="table-responsive p-0">
+            @if (count($orders) > 0)
               <table class="table align-items-center mb-0">
                 <thead>
                   <tr>
@@ -72,20 +73,25 @@
                       </td>
                       <td class="align-middle">
                         @if ($order->status == 'pending')
-                          <a href="{{ route('checkout', ['orderId' => $order->id]) }}" class="btn btn-danger btn-sm">Pay Now</a>
+                          <a href="{{ route('checkout', ['orderId' => $order->id]) }}" class="btn btn-info btn-sm">Pay Now</a>
                         @endif
                       </td>
                       <td>
+                      @if ($order->status == 'pending')
                       <form action="{{ route('deleteOrder', ['orderId' => $order->id]) }}" method="post">
-          @csrf
-          @method('DELETE')
-          <button type="submit" onclick="return confirm('Are you sure you want to cancel this order?')">Cancel Order</button>
-        </form>
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm" data-toggle="modal">Cancel Order</button>
+                      </form>
+                      @endif
                       </td>
                     </tr>
                   @endforeach
                 </tbody>
               </table>
+              @else
+              <h4>No orders yet. Shop latest fashion <a href="{{ route('cust.products.index') }}">here</a>.</h4>
+              @endif
             </div>
           </div>
         </div>
