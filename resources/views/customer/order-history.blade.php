@@ -71,7 +71,7 @@
                       </td>
                       <td class="align-middle">
                         @if ($order->status == 'pending')
-                          <a href="{{ route('checkout.redirect', ['orderId' => $order->id]) }}" class="btn btn-danger btn-sm">Pay Now</a>
+                          <a href="{{ route('checkout', ['orderId' => $order->id]) }}" class="btn btn-danger btn-sm">Pay Now</a>
                         @endif
                       </td>
                     </tr>
