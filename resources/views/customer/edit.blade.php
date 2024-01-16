@@ -1,7 +1,21 @@
 <x-customer_header activePage="" bodyClass="g-sidenav-show bg-gray-200">
     <!-- Authenticated User Header Content Goes Here -->
 </x-customer_header>
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Account Details</h4>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br>
+    <!-- Breadcrumb Section End -->
 <div class="container">
             <div class="checkout__form">
                 @if (session('message'))
@@ -18,7 +32,7 @@
 
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
-                            <h6 class="checkout__title">Account Details</h6>
+                            <h6 class="checkout__title">Edit Account</h6>
                             <div class="checkout__input">
                                 <p>Full Name<span>*</span></p>
                                 <input name="name" style="color: black;" type="text" value="{{$users->name}}" required>

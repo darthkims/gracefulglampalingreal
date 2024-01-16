@@ -2,6 +2,22 @@
   <!-- Authenticated User Header Content Goes Here -->
 </x-customer_header>
 
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Order History</h4>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br>
+    <!-- Breadcrumb Section End -->
+
 <div class="container">
   <div class="checkout__form">
     @if (session('success'))
@@ -68,7 +84,7 @@
                           @elseif ($order->status == 'processing')
                             <span class="badge bg-info">Processing</span>
                           @elseif ($order->status == 'completed')
-                            <span class="badge bg-success">Completed</span>
+                            <span class="badge bg-success" style="color: white;">Completed</span>
                           @endif
                       </td>
                       <td class="align-middle">

@@ -2,6 +2,8 @@
         <!-- Authenticated User Header Content Goes Here -->
 </x-customer_header>
 
+
+
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">
@@ -31,7 +33,7 @@
                                 </ul>
                                 <input type="hidden" value="{{ $order->grand_total }}" name="total">
                                 <input type="hidden" value="{{ request()->orderId }}" name="orderId">
-                                <button type="submit" class="site-btn">PAY NOW</button>
+                                <button type="submit" class="site-btn">PAY NOW WITH <i class="fa-brands fa-cc-stripe fa-2xl"></i></button>
                             </div>
                         </div>
                     </div>

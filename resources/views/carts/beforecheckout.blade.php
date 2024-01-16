@@ -2,6 +2,22 @@
         <!-- Authenticated User Header Content Goes Here -->
 </x-customer_header>
 
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Checkout Details</h4>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br>
+    <!-- Breadcrumb Section End -->
+
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">

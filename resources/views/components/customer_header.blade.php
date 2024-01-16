@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="{{ asset('customer')}}/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="{{ asset('customer')}}/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="{{ asset('customer')}}/css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css" type="text/css">
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -186,29 +189,28 @@
                 
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
-                    <div class="dropdown">
-        <a class="btn dropdown-toggle" href="#" role="button" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="{{ asset('customer')}}/img/icon/profile.png" alt="">
-        </a>
-        <div class="dropdown-menu" aria-labelledby="profileDropdown">
-            <a class="dropdown-item" href="{{ route('cust.edit')}}">Edit Profile</a>
-            <a class="dropdown-item" href="{{ route('cust.orders')}}">Order History</a>
-            
-        </div>
-    </div>
-                            <a href="{{ route('cart.index') }}"><img src="{{ asset('customer')}}/img/icon/cart.png" alt="">
-                            <span class="badge badge-pill badge-danger text-white">
-                            @if ($products->count() > 0)
-                                {{ $products->count() }}
-                            @else
-                                0
-                            @endif
-                            </span>
+                        <div class="dropdown">
+                        <a class="btn dropdown-toggle" href="#" role="button" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa-regular fa-user fa-lg"></i>
                         </a>
-                        <div class="price">RM {{ number_format($cartSubTotal, 2) }}</div>
+                    <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                        <a class="dropdown-item" href="{{ route('cust.edit')}}">Edit Profile</a>
+                        <a class="dropdown-item" href="{{ route('cust.orders')}}">Order History</a>
                     </div>
                 </div>
-            </div>
+                    <a href="{{ route('cart.index') }}"><img src="{{ asset('customer')}}/img/icon/cart.png" alt="">
+                        <span class="badge badge-pill badge-danger text-white">
+                        @if ($products->count() > 0)
+                            {{ $products->count() }}
+                        @else
+                            0
+                        @endif
+                        </span>
+                    </a>
+                    <div class="price">RM {{ number_format($cartSubTotal, 2) }}</div>
+                    </div>
+                    </div>
+                </div>
             <div class="canvas__open"><i class="fa fa-bars"></i></div>
         </div>
     </header>
