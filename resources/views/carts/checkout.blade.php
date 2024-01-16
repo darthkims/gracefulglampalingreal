@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <div class="checkout__order">
-                                <h4 class="order__title">Your order</h4>
+                                <h4 class="order__title">Your order #{{$order->order_number}}</h4>
                                 <div class="checkout__order__products">Product <span>Total</span></div>
                                 <ul class="checkout__total__products">
                                 @if (count($products) > 0)
