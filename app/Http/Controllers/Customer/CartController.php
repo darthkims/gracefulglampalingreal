@@ -77,9 +77,20 @@ class CartController extends Controller
             $cart->delete();
 
             return redirect()->route('checkout.redirect', ['orderId' => $order->id]);
-        } else {
-            return redirect()->route('checkout.redirect', ['orderId' => $request->orderId]);
         }
+
+        // Check if orderId is provided and valid
+        if ($request->orderId) {
+            $order = Order::find($request->orderId);
+            if ($order) {
+                $order->load('products');
+                $products = $order->products;
+
+                return view('carts.checkout', compact('user', 'order', 'products'));
+            }
+        }
+
+        return "Error: Order not found";
     }
 
     public function checkout(Request $request) 
