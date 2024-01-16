@@ -16,12 +16,30 @@
                     <div class="row">
                         <div class="col-xl-5 col-lg-7 col-md-8">
                             <div class="hero__text">
-                                <h6>Summer Collection</h6>
-                                <h2>Fall - Winter Collections 2030</h2>
-                                <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
-                                commitment to exceptional quality.</p>
+                            <h6>Discover the Essence of Summer Glamour</h6>
+                            <h2>Unveiling the Luxe Collections for 2024</h2>
+                            <p>Immerse yourself in the extraordinary as we introduce a bespoke label curating opulent essentials. Meticulously crafted with an unwavering commitment to transcendent quality and ethical sophistication.</p>
+
                                 <a href="{{route('cust.products.index', ['category' => 7])}}" class="primary-btn" >SHOP MEN <span class="arrow_right"></span></a>
                                 <a href="{{route('cust.products.index', ['category' => 8])}}" class="primary-btn" >SHOP WOMEN <span class="arrow_right"></span></a>
+                              
+                                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero__items set-bg" data-setbg="{{ asset('customer')}}/img/hero/hero-2.jpg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-7 col-md-8 text-right">
+                            <div class="hero__text">
+                            <h6>Elevate Your Style: Summer Edition</h6>
+                            <h2>Unveiling Fall - Winter Collections 2024</h2>
+                            <p>Discover an exclusive label dedicated to crafting luxury essentials. Our creations embody a steadfast commitment to exceptional quality and ethical craftsmanship.</p>
+
+                                <a href="{{route('cust.products.index', ['category' => 6])}}" class="primary-btn" >SHOP SHIRTS <span class="arrow_right"></span></a>
+                                <a href="{{route('cust.products.index', ['category' => 2])}}" class="primary-btn" >SHOP PANTS <span class="arrow_right"></span></a>
                               
                                         
                             </div>
@@ -41,7 +59,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <ul class="filter__controls">
-                        <li class="active" data-filter=".best-sellers">Best Sellers</li>
+                        <li class="active" data-filter=".best-sellers">Best Selling</li>
                         <li data-filter=".new-arrivals">New Arrivals</li>
                         
                     </ul>
