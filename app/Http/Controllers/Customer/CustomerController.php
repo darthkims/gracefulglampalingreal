@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -68,5 +69,21 @@ class CustomerController extends Controller
 
         return view('customer.order-history', compact('orders'));
     }
+
+    public function deleteOrder(Request $request, $orderId)
+    {
+        // Find the order by ID
+        $order = Order::findOrFail($orderId);
+
+        // Check if the authenticated user is the owner of the order
+        if ($order->user_id !== auth()->user()->id) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
+        // Delete the order and its associated products using the relationships
+        $order->products()->detach(); // Detach products from the pivot table
+        $order->delete(); // Delete the order
+
+        return redirect()->route('cust.orders')->with('success','Order cancelled successfully');    }
 
 }

@@ -37,6 +37,7 @@
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Status</th>
                     <th class="text-secondary opacity-7">
+                    <th class="text-secondary opacity-7">
 
                     </th>
                   </tr>
@@ -53,7 +54,7 @@
                       <td>
                           @foreach ($order->products as $index => $product )
                             <p>
-                              {{ $index + 1 }}. {{ $product->name }} ({{ $product->pivot->quantity }})
+                              {{ $index + 1 }}. {{ $product->name }} (x{{ $product->pivot->quantity }})
                             </p>
                           @endforeach
                       </td>
@@ -73,6 +74,13 @@
                         @if ($order->status == 'pending')
                           <a href="{{ route('checkout', ['orderId' => $order->id]) }}" class="btn btn-danger btn-sm">Pay Now</a>
                         @endif
+                      </td>
+                      <td>
+                      <form action="{{ route('deleteOrder', ['orderId' => $order->id]) }}" method="post">
+          @csrf
+          @method('DELETE')
+          <button type="submit" onclick="return confirm('Are you sure you want to cancel this order?')">Cancel Order</button>
+        </form>
                       </td>
                     </tr>
                   @endforeach
