@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -38,16 +39,29 @@ class ExportOrder implements FromCollection, WithHeadings
             ]);
         });
 
-        // Analyze data
-        $analytics = $this->analyzeOrders($orders);
+        $allOrders = Order::with(['user', 'products',])->get();
 
-        // Transform the analytics array for new table rows
+        // Analyze data
+        $analytics = $this->analyzeOrders($allOrders);
+
+        // // Transform the analytics array for new table rows
+        // $analyticsRows = collect();
+        // foreach ($analytics as $key => $value) {
+        //     $analyticsRows->push(['Analytics' => $key, 'Value' => $value]);
+        // }
+
+        // return $orders->merge([$analyticsRows]);
+
         $analyticsRows = collect();
         foreach ($analytics as $key => $value) {
             $analyticsRows->push(['Analytics' => $key, 'Value' => $value]);
         }
-
-        return $orders->merge([$analyticsRows]);
+    
+        // Insert a gap row
+        $gapRow = ['Order No.' => null, 'Username' => null, 'Product' => null, 'Total' => null];
+        $ordersAndGap = $orders->concat([$gapRow])->concat($analyticsRows);
+    
+        return $ordersAndGap;
     }
 
     public function headings(): array
@@ -59,15 +73,30 @@ class ExportOrder implements FromCollection, WithHeadings
     private function analyzeOrders(Collection $orders): array
     {
         $totalOrders = $orders->count();
-        $productCounts = $orders->flatMap(function ($order) {
-            return $order['products'];
-        })->countBy();
 
-        // Best seller
-        $bestSeller = $productCounts->sortDesc()->keys()->first();
+        $productQuantities = [];
 
-        // Least ordered item
-        $leastOrderedItem = $productCounts->sort()->keys()->first();
+        // Iterate through orders
+        foreach ($orders as $order) {
+            // Iterate through products in each order
+            foreach ($order['products'] as $product) {
+                $productId = $product['id'];
+
+                // Accumulate quantities for each product
+                if (!isset($productQuantities[$productId])) {
+                    $productQuantities[$productId] = 0;
+                }
+
+                $productQuantities[$productId] += $product['pivot']['quantity'];
+            }
+        }
+
+        // Find the most purchased and least purchased products
+        $mostPurchasedProductId = array_search(max($productQuantities), $productQuantities);
+        $leastPurchasedProductId = array_search(min($productQuantities), $productQuantities);
+
+        $bestSeller = Product::where('id', $mostPurchasedProductId)->pluck('name')->first();
+        $leastOrderedItem =  Product::where('id', $leastPurchasedProductId)->pluck('name')->first();
 
         return [
             'Total Order' => $totalOrders,
