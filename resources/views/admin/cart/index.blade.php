@@ -19,24 +19,73 @@
                                         <tr>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                ID
+                                                #
                                             </th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                CUSTOMER NAME</th>
+                                               ORDER NUMBER</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                NO. OF ORDERS</th>
+                                                PRODUCTS</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                DATE UPDATED</th>
+                                                TOTAL</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                ACTION
+                                                STATUS</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                DATE CREATED
                                             </th>
                                             <th class="text-secondary opacity-7"></th>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                    @foreach ($carts as $cart)
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <p class="mb-0 text-sm">{{ $cart->id }}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <p class="mb-0 text-sm">{{ $cart->order_number }}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                            @foreach ($cart->products as $index => $product )
+                                                <p class="text-xs text-secondary mb-0">
+                                                    {{ $index + 1 }}. {{ $product->name }} ({{ $product->pivot->quantity }})
+                                                </p>
+                                                @endforeach
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <p class="text-xs text-secondary mb-0">
+                                                RM {{ number_format($cart->productTotal, 2) }}
+                                                </p>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <p class="text-xs text-secondary mb-0">
+                                                @if ($cart->status == 'pending')
+                                                  <span class="badge bg-warning">Pending Payment</span>
+                                                @elseif ($cart->status == 'processing')
+                                                  <span class="badge bg-info">Processing</span>
+                                                @elseif ($cart->status == 'completed')
+                                                  <span class="badge bg-success">Completed</span>
+                                                @endif
+                                                </p>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <p class="text-xs text-secondary mb-0">{{ date_format($cart->created_at ,"d F Y H:i A") }}</p>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
