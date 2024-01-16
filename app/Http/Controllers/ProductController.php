@@ -93,8 +93,8 @@ class ProductController extends Controller
     {
         $products = Product::all();
         $top_sales = DB::table('products')
-            ->leftJoin('cart_product','products.id','=','cart_product.product_id')
-            ->selectRaw('products.id, SUM(cart_product.quantity) as total')
+            ->leftJoin('order_product','products.id','=','order_product.product_id')
+            ->selectRaw('products.id, SUM(order_product.quantity) as total')
             ->groupBy('products.id')
             ->orderBy('total','desc')
             ->take(4)
