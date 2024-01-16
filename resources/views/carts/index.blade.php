@@ -37,13 +37,6 @@
                     }, 5000); // Adjust the duration (in milliseconds) to fit your desired fade-out speed
                 </script>
             @endif
-            
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="continue__btn update__btn">
-                <a type="button" id="update-cart-btn" style="@if (count($products) == 0) background-color: #d3d3d3; color: #808080; cursor: not-allowed; pointer-events: none; @endif">
-                    <i class="fa fa-spinner"></i> Update cart</a>
-                </div>
-            </div>
 
             <div class="row">
                 <div class="col-lg-8">
@@ -77,9 +70,8 @@
                                         <div class="quantity">
                                             <div>
                                             <span class="qty-btn qty-dec" onclick="updateQuantity(this, -1, '{{ $product->id }}')"><i class="fa fa-minus"></i></span>
-<input type="text" value="{{ $product->pivot->quantity }}" style="width: 50px; text-align: center; border-radius: 10px;" id="quantityInput_{{ $product->id }}">
-<span class="qty-btn qty-inc" onclick="updateQuantity(this, 1, '{{ $product->id }}')"><i class="fa fa-plus"></i></span>
-
+                                            <input type="text" value="{{ $product->pivot->quantity }}" style="width: 50px; text-align: center; border-radius: 10px;" id="quantityInput_{{ $product->id }}">
+                                            <span class="qty-btn qty-inc" onclick="updateQuantity(this, 1, '{{ $product->id }}')"><i class="fa fa-plus"></i></span>
                                             </div>
                                         </div>
                                     </td>
@@ -113,11 +105,13 @@
                                 <a href="{{route('cust.products.index')}}">Continue Shopping</a>
                             </div>
                         </div>
-                        <!-- <div class="col-lg-6 col-md-6 col-sm-6">
+                        
+                        <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="continue__btn update__btn">
-                            <button type="button" id="update-cart-btn"><i class="fa fa-spinner"></i> Update cart</button>
+                            <a type="button" id="update-cart-btn" style="@if (count($products) == 0) background-color: #d3d3d3; color: #808080; cursor: not-allowed; pointer-events: none; @endif">
+                                <i class="fa fa-spinner"></i> Update cart</a>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
