@@ -52,11 +52,11 @@
                                 @endif
                                 </ul>
                                 <ul class="checkout__total__all">
-                                    <li>Subtotal <span>RM{{number_format($cartSubTotal, 2)}}</span></li>
+                                    <li>Subtotal <span>RM{{number_format($order->sub_total, 2)}}</span></li>
                                     <li>Delivery <span>RM10.00</span></li>
-                                    <li>Total (Service Fee 10%)<span>RM{{ number_format($cartTotal, 2)}}</span></li>
+                                    <li>Total (Service Fee 10%)<span>RM{{ number_format($order->grand_total, 2)}}</span></li>
                                 </ul>
-                                <input type="hidden" value="{{ $cartTotal }}" name="total">
+                                <input type="hidden" value="{{ $order->grand_total }}" name="total">
                                 <input type="hidden" value="{{ request()->orderId }}" name="orderId">
                                 <button type="submit" class="site-btn">PLACE ORDER</button>
                             </div>

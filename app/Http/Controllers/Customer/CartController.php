@@ -75,33 +75,21 @@ class CartController extends Controller
             // Delete the user's cart and cart products
             $cart->products()->detach();
             $cart->delete();
+
+            return redirect()->route('checkout.show', ['orderId' => $order->id]);
         } 
+    }
 
-        // $order = $user->orders()
-        //     ->where('status', 'pending')
-        //     ->latest()
-        //     ->first();
+    public function checkoutShow (Request $request) 
+    {
+        $user = Auth::user();
         $order = Order::with('products')->where('id', $request->orderId)->first();
-
         if ($order) {
             $order->load('products');
-            $productTotals = 0;
-
-            foreach ($order->products as $product) {
-                $productTotals += $product->price * $product->pivot->quantity;
-            }
-
-            $cartSubTotal = 0;
-            foreach ($order->products as $product) {
-                $cartSubTotal += $product->price * $product->pivot->quantity;
-            }
-
             $products = $order->products;
         } 
 
-        $cartTotal=$cartSubTotal*1.1+10;
-
-        return view('carts.checkout', compact('user', 'cart', 'products', 'productTotals', 'cartSubTotal', 'cartTotal'));
+        return view('carts.checkout', compact('user', 'order', 'products'));
     }
 
     public function addToCart(Request $request, $productId, $quantity = 1)
