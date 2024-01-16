@@ -52,6 +52,45 @@ class CartController extends Controller
         return view('carts.index', compact('user', 'cart', 'products', 'productTotals', 'cartSubTotal', 'cartTotal'));
     }
 
+    public function confirm()
+    {
+        $user = auth()->user();
+        $cart = $user->cart;
+
+        //count cart if cart is empty and has pending order which order pendings
+        $order = $user->orders()
+            ->where('status', 'pending')
+            ->latest()
+            ->first();
+        
+        // if ($order) {
+        //     return redirect()->route('checkout');
+        // }
+
+        // Ensure the cart exists
+        if (!$cart) {
+            $cart = new Cart();
+            $user->cart()->save($cart);
+        }
+
+        $products = $cart->products;
+
+        $productTotals = [];
+        foreach ($products as $product) {
+            $productTotals[$product->id] = $product->price * $product->pivot->quantity;
+        }
+
+        $cartSubTotal = 0;
+        foreach ($products as $product) {
+            $cartSubTotal += $product->price * $product->pivot->quantity;
+        }
+
+        $cartTotal=$cartSubTotal*1.1+10;
+    
+    
+        return view('carts.beforecheckout', compact('user', 'cart', 'products', 'productTotals', 'cartSubTotal', 'cartTotal'));
+    }
+
     public function checkoutRedirect(Request $request)
     {
         $user = Auth::user();

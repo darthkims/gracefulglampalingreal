@@ -81,6 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/checkout-redirect', [CartController::class, 'checkoutRedirect'])->name('checkout.redirect');
 	Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
 	Route::patch('/update-cart', [CartController::class, 'update'])->name('cart.update');
+	Route::get('/confirm-cart', [CartController::class, 'confirm'])->name('cart.confirm');
 	Route::post('/apply-promo', [CartController::class, 'applyPromo'])->name('cart.promo');
 	Route::delete('/remove-cart/{productId}', [CartController::class, 'destroy'])->name('cart.remove');
 	Route::resource('products', ProductController::class);

@@ -6,7 +6,6 @@
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
-                <form action="{{ route('session') }}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
@@ -52,17 +51,14 @@
                                 @endif
                                 </ul>
                                 <ul class="checkout__total__all">
-                                    <li>Subtotal <span>RM{{number_format($order->sub_total, 2)}}</span></li>
+                                    <li>Subtotal <span>RM{{number_format($cartSubTotal, 2)}}</span></li>
                                     <li>Delivery <span>RM10.00</span></li>
-                                    <li>Total (Service Fee 10%)<span>RM{{ number_format($order->grand_total, 2)}}</span></li>
+                                    <li>Total (Service Fee 10%)<span>RM{{ number_format($cartTotal, 2)}}</span></li>
                                 </ul>
-                                <input type="hidden" value="{{ $order->grand_total }}" name="total">
-                                <input type="hidden" value="{{ request()->orderId }}" name="orderId">
-                                <button type="submit" class="site-btn">PAY NOW</button>
+                                <a href="{{ count($products) > 0 ? route('checkout.redirect') : '#' }}" class="primary-btn">PLACE ORDER</a>
                             </div>
                         </div>
                     </div>
-                </form>
             </div>
         </div>
     </section>
