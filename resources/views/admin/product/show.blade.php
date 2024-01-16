@@ -24,7 +24,11 @@
                             </h2>
 
                             <div class="d-flex justify-content-center mb-4"> <!-- Center the content -->
-                                <img src="{{ asset('customer/img/product/product-' . $product->id . '.jpg') }}" alt="Product Image" style="width: 200px; height: auto;">
+                                <img src="{{ asset("storage/$product->productimg") }}" alt="Product Image" style="width: 200px; height: auto;">
+                                <img src="{{ asset("storage/$product->productthumb1") }}" alt="Product Image" style="width: 200px; height: auto;">
+                                <img src="{{ asset("storage/$product->productthumb2") }}" alt="Product Image" style="width: 200px; height: auto;">
+                                <img src="{{ asset("storage/$product->productthumb3") }}" alt="Product Image" style="width: 200px; height: auto;">
+                                <img src="{{ asset("storage/$product->productthumb4") }}" alt="Product Image" style="width: 200px; height: auto;">
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
