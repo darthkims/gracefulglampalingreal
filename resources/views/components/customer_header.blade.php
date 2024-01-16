@@ -78,15 +78,18 @@
 
                     <div class="col-lg-6 col-md-5">
                         <div class="header__top__right">
-                            <div class="header__top__links">
+                            <div class="header__top__links">                                
                             <form method="POST" action="{{ route('logout') }}" class="d-none" id="logout-form">
                                 @csrf
                             </form>
                             <a href="javascript:;" class="offcanvas__links">
+                                @php
+                                    $user=Auth::user();
+                                @endphp
+                                <span class="d-sm-inline d-none">Welcome! {{$user->name}}</span>
                                 <i class="fa fa-user me-sm-1"></i>
-                                <span class="d-sm-inline d-none"
-                                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">Sign
-                                    Out</span>
+                                <span class="d-sm-inline d-none" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                    SignOut</span>
                             </a>
                                 <!-- <a href="{{ route('logout') }}">Sign out</a> -->
                                 <!-- <a href="#">FAQs</a> -->
