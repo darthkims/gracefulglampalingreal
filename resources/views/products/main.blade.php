@@ -31,21 +31,21 @@
                     </div>
                 </div>
             </div>
-            <div class="hero__items set-bg" data-setbg="{{ asset('customer')}}/img/hero/newjeans.jpg">
+            <div class="hero__items set-bg" data-setbg="{{ asset('customer')}}/img/hero/newjeans-levi.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-5 col-lg-7 col-md-8">
                             <div class="hero__text">
                                 <h6>Levi's Newjeans</h6>
-                                <h2 style="color: orange;">Grab your favourite idol jeans</h2>
-                                <p style="color: yellow;">Elevate your style to K-pop chic with our fashion-forward jeans, the same iconic denim worn by your favorite idols, blending trendsetting designs with unparalleled comfort for an effortlessly cool look.</p>
+                                <h2 style="color: white;">Grab your favourite idol jeans</h2>
+                                <p style="color: white;">Elevate your style to K-pop chic with our fashion-forward jeans, the same iconic denim worn by your favorite idols, blending trendsetting designs with unparalleled comfort for an effortlessly cool look.</p>
                                 <a href="{{route('cust.products.index', ['category' => 2])}}" class="primary-btn" >SHOP PANTS <span class="arrow_right"></span></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="hero__items set-bg" data-setbg="{{ asset('customer')}}/img/hero/hero-2.jpg">
+            <div class="hero__items set-bg" data-setbg="{{ asset('customer')}}/img/hero/newjeans-2.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-5 col-lg-7 col-md-8 text-right">
