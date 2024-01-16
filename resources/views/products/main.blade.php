@@ -8,22 +8,38 @@
     </x-head_header>
 @endauth
 
-<!-- Hero Section Begin -->
-<section class="hero">
+    <!-- Hero Section Begin -->
+    <section class="hero">
         <div class="hero__slider owl-carousel">
-            <div class="hero__items set-bg" data-setbg="{{ asset('customer')}}/img/hero/hero-1.jpg">
+            <div class="hero__items set-bg" data-setbg="{{ asset('customer')}}/img/hero/bannermenwomen.png">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-5 col-lg-7 col-md-8">
                             <div class="hero__text">
-                            <h6>Discover the Essence of Summer Glamour</h6>
-                            <h2>Unveiling the Luxe Collections for 2024</h2>
-                            <p>Immerse yourself in the extraordinary as we introduce a bespoke label curating opulent essentials. Meticulously crafted with an unwavering commitment to transcendent quality and ethical sophistication.</p>
-
+                                <h6>Grand Opening</h6>
+                                <h2 style="color: white;">Provide Personal Shopper Service</h2>
+                                <p style="color: white;">
+                                    We sell limited and authentic products from all range. 
+                                    Discover unparalleled elegance and authenticity at our shop, where limited and 
+                                    carefully curated products across a diverse range await to add a touch of 
+                                    exclusivity to every facet of your life.
+                                </p>
                                 <a href="{{route('cust.products.index', ['category' => 7])}}" class="primary-btn" >SHOP MEN <span class="arrow_right"></span></a>
                                 <a href="{{route('cust.products.index', ['category' => 8])}}" class="primary-btn" >SHOP WOMEN <span class="arrow_right"></span></a>
-                              
-                                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero__items set-bg" data-setbg="{{ asset('customer')}}/img/hero/newjeans.jpg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-7 col-md-8">
+                            <div class="hero__text">
+                                <h6>Levi's Newjeans</h6>
+                                <h2 style="color: orange;">Grab your favourite idol jeans</h2>
+                                <p style="color: yellow;">Elevate your style to K-pop chic with our fashion-forward jeans, the same iconic denim worn by your favorite idols, blending trendsetting designs with unparalleled comfort for an effortlessly cool look.</p>
+                                <a href="{{route('cust.products.index', ['category' => 2])}}" class="primary-btn" >SHOP PANTS <span class="arrow_right"></span></a>
                             </div>
                         </div>
                     </div>
@@ -51,7 +67,7 @@
     </section>
     <!-- Hero Section End -->
 
-    
+    <br>
 
     <!-- Product Section Begin -->
     <section class="product spad">
@@ -119,7 +135,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="categories__text">
-                        <h2> <br /> <span>Shoe Collection</span> <br /> </h2>
+                        <h2> <br /> <span>Limited Quantity</span> <br /> </h2>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -127,18 +143,18 @@
                     <img src="{{ asset("storage/$product->productimg") }}" alt="Product Image">
                         <div class="hot__deal__sticker">
                             <span>Sale Of</span>
-                            <h5>RM899.00</h5>
+                            <h5>RM{{$product->price}}</h5>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 offset-lg-1">
                     <div class="categories__deal__countdown">
                         <span>Deal Of The Month</span>
-                        <h2>4DFWD 3 RUNNING SHOES</h2>
-                        <div class="categories__deal__countdown__timer" id="countdown">
+                        <h2>{{$product->name}}</h2>
+                        <!-- <div class="categories__deal__countdown__timer" id="countdown">
                             
-                        </div>
-                        <a href={{route('cust.products.display', ['product' => 4])}} class="primary-btn">Shop now</a>
+                        </div> -->
+                        <a href={{route('cust.products.display', ['product' => $product->id])}} class="primary-btn">Shop now</a>
                         
                         
                     </div>
