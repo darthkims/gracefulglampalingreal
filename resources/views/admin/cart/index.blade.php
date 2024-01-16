@@ -25,6 +25,9 @@
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                ORDER NUMBER</th>
                                             <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                               Username</th>
+                                            <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 PRODUCTS</th>
                                             <th
@@ -57,6 +60,13 @@
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <p class="mb-0 text-sm">{{ $cart->user->name }}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td class="align-middle text-center">
                                             @foreach ($cart->products as $index => $product )
                                                 <p class="text-xs text-secondary mb-0">
@@ -66,7 +76,7 @@
                                             </td>
                                             <td class="align-middle text-center">
                                                 <p class="text-xs text-secondary mb-0">
-                                                RM {{ number_format($cart->productTotal, 2) }}
+                                                RM {{ number_format($cart->total, 2) }}
                                                 </p>
                                             </td>
                                             <td class="align-middle text-center">
