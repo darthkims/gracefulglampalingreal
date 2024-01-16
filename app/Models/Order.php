@@ -13,8 +13,13 @@ class Order extends Model
         'order_number',
         'user_id', 
         'promo_code_id',
+        'status',
         'total',
-        'status'
+    ];
+
+    protected $appends = [
+        'grand_total',
+        'sub_total'
     ];
 
     public function user()
@@ -32,6 +37,65 @@ class Order extends Model
         return $this->belongsToMany(Product::class, 'order_product')
                     ->withPivot('quantity')
                     ->withTimestamps();
+    }
+
+    public function calculateGrandTotal()
+    {
+        $productTotals = 0;
+
+        foreach ($this->products as $product) {
+            $productTotals += $product->price * $product->pivot->quantity;
+        }
+
+        // Calculate total with 10% fee and delivery fee
+        $total = $productTotals * 1.1 + 10;
+
+        // Apply promo code discount if applicable
+        if ($this->promoCode) {
+            $total -= $total * ($this->promoCode->discount_percentage / 100);
+        }
+
+        // Set the calculated total to the model's total attribute
+        $this->total = max(0, $total); // Ensure total is non-negative
+    }
+
+    public function calculateSubTotal()
+    {
+        $productTotals = 0;
+
+        foreach ($this->products as $product) {
+            $productTotals += $product->price * $product->pivot->quantity;
+        }
+
+        // Calculate total 
+        $total = $productTotals;
+
+        // Apply promo code discount if applicable
+        if ($this->promoCode) {
+            $total -= $total * ($this->promoCode->discount_percentage / 100);
+        }
+
+        // Set the calculated total to the model's total attribute
+        $this->total = max(0, $total); // Ensure total is non-negative
+    }
+
+    public function getGrandTotalAttribute()
+    {
+        $this->calculateGrandTotal();
+        return $this->total;
+    }
+
+    public function getSubTotalAttribute()
+    {
+        $this->calculateSubTotal();
+        return $this->total;
+    }
+
+    // Override the save method to ensure total is always calculated before saving
+    public function save(array $options = [])
+    {
+        $this->calculateGrandTotal();
+        parent::save($options);
     }
 
     protected static function boot()

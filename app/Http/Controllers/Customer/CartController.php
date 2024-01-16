@@ -52,7 +52,7 @@ class CartController extends Controller
         return view('carts.index', compact('user', 'cart', 'products', 'productTotals', 'cartSubTotal', 'cartTotal'));
     }
 
-    public function show(Request $request)
+    public function checkoutRedirect(Request $request)
     {
         $user = Auth::user();
         $cart = $user->cart;
@@ -75,33 +75,34 @@ class CartController extends Controller
             // Delete the user's cart and cart products
             $cart->products()->detach();
             $cart->delete();
-        } 
 
-        // $order = $user->orders()
-        //     ->where('status', 'pending')
-        //     ->latest()
-        //     ->first();
+            return redirect()->route('checkout.redirect', ['orderId' => $order->id]);
+        }
+
+        // Check if orderId is provided and valid
+        if ($request->orderId) {
+            $order = Order::find($request->orderId);
+            if ($order) {
+                $order->load('products');
+                $products = $order->products;
+
+                return view('carts.checkout', compact('user', 'order', 'products'));
+            }
+        }
+
+        return "Error: Order not found";
+    }
+
+    public function checkout(Request $request) 
+    {
+        $user = Auth::user();
         $order = Order::with('products')->where('id', $request->orderId)->first();
-
         if ($order) {
             $order->load('products');
-            $productTotals = 0;
-
-            foreach ($order->products as $product) {
-                $productTotals += $product->price * $product->pivot->quantity;
-            }
-
-            $cartSubTotal = 0;
-            foreach ($order->products as $product) {
-                $cartSubTotal += $product->price * $product->pivot->quantity;
-            }
-
             $products = $order->products;
         } 
 
-        $cartTotal=$cartSubTotal*1.1+10;
-
-        return view('carts.checkout', compact('user', 'cart', 'products', 'productTotals', 'cartSubTotal', 'cartTotal'));
+        return view('carts.checkout', compact('user', 'order', 'products'));
     }
 
     public function addToCart(Request $request, $productId, $quantity = 1)
