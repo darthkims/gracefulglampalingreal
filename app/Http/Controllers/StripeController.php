@@ -36,6 +36,31 @@ class StripeController extends Controller
     // Calculate the total amount including tax
     $totalWithTax = $subtotal + $taxAmount;
 
+    $shipping_options = [];
+
+    $shipping_options = [
+        [
+        'shipping_rate_data' => [
+          'type' => 'fixed_amount',
+          'fixed_amount' => [
+            'amount' => 1000,
+            'currency' => 'myr',
+          ],
+          'display_name' => 'Normal postage',
+          'delivery_estimate' => [
+            'minimum' => [
+              'unit' => 'business_day',
+              'value' => 1,
+            ],
+            'maximum' => [
+              'unit' => 'business_day',
+              'value' => 5,
+            ],
+          ],
+        ],
+      ],
+    ];
+
     // Create an array of line items
     $lineItems = [];
 
@@ -64,23 +89,13 @@ class StripeController extends Controller
         'quantity'   => 1,
     ];
 
-    $lineItems[] = [
-        'price_data' => [
-            'currency'     => 'myr',
-            'product_data' => [
-                'name' => 'Delivery',
-            ],
-            'unit_amount'  => 10 * 100, // Amount in cents
-        ],
-        'quantity'   => 1,
-    ];
-
         // Create a Stripe checkout session
         $session = Session::create([
             'line_items'  => $lineItems,
+            'shipping_options' => $shipping_options,
             'mode'        => 'payment',
             'success_url' => route('success', ['order_id' => $orderId]),
-            'cancel_url'  => route('checkout', ['order_id' => $orderId]),
+            'cancel_url'  => route('checkout.redirect', ['orderId' => $orderId]),
         ]);
 
         return redirect()->away($session->url);
@@ -98,6 +113,6 @@ class StripeController extends Controller
             $order->update(['status' => 'completed']);
         }
 
-        return redirect()->route('cust.orders');
+        return redirect()->route('cust.orders')->with('success', 'Payment successful :)');
     }
 }
