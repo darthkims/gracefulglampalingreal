@@ -23,6 +23,7 @@ class ExportOrder implements FromCollection, WithHeadings
             $query->select('products.id', 'products.name'); // Explicitly select columns with table alias
         }])
         ->select('orders.order_number', 'orders.total', 'orders.user_id', 'orders.id')
+        ->where('status', 'completed') //only get completed orders
         ->get()
         ->map(function ($order) {
             $name = optional($order->user)->name;
@@ -39,7 +40,7 @@ class ExportOrder implements FromCollection, WithHeadings
             ]);
         });
 
-        $allOrders = Order::with(['user', 'products',])->get();
+        $allOrders = Order::with(['user', 'products',])->where('status', 'completed')->get();
 
         // Analyze data
         $analytics = $this->analyzeOrders($allOrders);
