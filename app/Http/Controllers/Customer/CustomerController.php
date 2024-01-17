@@ -7,6 +7,7 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CustomerController extends Controller
 {
@@ -68,6 +69,44 @@ class CustomerController extends Controller
         });
 
         return view('customer.order-history', compact('orders'));
+    }
+
+    public function download($orderId) {
+
+        $user = Auth::user();
+        $orders = Order::findOrFail($orderId);
+        $orders->load('products');
+
+        $data = [];
+        $totalPrice = 0;
+
+        // Loop through products in the order
+        foreach ($orders->products as $product) {
+            $itemPrice = $product->pivot->quantity * $product->price;
+    
+            $data[] = [
+                'quantity' => $product->pivot->quantity,
+                'description' => $product->name,
+                'price' => $product->price,
+                'total_item_price' => $itemPrice,
+            ];
+    
+            $totalPrice += $itemPrice;
+            
+        }
+
+        $totalPrice=$totalPrice*1.1+10;
+        
+            // Include user details in the data array
+            $userData = [
+                'name' => $user->name,
+                'address' => $user->location,
+            ];
+
+     
+        $pdf = Pdf::loadView('customer.pdf', ['data' => $data, 'orders' => $orders, 'totalPrice' => $totalPrice, 'userData' => $userData]);
+     
+        return $pdf->download();
     }
 
     public function deleteOrder(Request $request, $orderId)

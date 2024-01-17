@@ -92,6 +92,13 @@
                           <a href="{{ route('checkout', ['orderId' => $order->id]) }}" class="btn btn-info btn-sm">Pay Now</a>
                         @endif
                       </td>
+                      <td class="align-middle">
+                        @if ($order->status == 'completed')
+                        <form action="{{ route('cust.orders.download', ['orderId' => $order->id]) }}" method="get">
+                            <button type="submit" name="download_pdf">Download PDF</button>
+                        </form>                        
+                        @endif
+                      </td>
                       <td>
                       @if ($order->status == 'pending')
                       <form action="{{ route('deleteOrder', ['orderId' => $order->id]) }}" method="post">
