@@ -95,7 +95,7 @@
                       <td class="align-middle">
                         @if ($order->status == 'completed')
                         <form action="{{ route('cust.orders.download', ['orderId' => $order->id]) }}" method="get">
-                            <button type="submit" name="download_pdf">Download PDF</button>
+                            <button type="submit" class="btn btn-warning btn-sm" name="download_pdf">Download PDF</button>
                         </form>                        
                         @endif
                       </td>
