@@ -29,21 +29,12 @@
                                 @csrf
 
                                 <!-- Add a new input field for address search -->
-                                {{-- <div class="mb-3">
-                                    <label for="searchAddress" class="form-label">
-                                        Search Address <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="input-group input-group-outline">
-                                        <input type="text" class="form-control" id="searchAddress">
-                                    </div>
-                                </div> --}}
-
                                 <div class="mb-3">
                                     <label for="searchAddress" class="form-label">
                                         Search Address <span class="text-danger">*</span>
                                     </label>
                                     <div class="input-group input-group-outline">
-                                        <select class="form-control select2" id="searchAddress" style="width: 100%;">
+                                        <select class="form-control select2" name="address" id="searchAddress" style="width: 100%;">
                                             <!-- Options will be dynamically added by Select2 -->
                                         </select>
                                     </div>

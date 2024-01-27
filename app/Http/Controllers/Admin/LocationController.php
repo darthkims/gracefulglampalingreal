@@ -43,8 +43,10 @@ class LocationController extends Controller
     }
 
     // Show the form for editing the specified location.
-    public function edit(Location $location)
+    public function edit($id)
     {
+        $location = Location::findOrFail($id);
+        
         return view('admin.locations.edit', compact('location'));
     }
 
