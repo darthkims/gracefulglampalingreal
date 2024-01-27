@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Invoice</title>
 
-    <link rel="stylesheet" href="{{ asset('customer/pdf.css') }}" type="text/css"> 
+    <link rel="stylesheet" href="{{ public_path('customer/pdf.css') }}" type="text/css"> 
 
 </head>
 <body>
     <table class="w-full">
         <tr>
             <td class="w-half">
-                <img src="{{ asset('customer')}}/img/gg_full.png" alt="gracefulglam" width="200" />
+                <img src="{{ public_path('customer')}}/img/gg_full.png" alt="gracefulglam" width="200" />
             </td>
             <td class="w-half">
                 <h2>Invoice ID: {{ $orders->order_number }}</h2>
