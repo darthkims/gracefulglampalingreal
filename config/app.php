@@ -126,6 +126,8 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'mapbox' => env('MAPBOX_KEY'),
+
     /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver

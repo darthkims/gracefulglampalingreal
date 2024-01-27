@@ -1,25 +1,25 @@
 <?php
 
-use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\SizeController;
-use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\ColorController;
-use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Admin\PromoCodeController;
+use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Customer\CartController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\LocationController;
+use App\Http\Controllers\Admin\PromoCodeController;
 use App\Http\Controllers\Customer\CustomerController;
-
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -190,7 +190,15 @@ Route::group(['middleware' => 'auth'], function () {
 				Route::delete('/{id}', [PromoCodeController::class, 'destroy'])->name('promo-codes.destroy');
 			});
 
-			
+			Route::prefix('/locations')->group(function () {
+				Route::get('/', [LocationController::class, 'index'])->name('location.index');
+				Route::get('/create', [LocationController::class, 'create'])->name('location.create');
+				Route::post('/', [LocationController::class, 'store'])->name('location.store');
+				Route::get('/edit/{id}', [LocationController::class, 'edit'])->name('location.edit');
+				Route::patch('/{id}', [LocationController::class, 'update'])->name('location.update');
+				Route::delete('/{id}', [LocationController::class, 'destroy'])->name('location.destroy');
+			});
+
     		Route::get('/export-orders',[OrderController::class,'exportOrders'])->name('export.orders');
 		});
 	});
