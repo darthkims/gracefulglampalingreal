@@ -10,7 +10,7 @@
                 <div class="col-12">
                     <div class="card my-4">
                         <div class="card-body px-4 pb-2">
-                            <form class="my-4" action="{{ route('location.update', $location->id) }}"
+                            <form class="my-4" action="{{ route('locations.update', $location->id) }}"
                                 method="POST">
                                 @csrf
                                 @method('PATCH')
