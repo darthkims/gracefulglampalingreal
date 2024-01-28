@@ -36,9 +36,15 @@ class Order extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class, 'order_product')
-                    ->withPivot('quantity')
-                    ->withTimestamps();
+                    ->withPivot('quantity', 'location_id') // Add 'location_id' to the pivot
+                    ->withTimestamps()
+                    ->with(['locations' => function ($query) {
+                        // Add a condition to load the specific location based on the location_id in the pivot table
+                        $query->where('id', $this->pivot->location_id);
+                    }]);
     }
+
+
 
     public function calculateGrandTotal()
     {

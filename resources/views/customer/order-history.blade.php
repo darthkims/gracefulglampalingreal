@@ -53,6 +53,9 @@
                     <th
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Status</th>
+                    <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                        Store</th>
                     <th class="text-secondary opacity-7">
                     <th class="text-secondary opacity-7">
 
@@ -86,6 +89,15 @@
                           @elseif ($order->status == 'completed')
                             <span class="badge bg-success" style="color: white;">Completed</span>
                           @endif
+                      </td>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center text-left">
+                              <p class="mb-0 text-sm">
+                                   {{ $order->product->location->name }}
+                              </p>
+                          </div>
+                      </div>
                       </td>
                       <td class="align-middle">
                         @if ($order->status == 'pending')

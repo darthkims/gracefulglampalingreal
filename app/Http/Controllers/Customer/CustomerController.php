@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Concerns\ToArray;
 
 class CustomerController extends Controller
 {
@@ -59,6 +60,7 @@ class CustomerController extends Controller
         $user = Auth::user();
         $orders = $user->orders()->get();
         $orders->load('products');
+        dd($orders->toArray());
 
         $orders->each(function ($order) {
             $order->productTotal = $order->products->sum(function ($product) {

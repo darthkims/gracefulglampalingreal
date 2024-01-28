@@ -46,6 +46,7 @@
                                 <tr>
                                     <th>Product</th>
                                     <th>Quantity</th>
+                                    <th>Store Location</th>
                                     <th>Total</th>
                                     <th></th>
                                 </tr>
@@ -75,6 +76,16 @@
                                             </div>
                                         </div>
                                     </td>
+                                    <td class="store-location">
+                                        <select name="store_locations[{{ $product->id }}]" class="form-control">
+                                            @foreach ($product->locations as $location)
+                                                <option value="{{ $location->id }}" {{ $location->id == $product->pivot->location_id ? 'selected' : '' }}>
+                                                    {{ $location->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    
                                     </form>
                                     <td class="cart__price">
                                     @php

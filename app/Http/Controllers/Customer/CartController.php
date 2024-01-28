@@ -34,11 +34,12 @@ class CartController extends Controller
             $user->cart()->save($cart);
         }
 
-        $products = $cart->products;
+        $products = $cart->products()->with('locations')->get();
 
         $productTotals = [];
         foreach ($products as $product) {
             $productTotals[$product->id] = $product->price * $product->pivot->quantity;
+            $locations = $product->locations; 
         }
 
         $cartSubTotal = 0;
@@ -180,6 +181,7 @@ class CartController extends Controller
     public function update(Request $request)
     {
         $quantities = $request->input('quantities');
+        $storeLocations = $request->input('store_locations');
     
         // Loop through the submitted quantities and update the cart
         foreach ($quantities as $productId => $quantity) {
@@ -187,8 +189,12 @@ class CartController extends Controller
             $product = Product::find($productId);
     
             // Assuming you have a relationship between User and Cart models
-            auth()->user()->cart->products()->updateExistingPivot($productId, ['quantity' => $quantity]);
+            auth()->user()->cart->products()->updateExistingPivot($productId, [
+                'quantity' => $quantity,
+                'location_id' => $storeLocations[$productId] ?? null, // Use null if location is not provided
+            ]);
         }
+        
     
         // Optionally, you can return a response or redirect back to the cart page
         return redirect()->to(route('cart.index') . '#success-alert')->with('success', 'Cart updated successfully');
