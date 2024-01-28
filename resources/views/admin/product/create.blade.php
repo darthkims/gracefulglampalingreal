@@ -1,3 +1,5 @@
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 <x-layout bodyClass="g-sidenav-show bg-gray-200">
 
     <x-navbars.sidebar activePage="products"></x-navbars.sidebar>
@@ -68,8 +70,8 @@
                           Product Name <span class="text-danger">*</span>
                         </label>
                         <div class="input-group input-group-outline">
-                                     <input type="text" class="form-control @error('name') is-invalid @enderror" name="name">
-                                    </div>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name">
+                          </div>
                           @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -82,12 +84,13 @@
                           Price <span class="text-danger">*</span>
                         </label>
                         <div class="input-group input-group-outline">
-                                     <input type="text" class="form-control  @error('price') is-invalid @enderror" name="price" step="0.01">
-                                    </div>
-                          @error('price')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                          <input type="text" class="form-control  @error('price') is-invalid @enderror" name="price" step="0.01">
+                        </div>
+
+                        @error('price')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
                           @enderror
                       </div>
 
@@ -119,6 +122,25 @@
                         </select>
 
                           @error('brand')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                          @enderror
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="location" class="form-label">
+                          Location <span class="text-danger">*</span>
+                        </label>
+                        <br>
+
+                        <select class="form-select" name="locations[]" multiple="multiple" id="locationOptions">
+                          @foreach ($locations as $location)
+                            <option value="{{ $location->id }}">{{ $location->name }}</option>
+                          @endforeach
+                        </select>
+
+                          @error('location')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -196,7 +218,15 @@
             </div>
             <x-footers.auth></x-footers.auth>
         </div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script>
+          $(document).ready(function() {
+              $('#locationOptions').select2();
+          });
+        </script>
+
     </main>
     <x-plugins></x-plugins>
-
 </x-layout>

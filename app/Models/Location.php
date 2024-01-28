@@ -15,6 +15,6 @@ class Location extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'location_product')->withPivot('quantity')->withTimestamps();
+        return $this->belongsToMany(Product::class, 'location_product')->withTimestamps();
     }
 }

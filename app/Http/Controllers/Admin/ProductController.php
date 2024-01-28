@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -25,8 +26,9 @@ class ProductController extends Controller
         $sizes = Size::all();
         $colors = Color::all();
         $brands = Brand::all();
+        $locations = Location::all();
     
-        return view('admin.product.create', compact('categories', 'sizes', 'colors', 'brands'));
+        return view('admin.product.create', compact('categories', 'sizes', 'colors', 'brands', 'locations'));
     }
 
     public function store(Request $request)
@@ -68,7 +70,8 @@ class ProductController extends Controller
         // associate the brand with the product
         $product->brands()->attach($request->input('brand'), ['brand_id' => $request->input('brand')]);
     
-        // attach categories, sizes, and colors
+        // attach categories, sizes, and colors, locations
+        $product->locations()->sync($request->input('locations'));
         $product->categories()->sync($request->input('categories'));
         $product->sizes()->sync($request->input('sizes'));
         $product->colors()->sync($request->input('colors'));
@@ -97,8 +100,9 @@ class ProductController extends Controller
         $brands = Brand::all();
         $sizes = Size::all();
         $colors = Color::all();
+        $locations = Location::all();
         
-        return view('admin.product.edit',compact('product','categories','brands','sizes','colors'));
+        return view('admin.product.edit',compact('product','categories','brands','sizes','colors', 'locations'));
     }
 
     /**
@@ -126,6 +130,7 @@ class ProductController extends Controller
         $product->categories()->sync($request->input('categories'));
         $product->sizes()->sync($request->input('sizes'));
         $product->colors()->sync($request->input('colors'));
+        $product->locations()->sync($request->input('locations'));
     
         return redirect()->route('admin.products.index')->with('success', 'Product updated successfully');
     }
@@ -144,13 +149,12 @@ class ProductController extends Controller
         $product->categories()->detach();
         $product->colors()->detach();
         $product->sizes()->detach();
+        $product->locations()->detach();
         
         // Delete the product
         $product->delete();
-    
-  
-        return redirect()->route('admin.products.index')
-                        ->with('success','Product deleted successfully');
+
+        return redirect()->route('admin.products.index')->with('success','Product deleted successfully');
     }
 
     private function deleteProductImages(Product $product)
