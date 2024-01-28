@@ -52,12 +52,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($users as $user)
+                                    @foreach ($users as $index => $user)
                                         <tr>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <p class="mb-0 text-sm">{{ $user->id }}</p>
+                                                        <p class="mb-0 text-sm">{{ $index+1}}</p>
                                                     </div>
                                                 </div>
                                             </td>

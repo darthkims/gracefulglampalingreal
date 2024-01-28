@@ -49,12 +49,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($categories as $cat)
+                                    @foreach ($categories as $index => $cat)
                                         <tr>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <p class="mb-0 text-sm">{{ $cat->id }}</p>
+                                                        <p class="mb-0 text-sm">{{ $index+1 }}</p>
                                                     </div>
                                                 </div>
                                             </td>
