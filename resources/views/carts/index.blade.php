@@ -138,9 +138,11 @@
                             <li>Total<span>Calculated In Checkout</span></li>
                         </ul>
                         <a href="{{ count($products) > 0 ? route('cart.confirm') : '#' }}" class="primary-btn"
-                        <a type="button" id="update-cart-btn" style="@if (count($products) == 0 || is_null($product->pivot->location_id)) background-color: #d3d3d3; color: #808080; cursor: not-allowed; pointer-events: none; @endif">
-                            Proceed to checkout
+                           onclick="return validateForm();"
+                           style="@if (count($products) == 0) background-color: #d3d3d3; color: #808080; cursor: not-allowed; pointer-events: none; @endif">
+                           Proceed to checkout
                         </a>
+
                     </div>
                 </div>
             </div>
@@ -175,7 +177,21 @@
         inputField.value = newValue;
     }
 
-    
+    function validateForm() {
+        var storeSelects = document.querySelectorAll("select[name^='store_locations']");
+
+        for (var i = 0; i < storeSelects.length; i++) {
+            var selectedStore = storeSelects[i].value;
+
+            // Check if the store is not selected
+            if (!selectedStore) {
+                alert("Please select a store for all products.");
+                return false;
+            }
+        }
+
+        return true;
+    }    
 
     function updateCart() {
     // Remove existing hidden input fields
