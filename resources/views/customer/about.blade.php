@@ -26,14 +26,34 @@
     </section>
     <!-- Breadcrumb Section End -->
 
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    
     <!-- About Section Begin -->
     <section class="about spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="about__pic">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4260.185238352985!2d102.2882252363596!3d2.2715004565219226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d1e572dbf414d3%3A0xd901ef8b3710896f!2sMydin%20MITC%20Ayer%20Keroh!5e0!3m2!1sen!2sus!4v1705078045467!5m2!1sen!2sus" width="1200" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                </div>
-            </div>
+                    <div id="map" style="height: 400px;"></div>
+
+                    <script>
+                        var map = L.map('map').setView([0, 0], 2); // Default view, you may adjust this
+
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '&copy; OpenStreetMap contributors'
+                        }).addTo(map);
+
+                        @foreach($locations as $location)
+                            L.marker([{{ $location->latitude }}, {{ $location->longitude }}])
+                                .addTo(map)
+                                .bindPopup('{{ $location->name }}');
+                        @endforeach
+                    </script>
+                </div>
+
+
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="about__item">

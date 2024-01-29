@@ -60,6 +60,9 @@ Route::get('about', function () {
 })->name('about');
 
 
+Route::get('/about', [LocationController::class, 'about'])->name('about');
+
+
 
 
 // Product Listing
@@ -98,7 +101,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/session', [StripeController::class, 'session'])->name('session');
 	Route::get('/success', [StripeController::class, 'success'])->name('success');
 	});
-
+	
 
 
 	/**

@@ -42,6 +42,12 @@ class LocationController extends Controller
         return view('admin.locations.show', compact('location'));
     }
 
+    public function about()
+    {
+        $locations = Location::all();
+        return view('customer.about', compact('locations'));
+    }
+
     // Show the form for editing the specified location.
     public function edit($id)
     {
@@ -73,4 +79,6 @@ class LocationController extends Controller
 
         return redirect()->route('location.index')->with('success', 'Location deleted successfully!');
     }
+
+
 }
