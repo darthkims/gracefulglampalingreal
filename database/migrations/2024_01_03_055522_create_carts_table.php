@@ -28,6 +28,8 @@ return new class extends Migration
             $table->foreign('cart_id')->references('id')->on('carts')->onDelete('cascade');
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
+            $table->unsignedBigInteger('location_id')->nullable();
+            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
             $table->integer('quantity');
             $table->timestamps();
         });

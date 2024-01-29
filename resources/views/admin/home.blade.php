@@ -15,6 +15,9 @@
                             </div>
                             @php
                                 $products = App\Models\Product::all();
+                                $orders = App\Models\Order::all();
+                                $totalPrice = 0;
+                                
                                 $users = App\Models\User::all();
                                 $customerCount = $users->filter(function($user) {
                                     return $user->roles->first() && $user->roles->first()->name === 'customer';
@@ -23,6 +26,11 @@
                                     return $user->roles->first() && $user->roles->first()->name === 'admin';
                                 })->count();                              
                             @endphp
+                            @foreach ($orders as $order)
+    @php
+    $totalPrice += $order->total;
+    @endphp
+@endforeach
                             <div class="text-end pt-1">
                                 <p class="text-sm mb-0 text-capitalize">Total products</p>
                                 <h4 class="mb-0">{{ count($products) }}</h4>
@@ -79,7 +87,10 @@
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-sm mb-0 text-capitalize">Sales</p>
-                                <h4 class="mb-0">$103,430</h4>
+                                
+                                    <h4 class="font-weight-bold ms-1">RM {{ $totalPrice }}</h4>
+
+
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
