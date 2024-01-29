@@ -35,7 +35,7 @@
                                         <strong>Product ordered:</strong>
                                         @foreach ($order->products as $index => $product )
                                         <p class=" text-secondary mb-0">
-                                            {{ $index + 1 }}. {{ $product->name }} (x{{ $product->pivot->quantity }}) <b>({{$product->pivot->location->name}})<b>
+                                            {{ $index + 1 }}. {{ $product->name }} (x{{ $product->pivot->quantity }}) <b>(Store location: {{$product->pivot->location->name}})</b>
                                         </p>
                                         @endforeach                                    
                                     </div>
