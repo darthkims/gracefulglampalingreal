@@ -27,12 +27,12 @@
                                 })->count();                              
                             @endphp
                             @foreach ($orders as $order)
-    @if ($order->status == 'completed')
-        @php
-        $totalPrice += $order->total;
-        @endphp
-    @endif
-@endforeach
+                                @if ($order->status == 'completed')
+                                    @php
+                                    $totalPrice += $order->total;
+                                    @endphp
+                                @endif
+                            @endforeach
                             <div class="text-end pt-1">
                                 <p class="text-sm mb-0 text-capitalize">Total products</p>
                                 <h4 class="mb-0">{{ count($products) }}</h4>
@@ -40,7 +40,7 @@
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">"Total Products" </span></p>
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">Total Products</span></p>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">"Total Customers"</span></p>
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">Total Customers</span></p>
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">"Hello"</p>
+                            <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">Fellow Admins</p>
                         </div>
                     </div>
                 </div>
@@ -97,8 +97,7 @@
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+5% </span>than
-                                yesterday</p>
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">Total Profit</p>
                         </div>
                     </div>
                 </div>
@@ -110,10 +109,10 @@
                         <div class="card-header pb-0">
                             <div class="row">
                                 <div class="col-lg-6 col-7">
-                                    <h6>Products</h6>
+                                    <h6>Orders</h6>
                                     <p class="text-sm mb-0">
                                         <i class="fa fa-check text-info" aria-hidden="true"></i>
-                                        <span class="font-weight-bold ms-1">{{ count($products) }} products</span> listed
+                                        <span class="font-weight-bold ms-1">{{ count($orders) }} orders</span> listed
                                     </p>
                                 </div>
                                 <div class="col-lg-6 col-5 my-auto text-end">
@@ -124,12 +123,10 @@
                                         </a>
                                         <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5"
                                             aria-labelledby="dropdownTable">
-                                            <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
+                                            <li><a class="dropdown-item border-radius-md" href="{{route('carts.index')}}">Order Page</a>
                                             </li>
-                                            <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
-                                                    action</a></li>
-                                            <li><a class="dropdown-item border-radius-md" href="javascript:;">Something
-                                                    else here</a></li>
+                                            <li><a class="dropdown-item border-radius-md" href="{{route('admin.products.index')}}">Product Page</a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -142,77 +139,17 @@
                                     <tr>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            ID
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            IMAGE</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            NAME</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            PRICE</th>
-                                        <th class="text-secondary opacity-7"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($products as $product)
-                                    <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <p class="mb-0 text-sm">{{ $product->id }}</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div>
-                                                        <img src="{{ asset('customer/img/product/product-' . $product-> id . '.jpg') }}"
-                                                            class="avatar avatar-sm me-3 border-radius-lg" alt="{{ $product->name }}">
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $product->name }}</h6>
-                                                </div>
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <p class="text-xs text-secondary mb-0">RM{{ $product->price }}
-                                                </p>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100">
-                        <div class="card-header pb-0">
-                            <h6>Orders overview</h6>
-                            <p class="text-sm mb-0">
-                                <i class="fa fa-check text-info" aria-hidden="true"></i>
-                                <span class="font-weight-bold ms-1">{{ count($orders) }} orders</span> listed
-                            </p>               
-                        </div>
-                        <div class="card-body px-0 pb-2">
-                            <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            ID
-                                        </th>
+                                            ID</th>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             ORDER NUMBER</th>
-                                            <th
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            PAYMENT STATUS</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            ORDER STATUS</th>
+                                        <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             TOTAL</th>    
                                         <th class="text-secondary opacity-7"></th>
@@ -233,8 +170,86 @@
                                                     <h6 class="mb-0 text-sm">{{ $order->order_number }}</h6>
                                                 </div>
                                             </td>
+                                            <td>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    @if ($order->status == 'pending')
+                                                      <span class="badge bg-warning">Pending Payment</span>
+                                                    @elseif ($order->status == 'processing')
+                                                      <span class="badge bg-info">Processing</span>
+                                                    @elseif ($order->status == 'completed')
+                                                      <span class="badge bg-success" style="color: white;">Completed</span>
+                                                    @endif                                                
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                @if ($order->order_status == 'processing')
+                                                  <span class="badge bg-warning">Processing</span>
+                                                @elseif ($order->status == 'shipped')
+                                                  <span class="badge bg-info">Shipped</span>
+                                                @elseif ($order->status == 'Delivered')
+                                                  <span class="badge bg-success" style="color: white;">Delivered</span>
+                                                @else
+                                                  <span class="badge bg-warning" style="color: white;">Processing</span>
+                                                @endif                                              
+                                                </div>
+                                            </td>
                                             <td class="align-middle text-center text-sm">
                                                 <p class="text-xs text-secondary mb-0">RM{{ $order->total }}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header pb-0">
+                            <h6>Products</h6>
+                            <p class="text-sm mb-0">
+                                <i class="fa fa-check text-info" aria-hidden="true"></i>
+                                <span class="font-weight-bold ms-1">{{ count($products) }} products</span> listed
+                            </p>               
+                        </div>
+                        <div class="card-body px-0 pb-2">
+                            <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            ID
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            PRODUCT NAME</th>
+                                            <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            PRICE</th>    
+                                        <th class="text-secondary opacity-7"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($products as $product)
+                                    <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <p class="mb-0 text-sm">{{ $product->id }}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{ $product->name }}</h6>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <p class="text-xs text-secondary mb-0">RM{{ $product->price }}
                                                 </p>
                                             </td>
                                         </tr>
@@ -249,7 +264,6 @@
             <x-footers.auth></x-footers.auth>
         </div>
     </main>
-    <x-plugins></x-plugins>
     </div>
     @push('js')
     <script src="{{ asset('assets') }}/js/plugins/chartjs.min.js"></script>

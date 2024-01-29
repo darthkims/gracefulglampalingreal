@@ -52,7 +52,10 @@
                         Total</th>
                     <th
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Status</th>
+                        Payment Status</th>
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                        Order Status</th>
                     <th
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Store</th>
@@ -88,6 +91,17 @@
                             <span class="badge bg-info">Processing</span>
                           @elseif ($order->status == 'completed')
                             <span class="badge bg-success" style="color: white;">Completed</span>
+                          @endif
+                      </td>
+                      <td class="align-middle text-center">
+                          @if ($order->order_status == 'processing')
+                            <span class="badge bg-warning">Processing</span>
+                          @elseif ($order->status == 'shipped')
+                            <span class="badge bg-info">Shipped</span>
+                          @elseif ($order->status == 'Delivered')
+                            <span class="badge bg-success" style="color: white;">Delivered</span>
+                          @else
+                            <span class="badge bg-warning" style="color: white;">Processing</span>
                           @endif
                       </td>
                       <td class="align-middle text-center text-sm">

@@ -200,6 +200,5 @@
 
         </script>
     </main>
-    <x-plugins></x-plugins>
 
 </x-layout>

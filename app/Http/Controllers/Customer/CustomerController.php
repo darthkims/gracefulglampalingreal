@@ -109,7 +109,7 @@ class CustomerController extends Controller
      
         $pdf = Pdf::loadView('customer.pdf', ['data' => $data, 'orders' => $orders, 'totalPrice' => $totalPrice, 'userData' => $userData]);
      
-        return $pdf->download();
+        return $pdf->stream($orders->order_number. '.pdf');
     }
 
     public function deleteOrder(Request $request, $orderId)

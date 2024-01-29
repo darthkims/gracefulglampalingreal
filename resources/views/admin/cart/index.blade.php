@@ -44,7 +44,7 @@
                                                 ORDER STATUS</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                DATE CREATED
+                                                VIEW
                                             </th>
                                             <th class="text-secondary opacity-7"></th>
                                         </tr>
@@ -100,12 +100,14 @@
                                             <!-- ORDER STATUS -->
                                             <td class="align-middle text-center">
                                                 <p class="text-xs text-secondary mb-0">
-                                                @if ($cart->status == 'pending')
-                                                  <span class="badge bg-warning">Pending Payment</span>
-                                                @elseif ($cart->status == 'processing')
-                                                  <span class="badge bg-info">Processing</span>
-                                                @elseif ($cart->status == 'completed')
-                                                  <span class="badge bg-success">Completed</span>
+                                                @if ($cart->status == 'processing')
+                                                  <span class="badge bg-warning">Processing</span>
+                                                @elseif ($cart->status == 'Shipped')
+                                                  <span class="badge bg-info">Shipped</span>
+                                                @elseif ($cart->status == 'Delivered')
+                                                  <span class="badge bg-success">Delivered</span>
+                                                @else
+                                                    <span class="badge bg-warning">Processing</span>
                                                 @endif
                                                 </p>
                                             </td>
@@ -124,6 +126,5 @@
             <x-footers.auth></x-footers.auth>
         </div>
     </main>
-    <x-plugins></x-plugins>
 
 </x-layout>

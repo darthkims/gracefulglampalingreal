@@ -50,12 +50,26 @@
                                 <div class="form-group">
                                         <strong>Status: </strong>
                                         @if ($order->status == 'pending')
-                                                  <span class="badge bg-warning">Pending Payment</span>
-                                                @elseif ($order->status == 'processing')
-                                                  <span class="badge bg-info">Processing</span>
-                                                @elseif ($order->status == 'completed')
-                                                  <span class="badge bg-success">Completed</span>
-                                                @endif
+                                          <span class="badge bg-warning">Pending Payment</span>
+                                        @elseif ($order->status == 'processing')
+                                          <span class="badge bg-info">Processing</span>
+                                        @elseif ($order->status == 'completed')
+                                          <span class="badge bg-success">Completed</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>Status: </strong>
+                                        @if ($order->status == 'processing')
+                                          <span class="badge bg-warning">Processing</span>
+                                        @elseif ($order->status == 'Shipped')
+                                          <span class="badge bg-info">Shipped</span>
+                                        @elseif ($order->status == 'Delivered')
+                                          <span class="badge bg-success">Delivered</span>
+                                        @else
+                                            <span class="badge bg-warning">Processing</span>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -77,6 +91,5 @@
             <x-footers.auth></x-footers.auth>
         </div>
     </main>
-    <x-plugins></x-plugins>
 
 </x-layout>
