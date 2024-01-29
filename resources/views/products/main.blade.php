@@ -92,11 +92,11 @@
                         </a>
                         <div class="product__item__text">
                             <h6>{{ $product->name }}</h6>
-                                <form method="POST" action="{{ route('addToCart', ['productId' => $product->id]) }}">
+                            <form method="POST" action="{{ route('addToCart', ['productId' => $product->id]) }}">
                                         @csrf
                                         <!-- Other form fields or data -->
-                                        <button type="submit" class="add-cart">+ Add To Cart</button>
-                                 </form>
+                                        <button type="submit" class="add-cart" style="background-color: black; color: white; border-radius: 10px;">+ Add To Cart</button>
+                                    </form>
                             <h5>RM{{ $product->price }}</h5>
                         </div>
                     </div>
@@ -112,11 +112,11 @@
                         </a>
                         <div class="product__item__text">
                             <h6>{{ $product->name }}</h6>
-                                <form method="POST" action="{{ route('addToCart', ['productId' => $product->id]) }}">
+                            <form method="POST" action="{{ route('addToCart', ['productId' => $product->id]) }}">
                                         @csrf
                                         <!-- Other form fields or data -->
-                                        <button type="submit" class="add-cart">+ Add To Cart</button>
-                                 </form>
+                                        <button type="submit" class="add-cart" style="background-color: black; color: white; border-radius: 10px;">+ Add To Cart</button>
+                                    </form>
                             <h5>RM{{ $product->price }}</h5>
                         </div>
                     </div>

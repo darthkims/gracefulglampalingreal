@@ -170,10 +170,10 @@
                                     <h6>{{ $product->name }}</h6>
                                     
                                     <form method="POST" action="{{ route('addToCart', ['productId' => $product->id]) }}">
-    @csrf
-    <!-- Other form fields or data -->
-    <button type="submit" class="add-cart" style="background-color: black; color: white; border-radius: 10px;">+ Add To Cart</button>
-</form>
+                                        @csrf
+                                        <!-- Other form fields or data -->
+                                        <button type="submit" class="add-cart" style="background-color: black; color: white; border-radius: 10px;">+ Add To Cart</button>
+                                    </form>
 
                                         
                                     <h5>RM{{ $product->price }}</h5>
