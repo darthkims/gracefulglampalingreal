@@ -25,45 +25,45 @@
                         </div>
                       </div>
 
-                      <!-- <div class="mb-3">
-                        <label for="product_image" class="form-label">
+                      <div class="mb-3">
+                        <label for="thumbnail_1" class="form-label">
                           <span>Thumbnail 1</span>
                         </label>
-                          <div class="input-group input-group-outline">
-                              <input type="file" class="form-control" name="product_image" accept=".jpg">
-                              <input type="hidden" name="image_number" value="1">
-                          </div>
+                        <div class="input-group input-group-outline">
+                          <input type="file" class="form-control" name="thumbnail_1" accept=".jpg">
+                          <input type="hidden" name="thumbnail_1 value="1">
+                        </div>
                       </div>
                   
                       <div class="mb-3">
-                        <label for="product_image" class="form-label">
+                        <label for="thumbnail_2" class="form-label">
                           <span>Thumbnail 2</span>
                         </label>
                           <div class="input-group input-group-outline">
-                              <input type="file" class="form-control" name="product_image" accept=".jpg">
-                              <input type="hidden" name="image_number" value="2">
+                              <input type="file" class="form-control" name="thumbnail_2" accept=".jpg">
+                              <input type="hidden" name="thumbnail_2" value="2">
                           </div>
                       </div>
                   
                       <div class="mb-3">
-                        <label for="product_image" class="form-label">
+                        <label for="thumbnail_3" class="form-label">
                           <span>Thumbnail 3</span>
                         </label>
                           <div class="input-group input-group-outline">
-                              <input type="file" class="form-control" name="product_image" accept=".jpg">
-                              <input type="hidden" name="image_number" value="3">
+                              <input type="file" class="form-control" name="thumbnail_3" accept=".jpg">
+                              <input type="hidden" name="thumbnail_3" value="3">
                           </div>
                       </div>
                   
                       <div class="mb-3">
-                        <label for="product_image" class="form-label">
+                        <label for="thumbnail_4" class="form-label">
                           <span>Thumbnail 4</span>
                         </label>
                           <div class="input-group input-group-outline">
-                              <input type="file" class="form-control" name="product_image" accept=".jpg">
-                              <input type="hidden" name="image_number" value="4">
+                              <input type="file" class="form-control" name="thumbnail_4" accept=".jpg">
+                              <input type="hidden" name="thumbnail_4" value="4">
                           </div>
-                      </div> -->
+                      </div>
                       
                       <div class="mb-3">
                         <label for="name" class="form-label">
