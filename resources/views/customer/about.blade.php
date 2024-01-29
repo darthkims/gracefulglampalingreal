@@ -142,7 +142,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="team__item">
-                        <img src="{{ asset('customer')}}/img/about/kims.jpeg" alt="">
+                        <img src="{{ asset('customer')}}/img/about/alphaxan.jpg" alt="">
                         <h4>Salehuddin</h4>
                         <span>Founder</span>
                     </div>
@@ -156,14 +156,14 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="team__item">
-                        <img src="{{ asset('customer')}}/img/about/kims.jpeg" alt="">
+                        <img src="{{ asset('customer')}}/img/about/xan.jpg" alt="">
                         <h4>Haziq</h4>
                         <span>Manager</span>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="team__item">
-                        <img src="{{ asset('customer')}}/img/about/kims.jpeg" alt="">
+                        <img src="{{ asset('customer')}}/img/about/xankim.jpg" alt="">
                         <h4>Arief</h4>
                         <span>Supervisor</span>
                     </div>
