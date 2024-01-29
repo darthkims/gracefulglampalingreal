@@ -48,23 +48,15 @@
             </tr>
             @foreach($data as $item)
             <tr class="items">
-                
-                    <td>
-                        {{ $item['quantity'] }}
-                    </td>
-                    <td>
-                        {{ $item['description'] }}
-                    </td>
-                    <td>
-                    {{ $item['store'] }}
-                    <td>
-                    <td>
-                        {{ $item['price'] }}
-                    </td>     
+                <td>{{ $item['quantity'] }}</td>
+                <td>{{ $item['description'] }}</td>
+                <td>{{ $item['store'] }}</td>
+                <td>{{ $item['price'] }}</td>
             </tr>
             @endforeach
         </table>
     </div>
+
  
     <div class="total">
         Total: RM{{ number_format($totalPrice, 2) }}
