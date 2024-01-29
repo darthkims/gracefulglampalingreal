@@ -130,6 +130,7 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::get('/', [OrderController::class, 'index'])->name('carts.index');
 			Route::get('/create', [OrderController::class, 'create'])->name('carts.create');
 			Route::post('/', [OrderController::class, 'store'])->name('carts.store');
+			Route::get('/show/{order}', [OrderController::class, 'show'])->name('carts.show');
 			Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('carts.edit');
 			Route::patch('/{id}', [OrderController::class, 'update'])->name('carts.update');
 			Route::delete('/{id}', [OrderController::class, 'destroy'])->name('carts.destroy');

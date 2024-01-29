@@ -71,12 +71,11 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle text-center">
-                                            @foreach ($cart->products as $index => $product )
                                                 <p class="text-xs text-secondary mb-0">
-                                                    {{ $index + 1 }}. {{ $product->name }} ({{ $product->pivot->quantity }})
+                                                    Total Items: {{ count($cart->products) }}
                                                 </p>
-                                                @endforeach
                                             </td>
+
                                             <td class="align-middle text-center">
                                                 <p class="text-xs text-secondary mb-0">
                                                 RM {{ number_format($cart->total, 2) }}
@@ -94,7 +93,7 @@
                                                 </p>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <p class="text-xs text-secondary mb-0">{{ date_format($cart->created_at ,"d F Y H:i A") }}</p>
+                                            <a class="btn btn-success" href="{{ route('carts.show',$cart->id) }}"><i class="material-icons">visibility</i></a>
                                             </td>
                                         </tr>
                                         @endforeach

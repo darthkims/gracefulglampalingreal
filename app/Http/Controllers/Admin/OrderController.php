@@ -41,10 +41,12 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(Order $order)
     {
-        //
+    
+        return view('admin.cart.show', compact('order'));
     }
+    
     /**
      * Show the form for editing the specified resource.
      */
