@@ -41,6 +41,9 @@
                                                 STATUS</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                ORDER STATUS</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 DATE CREATED
                                             </th>
                                             <th class="text-secondary opacity-7"></th>
@@ -81,6 +84,20 @@
                                                 RM {{ number_format($cart->total, 2) }}
                                                 </p>
                                             </td>
+                                            
+                                            <td class="align-middle text-center">
+                                                <p class="text-xs text-secondary mb-0">
+                                                @if ($cart->status == 'pending')
+                                                  <span class="badge bg-warning">Pending Payment</span>
+                                                @elseif ($cart->status == 'processing')
+                                                  <span class="badge bg-info">Processing</span>
+                                                @elseif ($cart->status == 'completed')
+                                                  <span class="badge bg-success">Completed</span>
+                                                @endif
+                                                </p>
+                                            </td>
+                                            
+                                            <!-- ORDER STATUS -->
                                             <td class="align-middle text-center">
                                                 <p class="text-xs text-secondary mb-0">
                                                 @if ($cart->status == 'pending')

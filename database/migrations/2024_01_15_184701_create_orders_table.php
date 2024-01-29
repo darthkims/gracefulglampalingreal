@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->decimal('total', 10, 2)->default(0.00);
             $table->string('status')->default('PENDING PAYMENT');
+            $table->string('order_status')->default('PREPARING');
             $table->timestamps();
         });
         

@@ -15,6 +15,7 @@ class Order extends Model
         'user_id', 
         'promo_code_id',
         'status',
+        'order_status',
         'total',
     ];
 
