@@ -57,7 +57,7 @@
                         <h6>Enquiry</h6>
                         <ul>
                             <li><a href="{{route('about')}}">About Us</a></li>
-                            <li><a href="#">Delivery</a></li>
+                            <li><a href="{{route('cust.orders')}}">Delivery</a></li>
                         </ul>
                     </div>
                 </div>

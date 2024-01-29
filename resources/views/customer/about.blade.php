@@ -98,6 +98,8 @@
                     $categories = App\Models\Category::all();
                     $products = App\Models\Product::all();
                     $users = App\Models\User::all();
+                    $orders = App\Models\Order::all();
+                    $completedOrderCount = 0;
                     $customerCount = $users->filter(function($user) {
                                     return $user->roles->first() && $user->roles->first()->name === 'customer';
                                 })->count(); 
@@ -111,13 +113,13 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
-    <div class="counter__item">
-        <div class="counter__item__number">
-            <h2 class="cn_num">{{ count($categories) }}</h2>
-        </div>
-        <span>Total <br />Categories</span>
-    </div>
-</div>
+                    <div class="counter__item">
+                        <div class="counter__item__number">
+                            <h2 class="cn_num">{{ count($categories) }}</h2>
+                        </div>
+                        <span>Total <br />Categories</span>
+                    </div>
+                </div>
 
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="counter__item">
@@ -130,7 +132,14 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="counter__item">
                         <div class="counter__item__number">
-                            <h2 class="cn_num">98</h2>
+                        @foreach ($orders as $order)
+                        @if ($order->status == 'completed')
+                            @php
+                                $completedOrderCount++;
+                            @endphp
+                        @endif
+                        @endforeach
+                            <h2 class="cn_num">{{ $completedOrderCount }}</h2>
                         </div>
                         <span>Total <br />Orders</span>
                     </div>
