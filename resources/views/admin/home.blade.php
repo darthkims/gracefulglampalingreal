@@ -27,9 +27,11 @@
                                 })->count();                              
                             @endphp
                             @foreach ($orders as $order)
-    @php
-    $totalPrice += $order->total;
-    @endphp
+    @if ($order->status == 'completed')
+        @php
+        $totalPrice += $order->total;
+        @endphp
+    @endif
 @endforeach
                             <div class="text-end pt-1">
                                 <p class="text-sm mb-0 text-capitalize">Total products</p>
