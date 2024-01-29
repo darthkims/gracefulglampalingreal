@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Invoice</title>
+    <title>{{ $orders->order_number }}</title>
 
     <link rel="stylesheet" href="{{ public_path('customer/pdf.css') }}" type="text/css"> 
 
@@ -43,6 +43,7 @@
             <tr>
                 <th>Qty</th>
                 <th>Description</th>
+                <th>Store</th>
                 <th>Price (RM)</th>
             </tr>
             @foreach($data as $item)
@@ -55,9 +56,11 @@
                         {{ $item['description'] }}
                     </td>
                     <td>
+                        {{ $product->location->name ?? 'Unavailable' }}
+                    <td>
+                    <td>
                         {{ $item['price'] }}
-                    </td>
-                
+                    </td>     
             </tr>
             @endforeach
         </table>
