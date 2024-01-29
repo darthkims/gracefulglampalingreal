@@ -60,6 +60,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // dd($request->all());
         $request->validate([
             'order_status' => 'required|in:PREPARING,SHIPPED,DELIVERED',
         ]);
@@ -67,7 +68,7 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
         $order->update(['order_status' => $request->order_status]);
 
-        return redirect()->route('admin.orders.show', ['order' => $order])
+        return redirect()->route('carts.show', ['order' => $order])
             ->with('success', 'Order status updated successfully!');
     }
 

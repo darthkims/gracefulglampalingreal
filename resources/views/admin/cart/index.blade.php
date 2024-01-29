@@ -100,11 +100,11 @@
                                             <!-- ORDER STATUS -->
                                             <td class="align-middle text-center">
                                                 <p class="text-xs text-secondary mb-0">
-                                                @if ($cart->order_status == 'To Pay')
+                                                @if ($cart->order_status == 'To Pay' || $cart->order_status == 'PREPARING')
                                                   <span class="badge bg-warning">{{$cart->order_status}}</span>
-                                                @elseif ($cart->order_status == 'To Ship')
+                                                @elseif ($cart->order_status == 'To Ship' || $cart->order_status == 'SHIPPED')
                                                   <span class="badge bg-info">{{$cart->order_status}}</span>
-                                                @elseif ($cart->order_status == 'Delivered')
+                                                @elseif ($cart->order_status == 'Delivered' || $cart->order_status == 'DELIVERED')
                                                   <span class="badge bg-success">{{$cart->order_status }}</span>
                                                 @endif
                                                 </p>
