@@ -90,18 +90,16 @@
                             <span class="badge bg-success" style="color: white;">Completed</span>
                           @endif
                       </td>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center text-left">
-                              <p class="mb-0 text-sm">
-                                   {{ $order->product->location->name }}
-                              </p>
-                          </div>
-                      </div>
+                      <td class="align-middle text-center text-sm">
+                        @foreach ($order->products as $index => $product )
+                          <p>
+                            {{ $index + 1 }}. {{ $product->location->name ?? '' }}
+                          </p>
+                        @endforeach
                       </td>
                       <td class="align-middle">
                         @if ($order->status == 'pending')
-                          <a href="{{ route('checkout', ['orderId' => $order->id]) }}" class="btn btn-info btn-sm">Pay Now</a>
+                          <a href="{{ route('checkout', ['orderId' => $order->id]) }}" class="btn btn-info btn-sm text-sm">Pay Now</a>
                         @endif
                       </td>
                       <td class="align-middle">

@@ -60,15 +60,16 @@ class CustomerController extends Controller
         $user = Auth::user();
         $orders = $user->orders()->get();
         $orders->load('products');
-        dd($orders->toArray());
 
         $orders->each(function ($order) {
-            $order->productTotal = $order->products->sum(function ($product) {
+            $order->productTotal = $order->getProductsWithLocation()->sum(function ($product) {
                 return $product->price * $product->pivot->quantity;
             });
-
+    
             $order->productTotal = $order->productTotal * 1.1 + 10;
         });
+
+        // dd($orders->toArray());
 
         return view('customer.order-history', compact('orders'));
     }
