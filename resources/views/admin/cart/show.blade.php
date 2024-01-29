@@ -17,6 +17,10 @@
                             <h2 class="mb-4">Order Details 
                             </h2>
 
+                            <form action="{{ route('carts.update', $order->id) }}" method="POST">
+                                @csrf
+                                @method('PATCH')
+
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
@@ -59,7 +63,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                {{-- <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>Order Status: </strong>
                                         @if ($order->order_status == 'To Pay')
@@ -68,6 +72,20 @@
                                           <span class="badge bg-info">{{$order->order_status}}</span>
                                         @elseif ($order->order_status == 'Delivered')
                                           <span class="badge bg-success">{{$order->order_status }}</span>
+                                        @endif
+                                    </div>
+                                </div> --}}
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>Order Status:</strong>
+                                        @if ($order->order_status == 'To Pay')
+                                          <span class="badge bg-warning">{{$order->order_status}}</span>
+                                        @else
+                                            <select name="order_status" class="form-select">
+                                                <option value="PREPARING" {{ $order->order_status === 'PREPARING' ? 'selected' : '' }}>Preparing</option>
+                                                <option value="SHIPPED" {{ $order->order_status === 'SHIPPED' ? 'selected' : '' }}>Shipped</option>
+                                                <option value="DELIVERED" {{ $order->order_status === 'DELIVERED' ? 'selected' : '' }}>Delivered</option>
+                                            </select>
                                         @endif
                                     </div>
                                 </div>
@@ -80,11 +98,15 @@
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                            <button type="submit" class="btn btn-primary">Update Order</button>
+                        </div>
+                        </form>
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <a class="btn btn-primary" href="{{ route('carts.index') }}"> Back</a>
                         </div>
-                    </div>
-                            </div>
                         </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <x-footers.auth></x-footers.auth>
