@@ -35,11 +35,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="about__pic">
+                <div class="about__pic">
                     <div id="map" style="height: 400px;"></div>
 
                     <script>
-                        var map = L.map('map').setView([0, 0], 2); // Default view, you may adjust this
+                        var map = L.map('map').setView([4.2105, 101.9758], 7); // Centered on Malaysia with zoom level 6
 
                         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                             attribution: '&copy; OpenStreetMap contributors'
@@ -52,7 +52,7 @@
                         @endforeach
                     </script>
                 </div>
-
+            </div>
 
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-6">
