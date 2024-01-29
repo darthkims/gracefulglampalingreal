@@ -39,7 +39,7 @@
                     <div id="map" style="height: 400px;"></div>
 
                     <script>
-                        var map = L.map('map').setView([4.2105, 101.9758], 7); // Centered on Malaysia with zoom level 6
+                        var map = L.map('map').setView([3.1499, 101.6945], 10); // Centered on Malaysia with zoom level 6
 
                         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                             attribution: '&copy; OpenStreetMap contributors'
