@@ -33,7 +33,19 @@
     <!-- About Section Begin -->
     <section class="about spad">
         <div class="container">
+                <div class="row mt-5">
+                    <div class="col-lg-12">
+                        <div class="about__item">
+                            <h2 class="mb-4"><strong>Where We Bought the Item</strong></h2>
+                            <p class="lead">
+                                We carefully source our products from various locations to provide you with the best quality and selection. Here are some of the places where we bought the items featured on GracefulGlam.
+                            </p>
+                            <!-- You can add more details or customize the text as needed -->
+                        </div>
+                    </div>
+                </div>
             <div class="row">
+            
                 <div class="col-lg-12">
                 <div class="about__pic">
                     <div id="map" style="height: 400px;"></div>
@@ -58,7 +70,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="about__item">
                         <h4>Who We Are ?</h4>
-                        <p>GracefulGlamp is your go-to personal shopper website, dedicated to providing a seamless and personalized shopping experience. Our platform features a curated selection of the latest trends in fashion, beauty, and lifestyle. </p>
+                        <p>GracefulGlam is your go-to personal shopper website, dedicated to providing a seamless and personalized shopping experience. Our platform features a curated selection of the latest trends in fashion, beauty, and lifestyle. </p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
@@ -70,7 +82,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="about__item">
                         <h4>Why Choose Us</h4>
-                        <p>Quality is our priority. Each item featured on GracefulGlamp meets our high standards of excellence. Our user-friendly interface makes shopping enjoyable and efficient, and you can trust our secure platform for worry-free transactions.</p>
+                        <p>Quality is our priority. Each item featured on GracefulGlam meets our high standards of excellence. Our user-friendly interface makes shopping enjoyable and efficient, and you can trust our secure platform for worry-free transactions.</p>
                     </div>
                 </div>
             </div>
