@@ -91,11 +91,13 @@
                           @endif
                       </td>
                       <td class="align-middle text-center text-sm">
-                        @foreach ($order->products as $index => $product )
+                        @forelse ($order->products as $index => $product)
                           <p>
-                            {{ $index + 1 }}. {{ $product->location->name ?? '' }}
+                              {{ $index + 1 }}. {{ $product->location->name ?? 'No store available' }}
                           </p>
-                        @endforeach
+                        @empty
+                          <p>No store available</p>
+                        @endforelse
                       </td>
                       <td class="align-middle">
                         @if ($order->status == 'pending')
