@@ -106,7 +106,7 @@
                                                   <span class="badge bg-info">{{$cart->order_status}}</span>
                                                 @elseif ($cart->order_status == 'Delivered' || $cart->order_status == 'DELIVERED')
                                                   <span class="badge bg-success">{{$cart->order_status }}</span>
-                                                @endif
+                                                @endif  
                                                 </p>
                                             </td>
                                             <td class="align-middle text-center">
