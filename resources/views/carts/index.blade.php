@@ -127,12 +127,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="cart__discount">
-                        <h6>Discount codes</h6>
-                        <form id="apply-promo-form" method="post">
-                            @csrf
-                            <input type="text" name="promo_code" placeholder="Coupon code" id="promo-code-input">
-                            <button type="submit" @if(empty(session('cart.products'))) @endif>Apply</button>
-                        </form>
+
                     </div>
                     <div class="cart__total">
                         <h6>Cart total</h6>
