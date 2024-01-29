@@ -56,7 +56,7 @@
                         {{ $item['description'] }}
                     </td>
                     <td>
-                        {{ $product->location->name ?? 'Unavailable' }}
+                    {{ $item['store'] }}
                     <td>
                     <td>
                         {{ $item['price'] }}

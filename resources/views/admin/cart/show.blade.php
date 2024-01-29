@@ -34,10 +34,11 @@
                                     <div class="form-group">
                                         <strong>Product ordered:</strong>
                                         @foreach ($order->products as $index => $product )
-                                                <p class=" text-secondary mb-0">
-                                                    {{ $index + 1 }}. {{ $product->name }} (x{{ $product->pivot->quantity }})
-                                                </p>
-                                                @endforeach                                    </div>
+                                        <p class=" text-secondary mb-0">
+                                            {{ $index + 1 }}. {{ $product->name }} (x{{ $product->pivot->quantity }}) <b>({{$product->pivot->location->name}})<b>
+                                        </p>
+                                        @endforeach                                    
+                                    </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">

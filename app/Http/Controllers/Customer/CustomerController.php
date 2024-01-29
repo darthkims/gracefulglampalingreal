@@ -92,6 +92,7 @@ class CustomerController extends Controller
                 'description' => $product->name,
                 'price' => $product->price,
                 'total_item_price' => $itemPrice,
+                'store' => $product->pivot->location->name,
             ];
     
             $totalPrice += $itemPrice;
