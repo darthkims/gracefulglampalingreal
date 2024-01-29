@@ -172,26 +172,24 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    @if ($order->status == 'pending')
-                                                      <span class="badge bg-warning">Pending Payment</span>
-                                                    @elseif ($order->status == 'processing')
-                                                      <span class="badge bg-info">Processing</span>
-                                                    @elseif ($order->status == 'completed')
-                                                      <span class="badge bg-success" style="color: white;">Completed</span>
-                                                    @endif                                                
+                                                @if ($order->status == 'pending')
+                                                  <span class="badge bg-warning">Pending Payment</span>
+                                                @elseif ($order->status == 'processing')
+                                                  <span class="badge bg-info">Processing</span>
+                                                @elseif ($order->status == 'completed')
+                                                  <span class="badge bg-success">Completed</span>
+                                                @endif                                            
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                @if ($order->order_status == 'processing')
-                                                  <span class="badge bg-warning">Processing</span>
-                                                @elseif ($order->status == 'shipped')
-                                                  <span class="badge bg-info">Shipped</span>
-                                                @elseif ($order->status == 'Delivered')
-                                                  <span class="badge bg-success" style="color: white;">Delivered</span>
-                                                @else
-                                                  <span class="badge bg-warning" style="color: white;">Processing</span>
-                                                @endif                                              
+                                                @if ($order->order_status == 'To Pay' || $order->order_status == 'PREPARING')
+                                                  <span class="badge bg-warning">{{$order->order_status}}</span>
+                                                @elseif ($order->order_status == 'To Ship' || $order->order_status == 'SHIPPED')
+                                                  <span class="badge bg-info">{{$order->order_status}}</span>
+                                                @elseif ($order->order_status == 'Delivered' || $order->order_status == 'DELIVERED')
+                                                  <span class="badge bg-success">{{$order->order_status }}</span>
+                                                @endif                                          
                                                 </div>
                                             </td>
                                             <td class="align-middle text-center text-sm">
