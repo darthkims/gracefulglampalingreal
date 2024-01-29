@@ -78,6 +78,7 @@
                                     </td>
                                     <td class="store-location">
                                         <select name="store_locations[{{ $product->id }}]" class="form-control">
+                                            <option value="" disabled selected>Select Store</option>
                                             @foreach ($product->locations as $location)
                                                 <option value="{{ $location->id }}" {{ $location->id == $product->pivot->location_id ? 'selected' : '' }}>
                                                     {{ $location->name }}
@@ -85,6 +86,7 @@
                                             @endforeach
                                         </select>
                                     </td>
+
                                     
                                     </form>
                                     <td class="cart__price">
@@ -136,7 +138,7 @@
                             <li>Total<span>Calculated In Checkout</span></li>
                         </ul>
                         <a href="{{ count($products) > 0 ? route('cart.confirm') : '#' }}" class="primary-btn"
-                            style="@if (count($products) == 0) background-color: #d3d3d3; color: #808080; cursor: not-allowed; pointer-events: none; @endif">
+                        <a type="button" id="update-cart-btn" style="@if (count($products) == 0 || is_null($product->pivot->location_id)) background-color: #d3d3d3; color: #808080; cursor: not-allowed; pointer-events: none; @endif">
                             Proceed to checkout
                         </a>
                     </div>
@@ -172,6 +174,8 @@
         // Update the input field value
         inputField.value = newValue;
     }
+
+    
 
     function updateCart() {
     // Remove existing hidden input fields

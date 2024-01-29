@@ -54,7 +54,8 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
                                 <h4 class="order__title">Your order</h4>
-                                <div class="checkout__order__products">Product <span>Total</span></div>
+                                    <div class="checkout__order__products">Product <span>Total</span>
+                                    </div>
                                 <ul class="checkout__total__products">
                                 @if (count($products) > 0)
                                     @foreach ($products as $product)
@@ -71,10 +72,11 @@
                                     <li>Delivery <span>RM10.00</span></li>
                                     <li>Total (Service Fee 10%)<span>RM{{ number_format($cartTotal, 2)}}</span></li>
                                 </ul>
-                                <a href="{{ count($products) > 0 ? route('checkout.redirect') : '#' }}" class="primary-btn">PLACE ORDER</a>
+                                <a href="{{ count($products) > 0 ? route('checkout.redirect') : '#' }}" class="primary-btn" onclick="return validateForm();">PLACE ORDER</a>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </section>
