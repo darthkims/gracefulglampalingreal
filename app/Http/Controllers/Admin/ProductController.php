@@ -84,7 +84,7 @@ class ProductController extends Controller
                 $product->{"productthumb" . $i}= $thumbnailName;
                 $product->save();
             }
-        }        
+        }
     
         // associate the brand with the product
         $product->brands()->attach($request->input('brand'), ['brand_id' => $request->input('brand')]);
