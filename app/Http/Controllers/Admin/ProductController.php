@@ -58,16 +58,15 @@ class ProductController extends Controller
         $productId = $product->id;
     
         if ($request->hasFile('product_image')) {
-            $image = $request->file('product_image');
-            $imageName = 'product-' . $productId . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('storage'), $imageName);
+            // Upload main product image
+            $productImage = $request->file('product_image');
+            $productImageName = 'product-' . $productId . '.' . $productImage->getClientOriginalExtension();
+            $productImage->move(public_path('storage'), $productImageName);
+        
+            // Save main product image in the database
             $product = Product::find($productId);
-            $product->productimg = $imageName;
+            $product->productimg = $productImageName;
             $product->save();
-<<<<<<< HEAD
-            // You may want to save $imageName in the database for later use.
-        }
-=======
 
         }
         
@@ -85,8 +84,7 @@ class ProductController extends Controller
                 $product->{"productthumb" . $i}= $thumbnailName;
                 $product->save();
             }
-        }        
->>>>>>> parent of 75c7507 (Update ProductController.php)
+        }
     
         // associate the brand with the product
         $product->brands()->attach($request->input('brand'), ['brand_id' => $request->input('brand')]);
@@ -186,6 +184,17 @@ class ProductController extends Controller
         // Check if the image exists before attempting to delete it
         if (File::exists($imageFilePath)) {
             File::delete($imageFilePath);
+        }
+
+        for ($i = 1; $i <= 4; $i++) {
+
+        // Construct the image file path based on the product ID
+        $imageFilePath = public_path('storage/thumb-' . $i . '-' . $product->id . '.jpg');
+
+        // Check if the image exists before attempting to delete it
+        if (File::exists($imageFilePath)) {
+            File::delete($imageFilePath);
+        }
         }
     }
 }
