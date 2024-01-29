@@ -171,13 +171,13 @@
         var newValue = currentValue + value;
 
         // Ensure the quantity doesn't go below 0
-        newValue = Math.max(0, newValue);
+        newValue = Math.max(1, newValue);
 
         // Update the input field value
         inputField.value = newValue;
     }
 
-    function validateForm() {
+        function validateForm() {
         var storeSelects = document.querySelectorAll("select[name^='store_locations']");
 
         for (var i = 0; i < storeSelects.length; i++) {
