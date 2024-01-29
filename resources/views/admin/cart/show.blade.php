@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                        <strong>Status: </strong>
+                                        <strong>Payment Status: </strong>
                                         @if ($order->status == 'pending')
                                           <span class="badge bg-warning">Pending Payment</span>
                                         @elseif ($order->status == 'processing')
@@ -61,15 +61,13 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>Status: </strong>
-                                        @if ($order->status == 'processing')
-                                          <span class="badge bg-warning">Processing</span>
-                                        @elseif ($order->status == 'Shipped')
-                                          <span class="badge bg-info">Shipped</span>
-                                        @elseif ($order->status == 'Delivered')
-                                          <span class="badge bg-success">Delivered</span>
-                                        @else
-                                            <span class="badge bg-warning">Processing</span>
+                                        <strong>Order Status: </strong>
+                                        @if ($order->order_status == 'To Pay')
+                                          <span class="badge bg-warning">{{$order->order_status}}</span>
+                                        @elseif ($order->order_status == 'To Ship')
+                                          <span class="badge bg-info">{{$order->order_status}}</span>
+                                        @elseif ($order->order_status == 'Delivered')
+                                          <span class="badge bg-success">{{$order->order_status }}</span>
                                         @endif
                                     </div>
                                 </div>
