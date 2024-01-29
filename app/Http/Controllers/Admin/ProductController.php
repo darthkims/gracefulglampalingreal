@@ -64,8 +64,29 @@ class ProductController extends Controller
             $product = Product::find($productId);
             $product->productimg = $imageName;
             $product->save();
+<<<<<<< HEAD
             // You may want to save $imageName in the database for later use.
         }
+=======
+
+        }
+        
+        // Upload and save thumbnails
+        for ($i = 1; $i <= 4; $i++) {
+            $thumbnailImage = $request->file('thumbnail_' . $i);
+        
+            // Check if the file exists
+            if ($thumbnailImage) {
+                $thumbnailName = 'thumb-' . $i . '-' . $productId . '.' . $thumbnailImage->getClientOriginalExtension();
+                $thumbnailImage->move(public_path('storage'), $thumbnailName);
+            
+                // Save thumbnail information in the database
+                $product = Product::find($productId);
+                $product->{"productthumb" . $i}= $thumbnailName;
+                $product->save();
+            }
+        }        
+>>>>>>> parent of 75c7507 (Update ProductController.php)
     
         // associate the brand with the product
         $product->brands()->attach($request->input('brand'), ['brand_id' => $request->input('brand')]);
