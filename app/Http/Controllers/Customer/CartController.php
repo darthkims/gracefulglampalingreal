@@ -109,6 +109,7 @@ class CartController extends Controller
             foreach ($cart->products as $cartProduct) {
                 $order->products()->attach($cartProduct['pivot']['product_id'], [
                     'quantity' => $cartProduct['pivot']['quantity'],
+                    'location_id' => $cartProduct['pivot']['location_id'],
                 ]);
             }
 
