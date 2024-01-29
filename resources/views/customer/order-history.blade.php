@@ -94,14 +94,21 @@
                           @endif
                       </td>
                       <td class="align-middle text-center">
-                          @if ($order->order_status == 'processing')
-                            <span class="badge bg-warning">Processing</span>
-                          @elseif ($order->status == 'shipped')
-                            <span class="badge bg-info">Shipped</span>
+                          @if ($order->order_status == 'To Pay')
+                            <span class="badge bg-warning">
+                              {{ $order->order_status }}
+                            </span>
+                          @elseif ($order->status == 'To Ship')
+                            <span class="badge bg-info">
+                              {{ $order->order_status }}</span>
                           @elseif ($order->status == 'Delivered')
-                            <span class="badge bg-success" style="color: white;">Delivered</span>
+                            <span class="badge bg-success" style="color: white;">
+                              {{ $order->order_status }}
+                            </span>
                           @else
-                            <span class="badge bg-warning" style="color: white;">Processing</span>
+                            <span class="badge bg-warning" style="color: white;">
+                              {{ $order->order_status }}
+                            </span>
                           @endif
                       </td>
                       <td class="align-middle text-center text-sm">

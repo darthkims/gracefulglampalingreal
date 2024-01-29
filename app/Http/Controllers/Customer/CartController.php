@@ -103,6 +103,7 @@ class CartController extends Controller
                 'user_id' => $user->id,
                 'total' => $cart->grand_total,
                 'status' => 'pending',
+                'order_status' => 'To Pay',
             ]);
 
             // Transfer cart products to order products

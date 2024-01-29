@@ -110,7 +110,10 @@ class StripeController extends Controller
 
         // Check if the order exists and update its status
         if ($order) {
-            $order->update(['status' => 'completed']);
+            $order->update([
+                'status' => 'completed',
+                'order_status' => 'To Ship',
+            ]);
         }
 
         return redirect()->route('cust.orders')->with('success', 'Payment successful :)');
